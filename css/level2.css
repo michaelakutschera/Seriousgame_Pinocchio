@@ -1,0 +1,303 @@
+/* =========================================================
+   level2.css  —  "The Comic"
+
+   An open comic book: two pages side by side, each a 3x2
+   grid of 6 panels (12 total). Panels are clicked in pairs
+   to swap positions. Correctly placed panels get a green
+   "Humanity" frame; everything else stays plain black/white.
+   ========================================================= */
+
+.comic-stage {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 16px 80px;
+}
+
+/* ---------------------------------------------------------
+   Chapter heading
+   --------------------------------------------------------- */
+.chapter-heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chapter-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.chapter-title {
+  font-family: 'Bangers', var(--font-display);
+  letter-spacing: 0.04em;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 6px;
+  color: var(--wood-dark);
+}
+
+.chapter-source {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.puzzle-hint {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 14px auto 22px;
+}
+
+/* ---------------------------------------------------------
+   Open comic book spread
+   --------------------------------------------------------- */
+.comic-spread {
+  display: flex;
+  align-items: stretch;
+  background: #f3f1ea;
+  border-radius: 4px;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.08),
+    0 10px 34px rgba(0,0,0,.22);
+  position: relative;
+}
+
+/* spine shadow, same motif as the book in Level 1 */
+.comic-spread::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 40px;
+  margin-left: -20px;
+  background: linear-gradient(to right,
+    rgba(0,0,0,.14) 0%,
+    rgba(255,255,255,.05) 40%,
+    rgba(0,0,0,.10) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---------------------------------------------------------
+   Each comic page
+   --------------------------------------------------------- */
+.comic-page {
+  flex: 1 1 50%;
+  min-width: 0;
+  padding: clamp(18px, 3vw, 36px);
+  padding-bottom: 46px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.comic-page.left { border-right: 1px solid #d8d3c2; }
+
+.comic-page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.comic-page-title {
+  font-family: 'Bangers', var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: var(--wood-dark);
+}
+
+.comic-page-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.comic-page-status.complete {
+  color: var(--success);
+}
+
+/* page numbers, same placement as Level 1 */
+.page-number {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: #9a8f78;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   Panel grid: 3 columns x 2 rows = 6 panels per page
+   --------------------------------------------------------- */
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  flex: 1;
+}
+
+.panel {
+  position: relative;
+  border: 3px solid #1a1a1a;
+  border-radius: 2px;
+  background: #fff;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color .15s, transform .1s, box-shadow .15s;
+  box-shadow: 2px 2px 0 rgba(0,0,0,.15);
+}
+
+.panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 3px 4px 0 rgba(0,0,0,.2);
+}
+
+.panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* placeholder look until a real image is supplied */
+.panel .panel-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: repeating-linear-gradient(
+    135deg, #f0ede4 0 10px, #e7e2d4 10px 20px
+  );
+  font-family: var(--font-body);
+  text-align: center;
+  padding: 6px;
+}
+
+.panel .panel-placeholder .panel-number {
+  font-family: 'Bangers', var(--font-display);
+  font-size: 1.6rem;
+  color: var(--wood-dark);
+}
+
+.panel .panel-placeholder .panel-filename {
+  font-size: 0.62rem;
+  color: var(--ink-soft);
+  word-break: break-all;
+}
+
+/* ---------------------------------------------------------
+   Selection + feedback states
+   --------------------------------------------------------- */
+
+/* currently selected for swapping */
+.panel.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,162,39,.35), 2px 2px 0 rgba(0,0,0,.15);
+}
+
+/* correctly placed -> "Humanity" frame */
+.panel.correct {
+  border-color: var(--success);
+  box-shadow: 0 0 0 3px rgba(79,121,66,.25), 2px 2px 0 rgba(0,0,0,.15);
+  cursor: default;
+}
+
+.panel.correct:hover {
+  transform: none;
+  box-shadow: 0 0 0 3px rgba(79,121,66,.25), 2px 2px 0 rgba(0,0,0,.15);
+}
+
+/* small checkmark badge on correctly placed panels */
+.panel.correct::after {
+  content: "\2713";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--success);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ---------------------------------------------------------
+   Feedback + Continue (same as Level 1)
+   --------------------------------------------------------- */
+.feedback-box {
+  font-family: var(--font-body);
+  margin: 20px auto 0;
+  max-width: 760px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: rgba(201,162,39,.12);
+  border: 1px solid var(--gold);
+  font-size: 0.95rem;
+  display: none;
+  text-align: center;
+}
+.feedback-box.show { display: block; }
+
+.continue-wrap { margin-top: 14px; text-align: center; }
+.continue-wrap .btn         { display: none; }
+.continue-wrap .btn.visible { display: inline-flex; }
+
+/* ---------------------------------------------------------
+   Overlays (shared look with Level 1)
+   --------------------------------------------------------- */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(31,61,43,.88);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 24px; text-align: center;
+}
+.overlay.hidden { display: none; }
+.overlay-box { max-width: 460px; color: var(--paper); }
+.overlay-box h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 10px; }
+.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: .97rem; text-align: left; }
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 820px) {
+  .comic-spread    { flex-direction: column; }
+  .comic-page.left { border-right: none; border-bottom: 1px solid #d8d3c2; }
+  .comic-spread::after {
+    top: 50%; bottom: auto; left: 0; right: 0;
+    width: auto; height: 36px; margin-left: 0; margin-top: -18px;
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,.11) 0%, rgba(255,255,255,.05) 50%, rgba(0,0,0,.09) 100%);
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-grid { gap: 6px; }
+  .panel .panel-placeholder .panel-number { font-size: 1.2rem; }
+}

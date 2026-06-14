@@ -1,0 +1,458 @@
+/* =========================================================
+   style.css
+   Shared styles for the Pinocchio Serious Game
+   (header, buttons, badges, layout, index page sections)
+   ========================================================= */
+
+:root {
+  /* -- Palette: forest green + Pinocchio gold -- */
+  --paper:        #f4f1e3;   /* warm, faintly sage-tinted paper */
+  --paper-dark:   #e2e4cf;
+  --ink:          #21281f;   /* near-black, slightly green ink */
+  --ink-soft:     #51604c;
+  --wood:         #3f6b4f;   /* mid forest green (was "wood") */
+  --wood-dark:    #1f3d2b;   /* deep forest green (was "wood-dark") */
+  --gold:         #c9a227;   /* wax-seal / marionette gold */
+  --thread:       #c9a227;   /* signature thread, now gold */
+  --success:      #4f7942;
+  --error:        #a33d3d;
+
+  /* -- Type -- */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+  --font-book:    'Lora', Georgia, 'Times New Roman', serif;
+
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(44, 36, 32, 0.18);
+  --shadow-soft: 0 2px 8px rgba(44, 36, 32, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--wood-dark); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--wood-dark);
+  margin-top: 0;
+}
+
+/* =========================================================
+   Header / top bar (used on every page)
+   ========================================================= */
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--wood-dark);
+  color: var(--paper);
+  padding: 10px 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.top-bar .game-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--paper);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.top-bar .game-title small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.top-bar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--wood-dark);
+}
+.btn-primary:hover { background: #e0b34a; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--paper);
+  border-color: var(--paper);
+}
+.btn-secondary:hover { background: rgba(246, 239, 226, 0.15); }
+
+.btn-light {
+  background: var(--paper);
+  color: var(--wood-dark);
+  border-color: var(--wood-dark);
+}
+.btn-light:hover { background: var(--paper-dark); }
+
+.btn-danger {
+  background: transparent;
+  color: var(--thread);
+  border-color: var(--thread);
+}
+.btn-danger:hover { background: rgba(178, 59, 59, 0.1); }
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =========================================================
+   Status badges (timer, humanity counter)
+   ========================================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(246, 239, 226, 0.1);
+  border: 1px solid rgba(246, 239, 226, 0.35);
+  color: var(--paper);
+  white-space: nowrap;
+}
+
+.badge-gold {
+  background: rgba(201, 152, 46, 0.18);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.badge-icon { font-size: 1rem; }
+
+/* =========================================================
+   Page wrapper / generic sections
+   ========================================================= */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+.hero {
+  text-align: center;
+  padding: 56px 20px 40px;
+  border-bottom: 1px solid var(--paper-dark);
+  position: relative;
+}
+
+.hero .eyebrow {
+  font-family: var(--font-body);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--thread);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0 0 14px;
+}
+
+.hero p.lead {
+  max-width: 640px;
+  margin: 0 auto 28px;
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* string / thread divider — signature motif */
+.thread-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 46px 0 30px;
+  color: var(--thread);
+}
+.thread-divider::before,
+.thread-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to var(--dir, right), transparent, var(--thread) 50%, transparent);
+  max-width: 220px;
+}
+.thread-divider span {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+section.block {
+  margin: 50px 0;
+}
+
+section.block h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 18px;
+  color: var(--wood-dark);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 700px) {
+  .three-col { grid-template-columns: 1fr; }
+}
+
+.card-full {
+  width: 100%;
+}
+
+.card {
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   Level grid (index page)
+   ========================================================= */
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.level-card {
+  position: relative;
+  border-radius: var(--radius);
+  padding: 22px;
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 230px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.level-card.is-active {
+  border-color: var(--gold);
+}
+
+.level-card.is-active:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.level-card .level-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--thread);
+  font-weight: 700;
+}
+
+.level-card .swatch {
+  width: 100%;
+  height: 64px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.swatch.book   { background: repeating-linear-gradient(135deg, #2c2420 0 6px, #f6efe2 6px 12px); }
+.swatch.comic  { background: linear-gradient(135deg, #ffffff 0%, #ffffff 49%, #e8462e 50%, #2c2420 100%); }
+.swatch.film   { background: radial-gradient(circle at 30% 30%, #fcefc7 0%, #2c2420 70%); }
+.swatch.game   { background: repeating-conic-gradient(#3f9b5f 0% 25%, #2c2420 0% 50%) 0 0/16px 16px; }
+
+.level-card p {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.level-card .level-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.tag-open {
+  background: rgba(79, 121, 66, 0.15);
+  color: var(--success);
+}
+
+.tag-locked {
+  background: rgba(87, 74, 62, 0.12);
+  color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------
+   Level cards as links (index page overview)
+   --------------------------------------------------------- */
+.level-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.level-card .level-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--thread);
+}
+
+.level-card h3 {
+  margin: 2px 0 0;
+}
+
+.level-card .level-status {
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+/* unlocked, playable card */
+.level-card.unlocked {
+  border-color: var(--gold);
+}
+.level-card.unlocked:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+/* completed card */
+.level-card.completed .level-status {
+  color: var(--wood-dark);
+}
+.level-card.completed {
+  border-color: var(--success);
+}
+
+/* locked card -> not clickable, greyed out */
+.level-card.locked {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+.level-card.locked .level-status {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
+.site-footer {
+  text-align: center;
+  padding: 30px 20px 50px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* =========================================================
+   Responsive tweaks
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .hero { padding: 40px 16px 30px; }
+  .top-bar { padding: 8px 12px; }
+  .top-bar .game-title { font-size: 1.05rem; }
+}

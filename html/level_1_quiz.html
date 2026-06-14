@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 1 · Evaluation — Pinocchio: One Story, Many Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="quiz.css" />
+</head>
+<body class="quiz-body">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="top-bar">
+    <p class="game-title">
+      Pinocchio
+      <small>Level 1 — Evaluation</small>
+    </p>
+    <div class="top-bar-controls">
+      <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
+    </div>
+  </header>
+
+  <main class="quiz-stage">
+    <div class="quiz-card">
+      <p class="quiz-eyebrow">After the Chapter</p>
+      <h2>Thinking About the Book as a Medium</h2>
+      <p class="quiz-progress" id="progressText">Question 1 of 4</p>
+
+      <div class="quiz-steps">
+
+        <!-- Q1 -->
+        <div class="quiz-step active" data-qid="q1">
+          <p class="q-text">1. How does this chapter let you know that Pinocchio's nose is growing?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">A picture on the page shows the nose getting bigger step by step.</button>
+            <button class="option-btn" data-value="b">The narrator describes the nose becoming longer, and tells us what Pinocchio can no longer do because of it.</button>
+            <button class="option-btn" data-value="c">A sound effect plays and gets louder every time he lies.</button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-step" data-qid="q2">
+          <p class="q-text">2. In Level 1, Pinocchio is described only through words, without a picture of his face. Why might a book-based version of the story work this way?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">Because books are not allowed to contain any pictures.</button>
+            <button class="option-btn" data-value="b">Because leaving out an image of his face lets each reader imagine him, the same way the written words do.</button>
+            <button class="option-btn" data-value="c">Because Pinocchio has no face in the original story at all.</button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-step" data-qid="q3">
+          <p class="q-text">3. The text says Pinocchio "mourned for hours" over his nose. Compared to a film, how does a book handle a moment like this?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">A book can sum up hours of crying in a single sentence; a film would usually have to show that time passing on screen.</button>
+            <button class="option-btn" data-value="b">A book shows every minute of the crying in real time, exactly like a film would.</button>
+            <button class="option-btn" data-value="c">A book cannot describe the passing of time at all, only single actions.</button>
+          </div>
+        </div>
+
+        <!-- SCALE -->
+        <div class="quiz-step" data-qid="scale">
+          <p class="q-text">4. While reading this chapter, how clearly could you picture the scene in your mind, without seeing any pictures or video?</p>
+          <div class="quiz-options scale">
+            <button class="option-btn scale-option" data-value="low">Not very clearly</button>
+            <button class="option-btn scale-option" data-value="mid">Somewhat clearly</button>
+            <button class="option-btn scale-option" data-value="high">Very clearly</button>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="quiz-step" data-qid="results">
+          <div class="quiz-results" id="resultsContent">
+            <!-- filled in by quiz.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quiz-nav" id="quizNav">
+        <button class="btn btn-light" id="prevBtn" type="button">&larr; Previous</button>
+        <button class="btn btn-primary" id="nextBtn" type="button" disabled>Next &rarr;</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>

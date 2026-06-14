@@ -1,0 +1,182 @@
+/* =========================================================
+   quiz.css
+   Full-viewport, step-based evaluation page (no scrolling).
+   Reuses the green & gold palette from style.css.
+   ========================================================= */
+
+html, body.quiz-body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.quiz-stage {
+  height: calc(100vh - 60px); /* viewport minus top bar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.quiz-card {
+  width: 100%;
+  max-width: 680px;
+  max-height: 100%;
+  background: #fffdf6;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.quiz-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--thread);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.quiz-card h2 {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  margin-bottom: 4px;
+}
+
+.quiz-progress {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.quiz-steps {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.quiz-step {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.quiz-step.active {
+  display: flex;
+}
+
+.quiz-step .q-text {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  margin-bottom: 16px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.quiz-options.scale {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: #fff;
+  border: 1.5px solid var(--paper-dark);
+  border-radius: 8px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--gold);
+}
+
+.option-btn.selected {
+  border-color: var(--gold);
+  background: rgba(201, 162, 39, 0.15);
+  font-weight: 600;
+}
+
+.option-btn.scale-option {
+  flex: 1 1 150px;
+  text-align: center;
+}
+
+.option-btn.correct {
+  border-color: var(--success);
+  background: rgba(79, 121, 66, 0.14);
+}
+
+.option-btn.incorrect {
+  border-color: var(--error);
+  background: rgba(163, 61, 61, 0.12);
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
+
+/* ---------------------------------------------------------
+   Navigation row
+   --------------------------------------------------------- */
+
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------------------------------------------------------
+   Results step
+   --------------------------------------------------------- */
+
+.quiz-results {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.quiz-results .humanity-earned {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  color: var(--wood-dark);
+  margin: 10px 0;
+}
+
+.quiz-results .breakdown {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 500px) {
+  .quiz-card { padding: 18px; }
+  .quiz-options.scale { flex-direction: column; }
+}

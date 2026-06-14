@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 2 · The Comic — Pinocchio: One Story, Many Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="level2.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <p class="game-title">
+      Pinocchio
+      <small>Level 2 — The Comic</small>
+    </p>
+    <div class="top-bar-controls">
+      <a class="btn btn-secondary" href="index.html" id="backBtn">&larr; Back</a>
+      <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
+      <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
+      <span class="badge"><span class="badge-icon">&#9201;</span> <span id="timerDisplay">00:00</span></span>
+      <span class="badge badge-gold"><span class="badge-icon">&#10084;</span> <span id="humanityBadge">Humanity: 0</span></span>
+    </div>
+  </header>
+
+  <main class="comic-stage">
+
+    <!-- chapter heading -->
+    <div class="chapter-heading">
+      <p class="chapter-eyebrow">Level 2 &middot; The Comic</p>
+      <h1 class="chapter-title">The Fairy and the Three Lies</h1>
+      <p class="chapter-source">
+        The same chapter, retold across twelve comic panels &mdash;
+        sort each page into the right reading order.
+      </p>
+    </div>
+
+    <!-- progress / instructions -->
+    <p class="puzzle-hint" id="puzzleHint">
+      Tap one panel, then tap another to swap their places. Get every panel on
+      a page into the correct order to turn to the next spread.
+    </p>
+
+    <!-- OPEN COMIC BOOK SPREAD -->
+    <div class="comic-spread">
+
+      <!-- LEFT PAGE: panels 1-6 -->
+      <section class="comic-page left" aria-label="Left comic page">
+        <header class="comic-page-header">
+          <span class="comic-page-title">Page 1</span>
+          <span class="comic-page-status" id="leftStatus">0 / 6 correct</span>
+        </header>
+        <div class="panel-grid" id="leftGrid"></div>
+        <span class="page-number">&#8212; 1 &#8212;</span>
+      </section>
+
+      <!-- RIGHT PAGE: panels 7-12 -->
+      <section class="comic-page right" aria-label="Right comic page">
+        <header class="comic-page-header">
+          <span class="comic-page-title">Page 2</span>
+          <span class="comic-page-status" id="rightStatus">0 / 6 correct</span>
+        </header>
+        <div class="panel-grid" id="rightGrid"></div>
+        <span class="page-number">&#8212; 2 &#8212;</span>
+      </section>
+
+    </div><!-- /.comic-spread -->
+
+    <!-- FEEDBACK + CONTINUE -->
+    <div class="feedback-box" id="feedback"></div>
+    <div class="continue-wrap">
+      <a class="btn btn-primary" id="continueBtn" href="level_2_quiz.html">
+        Continue to Evaluation &rarr;
+      </a>
+    </div>
+
+  </main>
+
+  <!-- OVERLAYS -->
+  <div class="overlay" id="startOverlay">
+    <div class="overlay-box">
+      <h2>Level 2 &#8212; The Comic</h2>
+      <p>
+        This chapter is told across twelve comic panels, six per page. When the
+        comic opens, all twelve panels are shuffled at random.<br><br>
+        <strong>Tap one panel, then tap another</strong> to swap their places.
+        Arrange each page into the correct reading order &mdash; left to right,
+        top to bottom.<br><br>
+        Humanity is not just about finishing: it's about how directly you get
+        there. Each page starts with a "best possible" number of swaps needed to
+        fix that page's shuffle. The closer your actual number of swaps is to
+        that minimum, the more Humanity you earn &mdash; so look carefully
+        before you start swapping.<br><br>
+        A short evaluation on a separate page follows at the end. This chapter
+        can only be played once.
+      </p>
+      <button class="btn btn-primary" id="overlayStartBtn" type="button">&#9654; Open the Comic</button>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="pauseOverlay">
+    <div class="overlay-box">
+      <h2>Paused</h2>
+      <p>The timer is paused.</p>
+      <button class="btn btn-primary" id="resumeBtn" type="button">&#9654; Resume</button>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="doneOverlay">
+    <div class="overlay-box">
+      <h2>Already Completed</h2>
+      <p id="doneText">You have already played through this chapter.</p>
+      <a class="btn btn-primary" href="index.html">Return to Start</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="level2.js"></script>
+</body>
+</html>
