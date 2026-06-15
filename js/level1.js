@@ -1,7 +1,10 @@
 /* =========================================================
    level1.js  —  "The Book"
 
-   4 pages, shown as 2 spreads (1+2, then 3+4).
+   4 pages, shown as 2 spreads (1+2, then 3+4). Every page
+   STARTS WITH NARRATIVE TEXT (never a blank), so there is
+   always context before a question appears.
+
    Within a spread, the LEFT page types out first
    (typewriter effect), then the RIGHT page. Whenever a
    "blank" block is reached, typing pauses and a decision
@@ -14,7 +17,7 @@
    Scoring: 10 Humanity per correct blank (max 50).
    ========================================================= */
 
-const TYPE_SPEED_MS    = 12;
+const TYPE_SPEED_MS    = 28;   // ~36 chars/sec -- between the 12ms and 45ms versions
 const DECISION_SECONDS = 30;
 const POINTS_PER_BLANK = 10;
 
@@ -24,10 +27,15 @@ const POINTS_PER_BLANK = 10;
      { type: "text",  text: "...plain text, \n\n = paragraph break" }
      { type: "illus", id, file, alt }
      { type: "blank", id, options: [...] }
+
+   Every page's FIRST block is "text" -- a blank never opens
+   a page, so there's always context before a question.
    --------------------------------------------------------- */
 const pages = [
 
-  /* ============ PAGE 1 ============ */
+  /* ============ PAGE 1 ============
+     Pinocchio's full account of the Assassins -- one
+     continuous narration, plus the first illustration. */
   [
     { type: "text", text:
         "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:\n\n"
@@ -46,7 +54,13 @@ const pages = [
       + "and then we\u2019ll take the gold pieces that you have hidden under your tongue.\u2019\u201d\n\n"
     },
     { type: "illus", id: "illus1", file: "mazzanti_01.jpg",
-      alt: "Enrico Mazzanti, 1883: Pinocchio with the Blue Fairy" },
+      alt: "Enrico Mazzanti, 1883: Pinocchio with the Blue Fairy" }
+  ],
+
+  /* ============ PAGE 2 ============
+     The first two lies -- both blanks come after their own
+     bit of dialogue, never at the very start of the page. */
+  [
     { type: "text", text:
         "\u201cWhere are the gold pieces now?\u201d the Fairy asked.\n\n"
       + "\u201cI lost them,\u201d answered Pinocchio, but he told a lie, for he had them in his pocket."
@@ -55,11 +69,7 @@ const pages = [
       { text: "As he spoke, his nose, long though it was, became at least two inches longer.", correct: true },
       { text: "As he spoke, his nose stayed exactly the same length as before.",              correct: false },
       { text: "As he spoke, he began to cry softly, without saying another word.",            correct: false }
-    ]}
-  ],
-
-  /* ============ PAGE 2 ============ */
-  [
+    ]},
     { type: "text", text:
         "\n\n\u201cAnd where did you lose them?\u201d\n\n\u201cIn the wood near by.\u201d"
     },
@@ -67,17 +77,19 @@ const pages = [
       { text: "At this second lie, his nose grew a few more inches.",     correct: true },
       { text: "At this second lie, his nose shrank back a little.",       correct: false },
       { text: "At this second lie, both of his shoes fell off his feet.", correct: false }
-    ]},
+    ]}
+  ],
+
+  /* ============ PAGE 3 ============
+     The third lie and the Fairy's lesson about lying --
+     again, both blanks are preceded by their own text. */
+  [
     { type: "text", text:
-        "\n\n\u201cIf you lost them in the near\u2011by wood,\u201d said the Fairy, "
+        "\u201cIf you lost them in the near\u2011by wood,\u201d said the Fairy, "
       + "\u201cwe\u2019ll look for them and find them, for everything that is lost there is always found.\u201d\n\n"
       + "\u201cAh, now I remember,\u201d replied the Marionette, becoming more and more confused. "
       + "\u201cI did not lose the gold pieces, but I swallowed them when I drank the medicine.\u201d"
-    }
-  ],
-
-  /* ============ PAGE 3 ============ */
-  [
+    },
     { type: "blank", id: "blank3", options: [
       { text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. "
             + "If he turned to the right, he knocked it against the bed or into the windowpanes; if he turned "
@@ -105,16 +117,17 @@ const pages = [
     ]}
   ],
 
-  /* ============ PAGE 4 ============ */
+  /* ============ PAGE 4 ============
+     Pinocchio's shame, the woodpeckers, and the ending. */
   [
     { type: "text", text:
-        "\n\nPinocchio, not knowing where to hide his shame, tried to escape from the room, "
+        "Pinocchio, not knowing where to hide his shame, tried to escape from the room, "
       + "but his nose had become so long that he could not get it out of the door. "
       + "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. "
       + "No matter how he tried, it would not go through the door. The Fairy showed no pity toward him, "
       + "as she was trying to teach him a good lesson, so that he would stop telling lies, "
       + "the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes "
-      + "half out of his head from terror, she began to feel sorry for him and clapped her hands together.\n\n"
+      + "half out of his head from terror, she began to feel sorry for him and clapped her hands together."
     },
     { type: "illus", id: "illus2", file: "mazzanti_02.jpg",
       alt: "Enrico Mazzanti, 1883: Woodpeckers pecking Pinocchio's nose" },
@@ -151,6 +164,11 @@ let correctCount = 0;
 /* answers[blankId] = { isCorrect, correctChoice } */
 const answers = {};
 
+/* tracks which slot index (0,1,2) the CORRECT answer landed
+   on for the previous question, so we can avoid repeating
+   the same slot too often (anti-pattern safeguard) */
+let lastCorrectSlot = null;
+
 /* per-blank countdown interval id */
 let activeCountdownId = null;
 
@@ -170,6 +188,7 @@ const bookSpreadEl     = document.querySelector(".book-spread");
 const prevBtn = document.getElementById("prevSpreadBtn");
 const nextBtn = document.getElementById("nextSpreadBtn");
 const spreadIndicator = document.getElementById("spreadIndicator");
+const spreadNavEl = document.querySelector(".spread-nav");
 
 const feedbackEl  = document.getElementById("feedback");
 const continueBtn = document.getElementById("continueBtn");
@@ -188,8 +207,11 @@ const timer = new GameTimer("timerDisplay");
 renderHumanityBadge("humanityBadge");
 
 /* ---------------------------------------------------------
-   Shuffle helper
+   Shuffle helpers
    --------------------------------------------------------- */
+
+/* Fisher-Yates, but reshuffles in place using a fresh random
+   draw each time -- already unbiased on its own. */
 function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -197,6 +219,28 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+/* Shuffle a question's 3 options, then -- if the correct
+   answer would land in the SAME slot as the previous
+   question's correct answer -- reshuffle (a few tries max).
+   This avoids the "correct answer is always A" / "always B"
+   pattern across a playthrough without sacrificing fairness
+   (each individual shuffle is still a uniform permutation;
+   we're just rejecting a streak). */
+function shuffleOptionsAvoidingRepeat(options) {
+  let attempt = shuffle(options);
+  let tries = 0;
+  while (
+    lastCorrectSlot !== null &&
+    attempt.findIndex(o => o.correct) === lastCorrectSlot &&
+    tries < 6
+  ) {
+    attempt = shuffle(options);
+    tries++;
+  }
+  lastCorrectSlot = attempt.findIndex(o => o.correct);
+  return attempt;
 }
 
 /* ---------------------------------------------------------
@@ -369,7 +413,7 @@ function showDecisionInline(container, block, myToken, onDone) {
 
   wrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
 
-  const choices = shuffle(block.options);
+  const choices = shuffleOptionsAvoidingRepeat(block.options);
   let remaining = DECISION_SECONDS;
   let resolved  = false;
 
@@ -451,6 +495,10 @@ function renderSpread() {
   bookSpreadEl.classList.remove("spread-0", "spread-1");
   bookSpreadEl.classList.add("spread-" + currentSpread);
 
+  /* always start a new spread at the top of the book, so the
+     beginning of each page is visible without scrolling */
+  bookSpreadEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
   leftPageNum.textContent  = "\u2014 " + (leftPageIndex + 1)  + " \u2014";
   rightPageNum.textContent = "\u2014 " + (rightPageIndex + 1) + " \u2014";
 
@@ -494,12 +542,22 @@ function allBlanksAnsweredOnSpread() {
 }
 
 function updateNextButton() {
+  const wasDisabled = nextBtn.disabled;
+
   if (currentSpread < TOTAL_SPREADS - 1) {
     nextBtn.disabled = !allBlanksAnsweredOnSpread();
     nextBtn.textContent = "Next \u203a";
   } else {
     nextBtn.disabled = true;
     nextBtn.textContent = "\u203a";
+  }
+
+  /* if the button just became enabled, draw attention to it */
+  if (wasDisabled && !nextBtn.disabled) {
+    nextBtn.classList.add("ready");
+    spreadNavEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  } else if (nextBtn.disabled) {
+    nextBtn.classList.remove("ready");
   }
 }
 
@@ -522,6 +580,7 @@ prevBtn.addEventListener("click", () => {
 
 nextBtn.addEventListener("click", () => {
   if (currentSpread < TOTAL_SPREADS - 1 && allBlanksAnsweredOnSpread()) {
+    nextBtn.classList.remove("ready");
     currentSpread++;
     renderSpread();
   }
@@ -539,7 +598,8 @@ function finishPuzzle() {
     + `<strong>+${puzzleScore} Humanity</strong> earned for this chapter.<br>`
     + `Continue to the evaluation to collect more.`;
 
-  continueBtn.classList.add("visible");
+  continueBtn.classList.add("visible", "ready");
+  continueBtn.scrollIntoView({ behavior: "smooth", block: "center" });
 
   timer.stop();
   startBtn.disabled = true;

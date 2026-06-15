@@ -95,16 +95,18 @@
   box-sizing: border-box;
 }
 
-/* Spread 1 (pages 1+2): page 1 has the longest text + an
-   illustration + one decision box -> needs the most room. */
+/* Spread 1 (pages 1+2): page 1 has one long, continuous
+   narration plus an illustration (no decision boxes); page 2
+   has shorter text but two decision boxes. */
 .book-spread.spread-0 .book-page {
-  min-height: 1500px;
+  min-height: 1100px;
 }
 
-/* Spread 2 (pages 3+4): page 3 has two decision boxes,
-   page 4 has text + illustration + one decision box. */
+/* Spread 2 (pages 3+4): page 3 has two decision boxes with
+   shorter surrounding text; page 4 has more text plus an
+   illustration and one decision box. */
 .book-spread.spread-1 .book-page {
-  min-height: 1250px;
+  min-height: 950px;
 }
 
 .book-page.left { border-right: 1px solid #ddd5b8; }
@@ -304,6 +306,24 @@
   color: var(--ink-soft);
   min-width: 120px;
   text-align: center;
+}
+
+/* ---------------------------------------------------------
+   "Ready" pulse — draws attention to Next / Continue once
+   all blanks on the current spread (or the whole book) are
+   answered, so it's clear what to do next.
+   --------------------------------------------------------- */
+@keyframes ready-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201,162,39,.55);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201,162,39,0);
+  }
+}
+
+.btn.ready {
+  animation: ready-pulse 1.4s ease-out infinite;
 }
 
 /* ---------------------------------------------------------

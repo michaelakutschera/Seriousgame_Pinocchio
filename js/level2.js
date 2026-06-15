@@ -1,48 +1,51 @@
 /* =========================================================
    level2.js  —  "The Comic"
 
-   12 panels (6 per page) retelling the same chapter as
-   Level 1, but as a comic. On load, each page's 6 panels
-   are shuffled into random grid positions. The player taps
-   two panels to swap them, trying to restore the correct
-   reading order (left-to-right, top-to-bottom).
+   12 panels retelling the same chapter as Level 1, shown as
+   an open comic book: 6 panels on the left page, 6 on the
+   right (3x2 grid each = 12 slots total).
 
-   Scoring: every panel that is in its correct slot when the
-   puzzle ends earns Humanity. Humanity is recalculated live
-   as panels move; the level "finishes" once both pages are
-   fully correct, or the player can stop early (handled via
-   the Stop/pause flow, same as Level 1).
+   On load, ALL 12 panels are shuffled together into a single
+   pool and distributed across all 12 slots (both pages) --
+   a panel that belongs on page 1 can randomly start on page
+   2 and must be moved across. The player taps two panels
+   (on either page) to swap their places.
+
+   Scoring: efficiency-based (see pageScore below). Humanity
+   is based on how close the player's total swap count is to
+   the theoretical minimum for the whole 12-slot shuffle.
 
    IMAGES: place your own panel artwork in this same folder,
-   named panel_01.jpg .. panel_12.jpg (panels 1-6 = left page,
-   7-12 = right page, in correct reading order). Until then,
-   numbered placeholders are shown.
+   named panel_01.jpg .. panel_12.jpg, where panel_01..06 =
+   correct order for page 1 (slots 0-5) and panel_07..12 =
+   correct order for page 2 (slots 0-5). Until then, numbered
+   placeholders are shown.
    ========================================================= */
 
-const PANELS_PER_PAGE  = 6;
-const TOTAL_PANELS     = 12;
+const PANELS_PER_PAGE = 6;
+const TOTAL_PANELS    = 12;
 
 /* ---------------------------------------------------------
    Panel definitions.
-   "correctIndex" = 0..5 (this panel's correct slot on its page)
-   "file"         = expected image filename (flat folder)
+   "correctSlot" = 0..11, this panel's correct slot in the
+                   COMBINED 12-slot layout:
+                     slots 0-5  -> left page,  positions 0-5
+                     slots 6-11 -> right page, positions 0-5
+   "file"        = expected image filename (flat folder)
    --------------------------------------------------------- */
-const leftPanels = [
-  { id: "p1",  correctIndex: 0, file: "panel_01.jpg", alt: "Panel 1" },
-  { id: "p2",  correctIndex: 1, file: "panel_02.jpg", alt: "Panel 2" },
-  { id: "p3",  correctIndex: 2, file: "panel_03.jpg", alt: "Panel 3" },
-  { id: "p4",  correctIndex: 3, file: "panel_04.jpg", alt: "Panel 4" },
-  { id: "p5",  correctIndex: 4, file: "panel_05.jpg", alt: "Panel 5" },
-  { id: "p6",  correctIndex: 5, file: "panel_06.jpg", alt: "Panel 6" }
-];
-
-const rightPanels = [
-  { id: "p7",  correctIndex: 0, file: "panel_07.jpg", alt: "Panel 7" },
-  { id: "p8",  correctIndex: 1, file: "panel_08.jpg", alt: "Panel 8" },
-  { id: "p9",  correctIndex: 2, file: "panel_09.jpg", alt: "Panel 9" },
-  { id: "p10", correctIndex: 3, file: "panel_10.jpg", alt: "Panel 10" },
-  { id: "p11", correctIndex: 4, file: "panel_11.jpg", alt: "Panel 11" },
-  { id: "p12", correctIndex: 5, file: "panel_12.jpg", alt: "Panel 12" }
+const allPanels = [
+  { id: "p1",  correctSlot: 0,  file: "panel_01.jpg", alt: "Panel 1"  },
+  { id: "p2",  correctSlot: 1,  file: "panel_02.jpg", alt: "Panel 2"  },
+  { id: "p3",  correctSlot: 2,  file: "panel_03.jpg", alt: "Panel 3"  },
+  { id: "p4",  correctSlot: 3,  file: "panel_04.jpg", alt: "Panel 4"  },
+  { id: "p5",  correctSlot: 4,  file: "panel_05.jpg", alt: "Panel 5"  },
+  { id: "p6",  correctSlot: 5,  file: "panel_06.jpg", alt: "Panel 6"  },
+  { id: "p7",  correctSlot: 6,  file: "panel_07.jpg", alt: "Panel 7"  },
+  { id: "p8",  correctSlot: 7,  file: "panel_08.jpg", alt: "Panel 8"  },
+  { id: "p9",  correctSlot: 8,  file: "panel_09.jpg", alt: "Panel 9"  },
+  { id: "p10", correctSlot: 9,  file: "panel_10.jpg", alt: "Panel 10" },
+  { id: "p11", correctSlot: 10, file: "panel_11.jpg", alt: "Panel 11" },
+  { id: "p12", correctSlot: 11, file: "panel_12.jpg", alt: "Panel 12" }
 ];
 
 /* ---------------------------------------------------------
@@ -71,26 +74,24 @@ renderHumanityBadge("humanityBadge");
 
 /* ---------------------------------------------------------
    State
-   currentOrder[pageKey] = array of panel objects, in the
-   ORDER THEY CURRENTLY APPEAR in the grid (index = slot)
+   currentOrder = array of 12 panel objects, in the ORDER
+   THEY CURRENTLY APPEAR across both pages:
+     slots 0-5  -> left page,  positions 0-5
+     slots 6-11 -> right page, positions 0-5
    --------------------------------------------------------- */
 let paused      = true;
 let gameStarted = false;
 let finished    = false;
 
-const currentOrder = {
-  left:  null,
-  right: null
-};
+let currentOrder = null;
 
-/* currently selected slot for swapping: { pageKey, slotIndex } | null */
+/* currently selected slot index (0-11) for swapping, or null */
 let selection = null;
 
-/* swap counters, reset on start */
-const swapCount = { left: 0, right: 0 };
-/* minimum swaps required from the initial shuffle to a solved
-   page (computed once, right after shuffling) */
-const minSwaps = { left: 0, right: 0 };
+/* total swap counter, reset on start */
+let swapCount = 0;
+/* theoretical minimum swaps for the initial shuffle */
+let minSwapsTotal = 0;
 
 /* ---------------------------------------------------------
    Minimum-swaps calculation
@@ -108,7 +109,7 @@ function computeMinSwaps(order) {
     let j = i;
     while (!visited[j]) {
       visited[j] = true;
-      j = order[j].correctIndex; // follow where this panel needs to go
+      j = order[j].correctSlot;
     }
   }
   return n - cycles;
@@ -126,37 +127,50 @@ function shuffle(arr) {
   return a;
 }
 
-/* keep shuffling until the order is not already fully solved
-   (so the puzzle is never trivially "done" on load) */
-function shuffledNonSolved(panels) {
-  let attempt = shuffle(panels);
+/* keep shuffling until the order is not already fully solved,
+   and until at least a few panels start on the "wrong" page
+   (so the puzzle isn't trivially page-local) */
+function shuffledLayout() {
+  let attempt;
   let tries = 0;
-  while (attempt.every((p, i) => p.correctIndex === i) && tries < 10) {
-    attempt = shuffle(panels);
+  do {
+    attempt = shuffle(allPanels);
     tries++;
-  }
+  } while (
+    tries < 30 &&
+    (
+      attempt.every((p, i) => p.correctSlot === i) ||
+      attempt.filter((p, i) => Math.floor(p.correctSlot / PANELS_PER_PAGE) !== Math.floor(i / PANELS_PER_PAGE)).length < 2
+    )
+  );
   return attempt;
 }
 
 /* ---------------------------------------------------------
    Rendering
    --------------------------------------------------------- */
-function renderGrid(pageKey, gridEl, statusEl) {
-  gridEl.innerHTML = "";
-  const order = currentOrder[pageKey];
+function slotToPage(slot)  { return slot < PANELS_PER_PAGE ? "left" : "right"; }
+function slotToLocal(slot) { return slot < PANELS_PER_PAGE ? slot : slot - PANELS_PER_PAGE; }
 
-  order.forEach((panel, slotIndex) => {
+function renderAll() {
+  renderGrid("left",  leftGrid,  leftStatus,  0);
+  renderGrid("right", rightGrid, rightStatus, PANELS_PER_PAGE);
+}
+
+function renderGrid(pageKey, gridEl, statusEl, slotOffset) {
+  gridEl.innerHTML = "";
+
+  for (let local = 0; local < PANELS_PER_PAGE; local++) {
+    const slot  = slotOffset + local;
+    const panel = currentOrder[slot];
+
     const cell = document.createElement("div");
     cell.className = "panel";
-    cell.dataset.page = pageKey;
-    cell.dataset.slot = String(slotIndex);
+    cell.dataset.slot = String(slot);
 
-    const isCorrect = panel.correctIndex === slotIndex;
+    const isCorrect = panel.correctSlot === slot;
     if (isCorrect) cell.classList.add("correct");
-
-    if (selection && selection.pageKey === pageKey && selection.slotIndex === slotIndex) {
-      cell.classList.add("selected");
-    }
+    if (selection === slot) cell.classList.add("selected");
 
     const img = document.createElement("img");
     img.src = panel.file;
@@ -167,11 +181,11 @@ function renderGrid(pageKey, gridEl, statusEl) {
     });
     cell.appendChild(img);
 
-    cell.addEventListener("click", () => handlePanelClick(pageKey, slotIndex));
+    cell.addEventListener("click", () => handlePanelClick(slot));
     gridEl.appendChild(cell);
-  });
+  }
 
-  updateStatus(pageKey, statusEl);
+  updateStatus(pageKey, statusEl, slotOffset);
 }
 
 function buildPlaceholder(panel) {
@@ -191,61 +205,48 @@ function buildPlaceholder(panel) {
   return wrap;
 }
 
-function updateStatus(pageKey, statusEl) {
-  const order = currentOrder[pageKey];
-  const correctCount = order.filter((p, i) => p.correctIndex === i).length;
+function updateStatus(pageKey, statusEl, slotOffset) {
+  let correctCount = 0;
+  for (let local = 0; local < PANELS_PER_PAGE; local++) {
+    const slot = slotOffset + local;
+    if (currentOrder[slot].correctSlot === slot) correctCount++;
+  }
   statusEl.textContent = `${correctCount} / ${PANELS_PER_PAGE} correct`;
   statusEl.classList.toggle("complete", correctCount === PANELS_PER_PAGE);
 }
 
 /* ---------------------------------------------------------
-   Click-to-swap interaction
+   Click-to-swap interaction (works across both pages)
    --------------------------------------------------------- */
-function handlePanelClick(pageKey, slotIndex) {
+function handlePanelClick(slot) {
   if (paused || !gameStarted || finished) return;
 
-  const order = currentOrder[pageKey];
-
   /* clicking an already-correct panel does nothing (locked in place) */
-  if (order[slotIndex].correctIndex === slotIndex) return;
+  if (currentOrder[slot].correctSlot === slot) return;
 
-  if (!selection) {
-    selection = { pageKey, slotIndex };
-    renderGrid(pageKey, pageKey === "left" ? leftGrid : rightGrid,
-                         pageKey === "left" ? leftStatus : rightStatus);
+  if (selection === null) {
+    selection = slot;
+    renderAll();
     return;
   }
 
-  if (selection.pageKey === pageKey && selection.slotIndex === slotIndex) {
+  if (selection === slot) {
     /* clicked the same panel again -> deselect */
     selection = null;
-    renderGrid(pageKey, pageKey === "left" ? leftGrid : rightGrid,
-                         pageKey === "left" ? leftStatus : rightStatus);
+    renderAll();
     return;
   }
 
-  if (selection.pageKey !== pageKey) {
-    /* swapping across pages is not allowed -> move selection instead */
-    const oldPageKey = selection.pageKey;
-    selection = { pageKey, slotIndex };
-    renderGrid(oldPageKey, oldPageKey === "left" ? leftGrid : rightGrid,
-                            oldPageKey === "left" ? leftStatus : rightStatus);
-    renderGrid(pageKey, pageKey === "left" ? leftGrid : rightGrid,
-                         pageKey === "left" ? leftStatus : rightStatus);
-    return;
-  }
-
-  /* swap the two panels on the same page */
-  const a = selection.slotIndex;
-  const b = slotIndex;
-  const tmp = order[a];
-  order[a] = order[b];
-  order[b] = tmp;
-  swapCount[pageKey]++;
+  /* swap the two panels, possibly across pages */
+  const a = selection;
+  const b = slot;
+  const tmp = currentOrder[a];
+  currentOrder[a] = currentOrder[b];
+  currentOrder[b] = tmp;
+  swapCount++;
 
   selection = null;
-  renderGrid(pageKey, pageKey === "left" ? leftGrid : rightGrid,
-                       pageKey === "left" ? leftStatus : rightStatus);
+  renderAll();
 
   checkCompletion();
 }
@@ -254,10 +255,7 @@ function handlePanelClick(pageKey, slotIndex) {
    Completion check
    --------------------------------------------------------- */
 function checkCompletion() {
-  const leftDone  = currentOrder.left.every((p, i) => p.correctIndex === i);
-  const rightDone = currentOrder.right.every((p, i) => p.correctIndex === i);
-
-  if (leftDone && rightDone) {
+  if (currentOrder.every((p, i) => p.correctSlot === i)) {
     finishPuzzle();
   }
 }
@@ -271,57 +269,35 @@ function checkCompletion() {
    i.e. whether they recognised the right reading order quickly,
    or had to try many combinations.
 
-   For each page:
-     minSwaps  = theoretical minimum number of swaps needed
-                 to go from the initial shuffle to "solved"
-                 (computed once, right after shuffling)
-     extraSwaps = max(0, actualSwaps - minSwaps)
+   minSwapsTotal = theoretical minimum number of swaps needed
+                   to go from the initial 12-slot shuffle to
+                   "solved" (computed once, right after shuffling)
+   extraSwaps    = max(0, actualSwaps - minSwapsTotal)
 
-   Per page, Humanity = BASE_POINTS, reduced by a penalty for
-   each "extra" swap beyond the minimum, down to a floor so a
-   completed page is never worth zero.
-
-     pageScore = max(FLOOR, BASE_POINTS - extraSwaps * PENALTY)
-
-   Both pages together: max 2 x BASE_POINTS = 60 (same ceiling
-   as before). A player who solves a page in exactly minSwaps
-   moves gets the full 30 points for that page; someone who
-   needed many extra tries still gets at least 10.
+   Humanity = max(FLOOR, BASE_POINTS - extraSwaps * PENALTY)
+   BASE_POINTS = 60 (same ceiling as before).
    --------------------------------------------------------- */
-const BASE_POINTS_PER_PAGE = 30;
+const BASE_POINTS    = 60;
 const PENALTY_PER_EXTRA_SWAP = 3;
-const FLOOR_PER_PAGE = 10;
-
-function pageScore(pageKey) {
-  const order = currentOrder[pageKey];
-  const solved = order.every((p, i) => p.correctIndex === i);
-  if (!solved) return 0; // unfinished page earns nothing
-
-  const extra = Math.max(0, swapCount[pageKey] - minSwaps[pageKey]);
-  return Math.max(FLOOR_PER_PAGE, BASE_POINTS_PER_PAGE - extra * PENALTY_PER_EXTRA_SWAP);
-}
+const FLOOR_POINTS   = 15;
 
 function computeScore() {
-  return pageScore("left") + pageScore("right");
+  const extra = Math.max(0, swapCount - minSwapsTotal);
+  return Math.max(FLOOR_POINTS, BASE_POINTS - extra * PENALTY_PER_EXTRA_SWAP);
 }
-
 
 function finishPuzzle() {
   if (finished) return;
   finished = true;
 
-  const leftPts  = pageScore("left");
-  const rightPts = pageScore("right");
-  const score = leftPts + rightPts;
+  const score = computeScore();
   localStorage.setItem("pinocchio_level2PuzzleScore", score.toString());
 
   feedbackEl.classList.add("show");
   feedbackEl.innerHTML =
-      `Page 1 solved in ${swapCount.left} swap${swapCount.left === 1 ? "" : "s"} `
-    + `(best possible: ${minSwaps.left}) &mdash; <strong>+${leftPts} Humanity</strong>.<br>`
-    + `Page 2 solved in ${swapCount.right} swap${swapCount.right === 1 ? "" : "s"} `
-    + `(best possible: ${minSwaps.right}) &mdash; <strong>+${rightPts} Humanity</strong>.<br>`
-    + `Total: <strong>+${score} Humanity</strong> earned for this chapter. `
+      `You solved the whole comic in <strong>${swapCount}</strong> swap${swapCount === 1 ? "" : "s"} `
+    + `(best possible: ${minSwapsTotal}).<br>`
+    + `<strong>+${score} Humanity</strong> earned for this chapter. `
     + `Continue to the evaluation to collect more.`;
 
   continueBtn.classList.add("visible");
@@ -340,14 +316,10 @@ function startGame() {
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
 
-  currentOrder.left  = shuffledNonSolved(leftPanels);
-  currentOrder.right = shuffledNonSolved(rightPanels);
+  currentOrder = shuffledLayout();
+  minSwapsTotal = computeMinSwaps(currentOrder);
 
-  minSwaps.left  = computeMinSwaps(currentOrder.left);
-  minSwaps.right = computeMinSwaps(currentOrder.right);
-
-  renderGrid("left",  leftGrid,  leftStatus);
-  renderGrid("right", rightGrid, rightStatus);
+  renderAll();
 }
 
 function pauseGame() {

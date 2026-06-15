@@ -10,8 +10,8 @@
   --paper-dark:   #e2e4cf;
   --ink:          #21281f;   /* near-black, slightly green ink */
   --ink-soft:     #51604c;
-  --wood:         #3f6b4f;   /* mid forest green (was "wood") */
-  --wood-dark:    #1f3d2b;   /* deep forest green (was "wood-dark") */
+  --wood:         #3f6b4f;   /* mid forest green */
+  --wood-dark:    #9f570e;   /* brown */
   --gold:         #c9a227;   /* wax-seal / marionette gold */
   --thread:       #c9a227;   /* signature thread, now gold */
   --success:      #4f7942;
@@ -240,7 +240,7 @@ h1, h2, h3, h4 {
 .thread-divider span {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 14px;
 }
 
 section.block {
@@ -294,6 +294,19 @@ section.block h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 22px;
+}
+
+/* Always exactly 2 columns / 2 rows for the 4 level cards,
+   so 3+1 never happens. Not optimized for narrow phones --
+   this game is meant to be played in a browser. */
+.level-grid-2x2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 560px) {
+  .level-grid-2x2 {
+    grid-template-columns: 1fr;
+  }
 }
 
 .level-card {

@@ -13,8 +13,8 @@
   <!-- ============ TOP BAR ============ -->
   <header class="top-bar">
     <p class="game-title">
-      Pinocchio
-      <small>One Story, Many Media</small>
+      <em>The Adventures of Pinocchio</em>
+      <small>A Serious Game about one Story told in different Media</small>
     </p>
     <div class="top-bar-controls">
       <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
@@ -24,13 +24,12 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero">
-    <p class="eyebrow">A Serious Game about Stories and Media</p>
     <h1>Can a wooden puppet become a real boy?</h1>
     <p class="lead">
-      Pinocchio's most famous moment &mdash; the chapter about lying and his growing
-      nose &mdash; is told four times in four different media: a book,
-      a comic, a film, and a video game. Play through all four, collect
-      <strong>Humanity</strong>, and decide Pinocchio's fate.
+      Pinocchio's most famous moment, about lying and his growing nose: <br/>
+      Is told four times in four different media: 
+      a book, a comic, a film, and a video game.<br/>
+      Play through all four levels, collect Humanity, and decide Pinocchio's fate.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary" id="startGameBtn" href="level_1.html">▶ Start the Game — Level 1: The Book</a>
@@ -46,82 +45,79 @@
         <div class="card">
           <h3>What is it about?</h3>
           <p>
-            It is about how <strong>media shape stories</strong> &mdash; not just carry
-            them. The same scene from <em>Le avventure di Pinocchio &mdash; Storia di un
-            burattino</em> (Carlo Collodi, 1883) is retold in a book, a comic, a film,
-            and a video game.
+            The game is about how media shape stories and meaning.
+            The chapters 17 and 18 from <em>Le avventure di Pinocchio.<br/>
+            Storia di un burattino</em> (1883) from Carlo Collodi are told<br/>
+            in the English translation, in form 
+            of a book, a comic, a film and a video game. 
           </p>
         </div>
         <div class="card">
           <h3>Why does it matter?</h3>
           <p>
-            By comparing the same content across media, the game asks: why is one
-            version funnier, darker, or more detailed than another? What stays the same
-            about Pinocchio across more than a century of adaptations &mdash; and what
-            changes, and why?
+           Every story is brought to life through a medium, which in turn shapes
+          our perception of it. Each medium has its own specific characteristics,
+          and forces the story to change and adapt.<br/>
+          The game therefore asks: What remains the same, and what changes? How does the medium influence our perception? 
           </p>
         </div>
       </div>
     </section>
 
-    <div class="thread-divider"><span>The Levels</span></div>
+    <div class="thread-divider"><span><h2>Levels</h2></span></div>
 
     <!-- ============ LEVEL OVERVIEW ============ -->
     <section class="block">
       <h2>Choose a Chapter</h2>
       <p style="max-width: 680px; color: var(--ink-soft); margin-bottom: 22px;">
-        Each level retells the same "Lies" chapter in a different medium.
-        Play them in order &mdash; a level unlocks once the previous one is
-        completed.
+        Play the levels in order 1 to 4. A new level unlocks once the previous one is completed.
       </p>
-      <div class="level-grid" id="levelGrid">
+      <div class="level-grid level-grid-2x2" id="levelGrid">
 
         <a class="level-card" id="levelCard1" href="level_1.html">
           <span class="level-tag">Level 1</span>
           <h3>The Book</h3>
-          <p>A storybook page that types itself out as you read &mdash;
-             choose how the story continues at five key moments.</p>
+          <p>Pages from the novel that types itself out as you read and you must<br/>
+             complete the story at five key moments in order to finish the chapter.</p>
           <span class="level-status" id="levelStatus1">Start &rarr;</span>
         </a>
 
         <a class="level-card" id="levelCard2" href="level_2.html">
           <span class="level-tag">Level 2</span>
           <h3>The Comic</h3>
-          <p>An open comic book with twelve shuffled panels &mdash;
-             put each page back into the correct reading order.</p>
+          <p>An open comic book with twelve shuffeled panels.<br/>
+          Put the panels in the correct order reading order.</p>
           <span class="level-status" id="levelStatus2">Locked</span>
         </a>
 
         <a class="level-card" id="levelCard3" href="level_3.html">
           <span class="level-tag">Level 3</span>
           <h3>The Film</h3>
-          <p>Coming soon: a cinematic retelling of the same scene.</p>
+          <p>Coming soon</p>
           <span class="level-status" id="levelStatus3">Locked</span>
         </a>
 
         <a class="level-card" id="levelCard4" href="level_4.html">
           <span class="level-tag">Level 4</span>
           <h3>The Video Game</h3>
-          <p>Coming soon: a video game inside the video game &mdash;
-             your choices decide Pinocchio's fate.</p>
+          <p>Coming soon</p>
           <span class="level-status" id="levelStatus4">Locked</span>
         </a>
 
       </div>
     </section>
 
-    <div class="thread-divider"><span>How to Play</span></div>
+    <div class="thread-divider"><span><h2>How to Play</h2></span></div>
 
     <!-- ============ CONTROLS ============ -->
     <section class="block">
       <h2>Controls &amp; Rules</h2>
-      <!-- 3 equal cards on top row, "After each level" spans full width below -->
       <div class="three-col">
         <div class="card">
           <h3>Timer</h3>
           <p>
             Each level has a timer in the top bar, counting how long you spend on that
-            chapter. It starts when you press <strong>Start</strong> and pauses when
+            level. It starts when you press <strong>Start</strong> and pauses when
             you press <strong>Stop</strong>.
           </p>
         </div>
@@ -137,22 +133,21 @@
           <h3>Back to Start</h3>
           <p>
             Returns you to this page at any time. Once a level is completed it is
-            locked &mdash; each chapter can only be played through once.
+            locked &mdash; each chapter can only be played once.<br/>
+            It is possible to <strong>"Reset Progress"</strong> and start with level 1.
           </p>
         </div>
       </div>
       <div class="card card-full" style="margin-top: 22px;">
         <h3>After each level</h3>
         <p>
-          Every level ends with a short evaluation on its own page. These questions
-          are not about <em>what happened</em> in the story &mdash; they ask
-          <em>how the medium itself</em> told it: through pictures, panels, camera
-          shots, or interaction.
-        </p>
+          Every level ends with a short evaluation. These questions
+          are not about <em>what happened</em> in the chapters.<br/>
+          Is is about <em>how the medium itself</em> told it</p>
       </div>
     </section>
 
-    <div class="thread-divider"><span>The Reward System</span></div>
+    <div class="thread-divider"><span><h2>Reward System</h2></span></div>
 
     <!-- ============ HUMANITY / ENDING ============ -->
     <section class="block">
@@ -161,20 +156,22 @@
         <div class="card">
           <h3>Collecting Humanity</h3>
           <p>
-            Every level rewards you with <strong>Humanity points</strong>: for
+            Every level rewards you with <strong>Humanity Points</strong>: for
             correctly completing the chapter under time pressure, and for thinking
-            carefully about how each medium tells it. Your total carries over from
-            level to level &mdash; you can see it at the top of every page.
+            carefully about how each medium tells it.<br/>
+            Your total <strong>Humanity Points</strong> carry over from level to level,
+            and you can see them at the top of every page.
           </p>
         </div>
         <div class="card">
           <h3>The Ending</h3>
           <p>
-            After Level 4, Pinocchio's fate depends on how much Humanity you've
-            collected across all four levels. Collect enough, and the Fairy will
-            turn him into a real boy. Fall short &mdash; for example, by running out
-            of time, choosing the wrong sentence, or misreading how a medium works
-            &mdash; and Pinocchio remains a wooden puppet.
+            After Level 4, Pinocchio's fate depends on how much Humanity Points you've
+            collected across all four levels. Collect enough, and the Fairy with the blue hair 
+            will turn him into a real boy. <br/>
+            Fall short – by running out  
+            of time or misreading how a medium works
+            – and Pinocchio remains a wooden puppet.
           </p>
         </div>
       </div>
@@ -183,12 +180,13 @@
   </main>
 
   <footer class="site-footer">
-    Pinocchio: One Story, Many Media &mdash; a serious game prototype for a university
-    media studies project (4 ECTS). Story text adapted from <em>Le avventure di
-    Pinocchio &mdash; Storia di un burattino</em> by Carlo Collodi (1883); illustrations
-    in Level 1 after Enrico Mazzanti's original 1883 drawings.
+    Coming Soon!!!!
+    https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016
+    THE ADVENTURES OF PINOCCHIO
+    Translated from the Italian by Carol Della Chiesa
   </footer>
 
+<!-- ============ JS. SCRIPT ============ -->
   <script src="script.js"></script>
   <script>
     renderHumanityBadge("humanityBadge");
@@ -199,6 +197,7 @@
         resetAllProgress();
         renderHumanityBadge("humanityBadge");
         updateLevelCards();
+        updateHeroCTA();
       }
     });
 
@@ -246,6 +245,37 @@
       }
     }
 
+    /* ---------------------------------------------------------
+       Dynamic hero call-to-action
+       Points to the first level that is not yet completed
+       (i.e. "continue where you left off"), or congratulates
+       the player if all built levels are done.
+       --------------------------------------------------------- */
+    function updateHeroCTA() {
+      const heroBtn = document.getElementById("startGameBtn");
+      const levels = [
+        { id: 1, completed: localStorage.getItem("pinocchio_level1Completed") === "true", href: "level_1.html", label: "Level 1: The Book" },
+        { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "level_2.html", label: "Level 2: The Comic" }
+        /* Level 3 & 4 added here once their pages exist */
+      ];
+
+      const next = levels.find(l => !l.completed);
+
+      if (!next) {
+        /* everything currently available has been completed */
+        heroBtn.textContent = "\u25B6 Replay Level 1: The Book";
+        heroBtn.href = "level_1.html";
+        return;
+      }
+
+      const anyStarted = levels.some(l => l.completed);
+      heroBtn.textContent = anyStarted
+        ? `\u25B6 Continue \u2014 ${next.label}`
+        : `\u25B6 Start the Game \u2014 ${next.label}`;
+      heroBtn.href = next.href;
+    }
+
+    updateHeroCTA();
     updateLevelCards();
   </script>
 </body>
