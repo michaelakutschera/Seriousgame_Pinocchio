@@ -17,7 +17,7 @@
    ========================================================= */
 
 const TYPE_SPEED_MS    = 28;   // ~36 chars/sec
-const DECISION_SECONDS = 30;
+const DECISION_SECONDS = 20;
 const POINTS_PER_BLANK = 10;
 
 /* ---------------------------------------------------------
@@ -41,7 +41,8 @@ const pages = [
   Text in vier gleichgroße Teile teilen, damit die Seiten tatsächlich voll sind.*/
   [
     { type: "text", text:
-        "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:\n\n"
+      "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes."
+      + "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:\n\n"
       + "\u201cCome here now and tell me how it came about that you found yourself in the hands of the Assassins.\u201d\n\n"
       + "\u201cIt happened that Fire\u2011Eater gave me five gold pieces to give to my Father, but on the way, "
       + "I met a Fox and a Cat, who asked me, \u2018Do you want the five pieces to become two thousand?\u2019 "
@@ -51,19 +52,22 @@ const pages = [
       + "and I started out in the darkness all alone. On the road I met two Assassins dressed in black coal "
       + "sacks, who said to me, \u2018Your money or your life!\u2019 and I said, \u2018I haven\u2019t any money\u2019; "
       + "for, you see, I had put the money under my tongue. One of them tried to put his hand in my mouth and "
-      + "I bit it off and spat it out; but it wasn\u2019t a hand, it was a cat\u2019s paw. And they ran after me "
-      + "and I ran and ran, till at last they caught me and tied my neck with a rope and hanged me to a tree, "
-      + "saying, \u2018Tomorrow we\u2019ll come back for you and you\u2019ll be dead and your mouth will be open, "
-      + "and then we\u2019ll take the gold pieces that you have hidden under your tongue.\u2019\u201d\n\n"
+      + "I bit it off and spat it out; but it wasn\u2019t a hand, it was a cat\u2019s paw."
     },
-  ],
-
+    {type: "blank", id: "blank0", options: [
+      {text: "And they ran after me and I ran and ran, till at last they caught me and tied my neck with a rope and hanged me to a tree.", correct: true},
+      {text: "Comming soon", correct: false},
+      {text: "Coming soon", correct: false}
+      ]},
+    ],  
   /* ============ PAGE 2 ============
      The first two lies -- both blanks come after their own
      bit of dialogue, never at the very start of the page. */
   [
     { type: "text", text:
-        "\u201cWhere are the gold pieces now?\u201d the Fairy asked.\n\n"
+        "Saying, \u2018Tomorrow we\u2019ll come back for you and you\u2019ll be dead and your mouth will be open, "
+      + "and then we\u2019ll take the gold pieces that you have hidden under your tongue.\u2019\u201d\n\n"
+      + "\u201cWhere are the gold pieces now?\u201d the Fairy asked.\n\n"
       + "\u201cI lost them,\u201d answered Pinocchio, but he told a lie, for he had them in his pocket."
     },
     { type: "blank", id: "blank1", options: [
@@ -80,7 +84,11 @@ const pages = [
       { text: "At this second lie, both of his shoes fell off his feet.", correct: false }
     ]},
     { type: "illus", id: "illus1", file: "Mazzanti_1.jpg",
-      alt: "Enrico Mazzanti, 1883" }
+      alt: "Enrico Mazzanti, 1883" },
+    { type: "text", text:
+        "\u201cIf you lost them in the near\u2011by wood,\u201d said the Fairy, "
+      + "\u201cwe\u2019ll look for them and find them, for everything that is lost there is always found.\u201d\n\n"
+    }  
   ],
 
   /* ============ PAGE 3 ============
@@ -88,23 +96,21 @@ const pages = [
      again, both blanks are preceded by their own text. */
   [
     { type: "text", text:
-        "\u201cIf you lost them in the near\u2011by wood,\u201d said the Fairy, "
-      + "\u201cwe\u2019ll look for them and find them, for everything that is lost there is always found.\u201d\n\n"
-      + "\u201cAh, now I remember,\u201d replied the Marionette, becoming more and more confused. "
+      "\u201cAh, now I remember,\u201d replied the Marionette, becoming more and more confused. "
       + "\u201cI did not lose the gold pieces, but I swallowed them when I drank the medicine.\u201d"
     },
     { type: "blank", id: "blank3", options: [
-      { text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. "
-            + "If he turned to the right, he knocked it against the bed or into the windowpanes; if he turned "
-            + "to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy\u2019s eyes out.",
+      { text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. ",
         correct: true },
-      { text: "At this third lie, nothing at all happened \u2014 his nose stayed perfectly normal.",
+      { text: "At this third lie, nothing at all happened \u2014 his nose stayed normal.",
         correct: false },
       { text: "At this third lie, his nose turned bright red and began to itch terribly.",
         correct: false }
     ]},
     { type: "text", text:
-        "\n\nThe Fairy sat looking at him and laughing.\n\n"
+       "If he turned to the right, he knocked it against the bed or into the windowpanes; if he turned "
+      + "to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy\u2019s eyes out."
+      +  "\n\nThe Fairy sat looking at him and laughing.\n\n"
       + "\u201cWhy do you laugh?\u201d the Marionette asked her, worried now at the sight of his growing nose.\n\n"
       + "\u201cI am laughing at your lies.\u201d\n\n"
       + "\u201cHow do you know I am lying?\u201d"
@@ -117,16 +123,18 @@ const pages = [
         correct: false },
       { text: "\u201cLies, my boy, only matter if somebody else hears them and believes them.\u201d",
         correct: false }
-    ]}
+    ]},
+    { type: "text", text:
+        "Pinocchio, not knowing where to hide his shame, tried to escape from the room, "
+      + "but his nose had become so long that he could not get it out of the door. "
+    }
   ],
 
   /* ============ PAGE 4 ============
      Pinocchio's shame, the woodpeckers, and the ending. */
   [
     { type: "text", text:
-        "Pinocchio, not knowing where to hide his shame, tried to escape from the room, "
-      + "but his nose had become so long that he could not get it out of the door. "
-      + "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. "
+        "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. "
       + "No matter how he tried, it would not go through the door. The Fairy showed no pity toward him, "
       + "as she was trying to teach him a good lesson, so that he would stop telling lies, "
       + "the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes "
@@ -597,7 +605,7 @@ function finishPuzzle() {
 
   feedbackEl.classList.add("show");
   feedbackEl.innerHTML =
-      `You answered <strong>${correctCount} of 5</strong> moments correctly in time \u2014 `
+      `You answered <strong>${correctCount} of 6</strong> moments correctly in time \u2014 `
     + `<strong>+${puzzleScore} Humanity</strong> earned for this chapter.<br>`
     + `Continue to the evaluation to collect more.`;
 

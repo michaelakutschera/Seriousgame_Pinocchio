@@ -2,8 +2,8 @@
    level2.js  —  "The Comic"
 
    12 panels retelling the same chapter as Level 1, shown as
-   an open comic book: 6 panels on the left page, 6 on the
-   right (3x2 grid each = 12 slots total).
+   a comic book: 6 panels on the left page, 6 on the
+   right.
 
    On load, ALL 12 panels are shuffled together into a single
    pool and distributed across all 12 slots (both pages) --
@@ -15,12 +15,7 @@
    is based on how close the player's total swap count is to
    the theoretical minimum for the whole 12-slot shuffle.
 
-   IMAGES: place your own panel artwork in this same folder,
-   named panel_01.jpg .. panel_12.jpg, where panel_01..06 =
-   correct order for page 1 (slots 0-5) and panel_07..12 =
-   correct order for page 2 (slots 0-5). Until then, numbered
-   placeholders are shown.
-   ========================================================= */
+  ========================================================= */
 
 const PANELS_PER_PAGE = 6;
 const TOTAL_PANELS    = 12;
@@ -34,18 +29,18 @@ const TOTAL_PANELS    = 12;
    "file"        = expected image filename (flat folder)
    --------------------------------------------------------- */
 const allPanels = [
-  { id: "p1",  correctSlot: 0,  file: "panel_01.jpg", alt: "Panel 1"  },
-  { id: "p2",  correctSlot: 1,  file: "panel_02.jpg", alt: "Panel 2"  },
-  { id: "p3",  correctSlot: 2,  file: "panel_03.jpg", alt: "Panel 3"  },
-  { id: "p4",  correctSlot: 3,  file: "panel_04.jpg", alt: "Panel 4"  },
-  { id: "p5",  correctSlot: 4,  file: "panel_05.jpg", alt: "Panel 5"  },
-  { id: "p6",  correctSlot: 5,  file: "panel_06.jpg", alt: "Panel 6"  },
-  { id: "p7",  correctSlot: 6,  file: "panel_07.jpg", alt: "Panel 7"  },
-  { id: "p8",  correctSlot: 7,  file: "panel_08.jpg", alt: "Panel 8"  },
-  { id: "p9",  correctSlot: 8,  file: "panel_09.jpg", alt: "Panel 9"  },
-  { id: "p10", correctSlot: 9,  file: "panel_10.jpg", alt: "Panel 10" },
-  { id: "p11", correctSlot: 10, file: "panel_11.jpg", alt: "Panel 11" },
-  { id: "p12", correctSlot: 11, file: "panel_12.jpg", alt: "Panel 12" }
+  { id: "p1",  correctSlot: 0,  file: "Panel_1.jpg", alt: "Panel 1"  },
+  { id: "p2",  correctSlot: 1,  file: "Panel_2.jpg", alt: "Panel 2"  },
+  { id: "p3",  correctSlot: 2,  file: "Panel_3.jpg", alt: "Panel 3"  },
+  { id: "p4",  correctSlot: 3,  file: "Panel_4.jpg", alt: "Panel 4"  },
+  { id: "p5",  correctSlot: 4,  file: "Panel_5.jpg", alt: "Panel 5"  },
+  { id: "p6",  correctSlot: 5,  file: "Panel_6.jpg", alt: "Panel 6"  },
+  { id: "p7",  correctSlot: 6,  file: "Panel_7.jpg", alt: "Panel 7"  },
+  { id: "p8",  correctSlot: 7,  file: "panel_8.jpg", alt: "Panel 8"  },
+  { id: "p9",  correctSlot: 8,  file: "Panel_9.jpg", alt: "Panel 9"  },
+  { id: "p10", correctSlot: 9,  file: "Panel_10.jpg", alt: "Panel 10" },
+  { id: "p11", correctSlot: 10, file: "Panel_11.jpg", alt: "Panel 11" },
+  { id: "p12", correctSlot: 11, file: "Panel_12.jpg", alt: "Panel 12" }
 ];
 
 /* ---------------------------------------------------------
