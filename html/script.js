@@ -33,8 +33,11 @@ function addHumanity(amount) {
 /** Clear all saved progress (used by "Reset progress" on the start page). */
 function resetAllProgress() {
   localStorage.removeItem(HUMANITY_KEY);
-  localStorage.removeItem("pinocchio_level1Completed");
-  localStorage.removeItem("pinocchio_level1Score");
+  [1, 2, 3, 4].forEach(n => {
+    localStorage.removeItem("pinocchio_level" + n + "Completed");
+    localStorage.removeItem("pinocchio_level" + n + "Score");
+    localStorage.removeItem("pinocchio_level" + n + "PuzzleScore");
+  });
 }
 
 /** Write the current humanity total into a badge element. */

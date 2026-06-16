@@ -2,12 +2,11 @@
    level1.js  —  "The Book"
 
    4 pages, shown as 2 spreads (1+2, then 3+4). Every page
-   STARTS WITH NARRATIVE TEXT (never a blank), so there is
+   STARTS WITH NARRATIVE TEXT, so there is
    always context before a question appears.
 
-   Within a spread, the LEFT page types out first
-   (typewriter effect), then the RIGHT page. Whenever a
-   "blank" block is reached, typing pauses and a decision
+   Within a spread, the LEFT page types out first, then the RIGHT page. 
+   Whenever a "blank" block is reached, typing pauses and a decision
    box (3 plain-text options + 30s bar) appears right there
    in the text; typing only continues once it is answered.
 
@@ -17,7 +16,7 @@
    Scoring: 10 Humanity per correct blank (max 50).
    ========================================================= */
 
-const TYPE_SPEED_MS    = 28;   // ~36 chars/sec -- between the 12ms and 45ms versions
+const TYPE_SPEED_MS    = 28;   // ~36 chars/sec
 const DECISION_SECONDS = 30;
 const POINTS_PER_BLANK = 10;
 
@@ -36,6 +35,10 @@ const pages = [
   /* ============ PAGE 1 ============
      Pinocchio's full account of the Assassins -- one
      continuous narration, plus the first illustration. */
+
+  /*Frage einbauen hier! 
+  Ändern der Anführungszeichen auf französsische.
+  Text in vier gleichgroße Teile teilen, damit die Seiten tatsächlich voll sind.*/
   [
     { type: "text", text:
         "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:\n\n"
@@ -53,8 +56,6 @@ const pages = [
       + "saying, \u2018Tomorrow we\u2019ll come back for you and you\u2019ll be dead and your mouth will be open, "
       + "and then we\u2019ll take the gold pieces that you have hidden under your tongue.\u2019\u201d\n\n"
     },
-    { type: "illus", id: "illus1", file: "mazzanti_01.jpg",
-      alt: "Enrico Mazzanti, 1883: Pinocchio with the Blue Fairy" }
   ],
 
   /* ============ PAGE 2 ============
@@ -77,7 +78,9 @@ const pages = [
       { text: "At this second lie, his nose grew a few more inches.",     correct: true },
       { text: "At this second lie, his nose shrank back a little.",       correct: false },
       { text: "At this second lie, both of his shoes fell off his feet.", correct: false }
-    ]}
+    ]},
+    { type: "illus", id: "illus1", file: "Mazzanti_1.jpg",
+      alt: "Enrico Mazzanti, 1883" }
   ],
 
   /* ============ PAGE 3 ============
@@ -129,8 +132,7 @@ const pages = [
       + "the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes "
       + "half out of his head from terror, she began to feel sorry for him and clapped her hands together."
     },
-    { type: "illus", id: "illus2", file: "mazzanti_02.jpg",
-      alt: "Enrico Mazzanti, 1883: Woodpeckers pecking Pinocchio's nose" },
+    
     { type: "blank", id: "blank5", options: [
       { text: "A thousand woodpeckers flew in through the window and settled themselves on Pinocchio\u2019s nose. "
             + "They pecked and pecked so hard at that enormous nose that in a few moments, it was the same size as before.",
@@ -140,6 +142,9 @@ const pages = [
       { text: "The Fairy touched the nose with her wand, and it disappeared completely, leaving no nose at all.",
         correct: false }
     ]},
+    { type: "illus", id: "illus2", file: "Mazzanti_2.jpg",
+      alt: "Enrico Mazzanti, 1883" },
+      
     { type: "text", text:
         "\n\n\u201cHow good you are, my Fairy,\u201d said Pinocchio, drying his eyes, "
       + "\u201cand how much I love you!\u201d\n\n"
@@ -283,9 +288,7 @@ function buildIllustration(block) {
 
   const caption = document.createElement("figcaption");
   caption.innerHTML =
-    `Illustration by Enrico Mazzanti, 1883<br>`
-    + `<em style="font-size:.7rem;">(place file at ${block.file})</em>`;
-
+    `Illustration by Enrico Mazzanti, 1883<br>`;
   figure.appendChild(img);
   figure.appendChild(caption);
   return figure;
