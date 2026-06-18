@@ -83,7 +83,7 @@ const pages = [
       { text: "At this second lie, his nose shrank back a little.",       correct: false },
       { text: "At this second lie, both of his shoes fell off his feet.", correct: false }
     ]},
-    { type: "illus", id: "illus1", file: "Mazzanti_1.jpg",
+    { type: "illus", id: "illus1", file: "../images/Mazzanti_1.jpg",
       alt: "Enrico Mazzanti, 1883" },
     { type: "text", text:
         "\u201cIf you lost them in the near\u2011by wood,\u201d said the Fairy, "
@@ -127,6 +127,8 @@ const pages = [
     { type: "text", text:
         "Pinocchio, not knowing where to hide his shame, tried to escape from the room, "
       + "but his nose had become so long that he could not get it out of the door. "
+      + "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. "
+      + "No matter how he tried, it would not go through the door."
     }
   ],
 
@@ -134,10 +136,9 @@ const pages = [
      Pinocchio's shame, the woodpeckers, and the ending. */
   [
     { type: "text", text:
-        "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. "
-      + "No matter how he tried, it would not go through the door. The Fairy showed no pity toward him, "
-      + "as she was trying to teach him a good lesson, so that he would stop telling lies, "
-      + "the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes "
+        "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, "
+      + "so that he would stop telling lies, the worst habit any boy may acquire."
+      + "But when she saw him, pale with fright and with his eyes "
       + "half out of his head from terror, she began to feel sorry for him and clapped her hands together."
     },
     
@@ -150,7 +151,7 @@ const pages = [
       { text: "The Fairy touched the nose with her wand, and it disappeared completely, leaving no nose at all.",
         correct: false }
     ]},
-    { type: "illus", id: "illus2", file: "Mazzanti_2.jpg",
+    { type: "illus", id: "illus2", file: "../images/Mazzanti_2.jpg",
       alt: "Enrico Mazzanti, 1883" },
       
     { type: "text", text:
@@ -508,7 +509,7 @@ function renderSpread() {
 
   /* always start a new spread at the top of the book, so the
      beginning of each page is visible without scrolling */
-  bookSpreadEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   leftPageNum.textContent  = "\u2014 " + (leftPageIndex + 1)  + " \u2014";
   rightPageNum.textContent = "\u2014 " + (rightPageIndex + 1) + " \u2014";

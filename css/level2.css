@@ -147,11 +147,13 @@
 .panel-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); /*Portrait-Format 3 rows with 2 panels.*/
   gap: 10px;
   flex: 1;
   min-height: 0;
   overflow: hidden;
+  height: 100%;
+  max-height: 100vh;
 }
 
 .panel {
@@ -159,7 +161,6 @@
   border: 3px solid #1a1a1a;
   border-radius: 2px;
   background: #fff;
-  aspect-ratio: 4 / 3;
   cursor: pointer;
   overflow: hidden;
   display: flex;
@@ -167,6 +168,9 @@
   justify-content: center;
   transition: border-color .15s, transform .1s, box-shadow .15s;
   box-shadow: 2px 2px 0 rgba(0,0,0,.15);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 /4;
 }
 
 .panel:hover {

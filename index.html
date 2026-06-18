@@ -6,7 +6,7 @@
   <title>Pinocchio: One Story, Many Media</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -32,7 +32,7 @@
       Play through all four levels, collect Humanity, and decide Pinocchio's fate.
     </p>
     <div class="hero-actions">
-      <a class="btn btn-primary" id="startGameBtn" href="level_1.html">▶ Start the Game — Level 1: The Book</a>
+      <a class="btn btn-primary" id="startGameBtn" href="html/level_1.html">▶ Start the Game — Level 1: The Book</a>
     </div>
   </section>
 
@@ -74,7 +74,7 @@
       </p>
       <div class="level-grid level-grid-2x2" id="levelGrid">
 
-        <a class="level-card" id="levelCard1" href="level_1.html">
+        <a class="level-card" id="levelCard1" href="html/level_1.html">
           <span class="level-tag">Level 1</span>
           <h3>The Book</h3>
           <p>Pages from the novel that types itself out as you read and you must<br/>
@@ -82,7 +82,7 @@
           <span class="level-status" id="levelStatus1">Start &rarr;</span>
         </a>
 
-        <a class="level-card" id="levelCard2" href="level_2.html">
+        <a class="level-card" id="levelCard2" href="html/level_2.html">
           <span class="level-tag">Level 2</span>
           <h3>The Comic</h3>
           <p>An open comic book with twelve shuffeled panels.<br/>
@@ -90,14 +90,14 @@
           <span class="level-status" id="levelStatus2">Locked</span>
         </a>
 
-        <a class="level-card" id="levelCard3" href="level_3.html">
+        <a class="level-card" id="levelCard3" href="html/level_3.html">
           <span class="level-tag">Level 3</span>
           <h3>The Film</h3>
           <p>Coming soon</p>
           <span class="level-status" id="levelStatus3">Locked</span>
         </a>
 
-        <a class="level-card" id="levelCard4" href="level_4.html">
+        <a class="level-card" id="levelCard4" href="html/level_4.html">
           <span class="level-tag">Level 4</span>
           <h3>The Video Game</h3>
           <p>Coming soon</p>
@@ -180,14 +180,30 @@
   </main>
 
   <footer class="site-footer">
-    Coming Soon!!!!
-    https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016
-    THE ADVENTURES OF PINOCCHIO
-    Translated from the Italian by Carol Della Chiesa
+    <div class="footer-content">
+      <h3>Projcet:</h3>
+      <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+      136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+      Summersemester 2026<br/>
+      University Vienna</p>
+      </div>
+      <div class="footer-content">
+        <h3>Contact:</h3>
+        <p> Created: Michaela Kutschera BA <br/>
+            E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+            &copy; 2026</p>
+      </div>
+      <div class="footer-content">
+        <h3>Source:</h3>
+        <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+          translated by Carol Della Chiesa <br/>  
+          Text for Level 1 based on: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+      </div>
+    </div>
   </footer>
 
 <!-- ============ JS. SCRIPT ============ -->
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
   <script>
     renderHumanityBadge("humanityBadge");
 
@@ -254,9 +270,11 @@
     function updateHeroCTA() {
       const heroBtn = document.getElementById("startGameBtn");
       const levels = [
-        { id: 1, completed: localStorage.getItem("pinocchio_level1Completed") === "true", href: "level_1.html", label: "Level 1: The Book" },
-        { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "level_2.html", label: "Level 2: The Comic" }
-        /* Level 3 & 4 added here once their pages exist */
+        { id: 1, completed: localStorage.getItem("pinocchio_level1Completed") === "true", href: "html/level_1.html", label: "Level 1: The Book" },
+        { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "html/level_2.html", label: "Level 2: The Comic" }
+        /* Einfügen, wenn vorhanden!!!
+        { id: 3, completed: localStorage.getItem("pinocchio_level3.Completed") == "true", href: "html/level_3.html", label: "Level 3: The Film" },
+        { id: 4, completed: localStorage.getItem("pinocchio_level4Completed") == "true", href:"html/level_4.html", label: "Level 4: The Video Game"}*/
       ];
 
       const next = levels.find(l => !l.completed);
@@ -264,7 +282,7 @@
       if (!next) {
         /* everything currently available has been completed */
         heroBtn.textContent = "\u25B6 Replay Level 1: The Book";
-        heroBtn.href = "level_1.html";
+        heroBtn.href = "html/level_1.html";
         return;
       }
 

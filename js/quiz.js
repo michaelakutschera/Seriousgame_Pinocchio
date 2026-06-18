@@ -1,15 +1,15 @@
 /* =========================================================
-   quiz2.js
-   Step-based evaluation for Level 2 ("The Comic").
+   quiz.js
+   Step-based evaluation for Level 1 ("The Book").
 
-   - 3 multiple-choice questions about the COMIC as a medium
+   - 3 multiple-choice questions about the BOOK as a medium
      (5 Humanity each if correct)
    - 1 three-step rating scale (flat +5 Humanity for
      completing an honest self-reflection)
-   - combined with the puzzle score from level_2.html
+   - combined with the puzzle score from level_1.html
    ========================================================= */
 
-const evalAnswerKey = { q1: "b", q2: "a", q3: "a" };
+const evalAnswerKey = { q1: "b", q2: "b", q3: "a" };
 const POINTS_PER_MC = 5;
 const REFLECTION_BONUS = 5;
 
@@ -26,13 +26,13 @@ const resultsContent = document.getElementById("resultsContent");
 const selected = { q1: null, q2: null, q3: null, scale: null };
 let currentStep = 0;
 
-const completed = localStorage.getItem("pinocchio_level2Completed") === "true";
-const puzzleScoreRaw = localStorage.getItem("pinocchio_level2PuzzleScore");
+const completed = localStorage.getItem("pinocchio_level1Completed") === "true";
+const puzzleScoreRaw = localStorage.getItem("pinocchio_level1PuzzleScore");
 
 /* If someone lands here without having played the puzzle yet,
    send them back to start it. */
 if (!completed && puzzleScoreRaw === null) {
-  window.location.href = "level_2.html";
+  window.location.href = "../html/level_1.html";
 }
 
 if (completed) {
@@ -115,8 +115,8 @@ function finishEvaluation() {
   const levelTotal = puzzleScore + evalScore;
   const newTotal = addHumanity(levelTotal);
 
-  localStorage.setItem("pinocchio_level2Completed", "true");
-  localStorage.setItem("pinocchio_level2Score", levelTotal.toString());
+  localStorage.setItem("pinocchio_level1Completed", "true");
+  localStorage.setItem("pinocchio_level1Score", levelTotal.toString());
   renderHumanityBadge("humanityBadge");
 
   resultsContent.innerHTML = buildResultsHTML({
@@ -131,7 +131,7 @@ function finishEvaluation() {
 }
 
 function showResultsOnly() {
-  const storedScore = parseInt(localStorage.getItem("pinocchio_level2Score") || "0", 10);
+  const storedScore = parseInt(localStorage.getItem("pinocchio_level1Score") || "0", 10);
   resultsContent.innerHTML = buildResultsHTML({
     puzzleScore: null,
     mcCorrect: null,
@@ -148,16 +148,16 @@ function showResultsOnly() {
 function buildResultsHTML({ puzzleScore, mcCorrect, evalScore, levelTotal, newTotal, alreadyDone }) {
   const breakdown = alreadyDone
     ? `This chapter has already been completed.`
-    : `Panel-ordering puzzle: ${puzzleScore} &middot; Medium questions: ${mcCorrect}/3 correct (+${(mcCorrect || 0) * POINTS_PER_MC}) &middot; Reflection: +${REFLECTION_BONUS}`;
+    : `Story puzzle: ${puzzleScore} &middot; Medium questions: ${mcCorrect}/3 correct (+${(mcCorrect || 0) * POINTS_PER_MC}) &middot; Reflection: +${REFLECTION_BONUS}`;
 
   return `
-    <p class="quiz-eyebrow">Level 2 complete</p>
+    <p class="quiz-eyebrow">Level 1 complete</p>
     <p class="humanity-earned">+${levelTotal} Humanity</p>
     <p class="breakdown">${breakdown}</p>
     <p>Total Humanity so far: <strong>${newTotal}</strong></p>
     <p style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <a class="btn btn-primary" href="level_3.html">Continue to Level 3: The Film &rarr;</a>
-      <a class="btn btn-light" href="index.html">Back to Start</a>
+      <a class="btn btn-primary" href="../html/level_2.html">Continue to Level 2: The Comic &rarr;</a>
+      <a class="btn btn-light" href="../index.html">Back to Start</a>
     </p>
   `;
 }
