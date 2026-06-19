@@ -36,7 +36,7 @@ const allPanels = [
   { id: "p5",  correctSlot: 4,  file: "../images/Panel_5.jpg", alt: "Panel 5"  },
   { id: "p6",  correctSlot: 5,  file: "../images/Panel_6.jpg", alt: "Panel 6"  },
   { id: "p7",  correctSlot: 6,  file: "../images/Panel_7.jpg", alt: "Panel 7"  },
-  { id: "p8",  correctSlot: 7,  file: "../images/panel_8.jpg", alt: "Panel 8"  },
+  { id: "p8",  correctSlot: 7,  file: "../images/Panel_8.jpg", alt: "Panel 8"  },
   { id: "p9",  correctSlot: 8,  file: "../images/Panel_9.jpg", alt: "Panel 9"  },
   { id: "p10", correctSlot: 9,  file: "../images/Panel_10.jpg", alt: "Panel 10" },
   { id: "p11", correctSlot: 10, file: "../images/Panel_11.jpg", alt: "Panel 11" },
