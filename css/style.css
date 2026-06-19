@@ -444,12 +444,63 @@ section.block h2 {
 /* =========================================================
    Footer
    ========================================================= */
-
 .site-footer {
-  text-align: center;
-  padding: 30px 20px 50px;
-  color: var(--ink-soft);
-  font-size: 0.85rem;
+  background: var(--wood-dark);
+  color: rgba(255,255,255,0.85);
+  padding: 36px 40px;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+ 
+.site-footer .footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: 1200px; /* <- HIER war der Fehler: 120px statt 1200px! */
+  margin: 0 auto;
+}
+
+.site-footer .footer-content {
+  flex: 1 1 30%;
+  min-width: 200px;
+}
+ 
+.site-footer h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: #fff;
+  margin: 0 0 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  padding-bottom: 6px;
+}
+ 
+.site-footer p,
+.site-footer a {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.7;
+  margin: 0;
+}
+ 
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+ 
+@media (max-width: 600px) {
+  .site-footer .footer-grid {
+    flex-direction: column; /* <- HIER war auch ein Fehler: grid-template-columns durch flex-direction ersetzen */
+    gap: 24px;
+  }
+  .site-footer .footer-content {
+    flex: 1 1 100%;
+  }
+  .site-footer {
+    padding: 28px 20px;
+  }
 }
 
 /* =========================================================
