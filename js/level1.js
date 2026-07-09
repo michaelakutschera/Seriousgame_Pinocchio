@@ -16,9 +16,19 @@
    Scoring: 10 Humanity per correct blank (max 50).
    ========================================================= */
 
-const TYPE_SPEED_MS    = 28;   // ~36 chars/sec
-const DECISION_SECONDS = 20;
+const DECISION_SECONDS = 30;
 const POINTS_PER_BLANK = 10;
+
+/*Wort-Verzögerung statt Zeichen- oder Zeilen-Verzögerung, 3 Stufen wählbar */
+const WORD_DELAYS_MS = { slow: 350, normal: 260, fast: 100 };
+let currentSpeed = "normal";
+
+/* globaler Schalter, ob der 30s-Fragen-Timer überhaupt aktiv ist */
+let questionTimerEnabled = true;
+
+/* wenn true, wird laufender Text/Illustration ohne Wartezeit
+   bis zur nächsten Frage durchgereicht (Überspringen-Button) */
+let fastForward = false;
 
 /* ---------------------------------------------------------
    Page content definitions.
@@ -32,16 +42,13 @@ const POINTS_PER_BLANK = 10;
    --------------------------------------------------------- */
 const pages = [
 
-  /* ============ PAGE 1 ============
-     Pinocchio's full account of the Assassins -- one
-     continuous narration, plus the first illustration. */
-
+  /* ============ PAGE 1 ============*/
   /*Frage einbauen hier! 
   Ändern der Anführungszeichen auf französsische.
   Text in vier gleichgroße Teile teilen, damit die Seiten tatsächlich voll sind.*/
   [
     { type: "text", text:
-      "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes."
+      "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes. "
       + "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:\n\n"
       + "\u201cCome here now and tell me how it came about that you found yourself in the hands of the Assassins.\u201d\n\n"
       + "\u201cIt happened that Fire\u2011Eater gave me five gold pieces to give to my Father, but on the way, "
@@ -60,9 +67,7 @@ const pages = [
       {text: "Coming soon", correct: false}
       ]},
     ],  
-  /* ============ PAGE 2 ============
-     The first two lies -- both blanks come after their own
-     bit of dialogue, never at the very start of the page. */
+  /* ============ PAGE 2 ============ */
   [
     { type: "text", text:
         "Saying, \u2018Tomorrow we\u2019ll come back for you and you\u2019ll be dead and your mouth will be open, "
@@ -91,9 +96,7 @@ const pages = [
     }  
   ],
 
-  /* ============ PAGE 3 ============
-     The third lie and the Fairy's lesson about lying --
-     again, both blanks are preceded by their own text. */
+  /* ============ PAGE 3 ============*/
   [
     { type: "text", text:
       "\u201cAh, now I remember,\u201d replied the Marionette, becoming more and more confused. "
@@ -132,8 +135,7 @@ const pages = [
     }
   ],
 
-  /* ============ PAGE 4 ============
-     Pinocchio's shame, the woodpeckers, and the ending. */
+  /* ============ PAGE 4 ============*/
   [
     { type: "text", text:
         "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, "
@@ -216,6 +218,11 @@ const resumeBtn       = document.getElementById("resumeBtn");
 const startBtn        = document.getElementById("startBtn");
 const stopBtn         = document.getElementById("stopBtn");
 const backBtn         = document.getElementById("backBtn");
+
+/* CHANGED: neue Steuerelemente */
+const skipBtn           = document.getElementById("skipBtn");
+const speedButtons      = document.querySelectorAll(".speed-btn");   /* Top-Bar + Overlay, gleiche Klasse */
+const qTimerButtons     = document.querySelectorAll(".qtimer-btn");  /* nur im Start-Overlay */
 
 const timer = new GameTimer("timerDisplay");
 renderHumanityBadge("humanityBadge");
@@ -334,13 +341,15 @@ function typePage(pageIndex, container, myToken, onDone) {
       typeTextBlock(container, block.text, myToken, nextBlock);
     } else if (block.type === "illus") {
       container.appendChild(buildIllustration(block));
-      setTimeout(nextBlock, 150);
+      setTimeout(nextBlock, fastForward ? 0 : 150);   /* CHANGED: respektiert Skip */
     } else if (block.type === "blank") {
       if (answers[block.id]) {
         /* already answered (e.g. revisiting) -> show resolved text */
         container.appendChild(buildBlankResolved(block));
         nextBlock();
       } else {
+        fastForward = false;   /* CHANGED: Frage erreicht -> Skip endet hier */
+        updateSkipButton();
         showDecisionInline(container, block, myToken, nextBlock);
       }
     }
@@ -349,8 +358,10 @@ function typePage(pageIndex, container, myToken, onDone) {
   nextBlock();
 }
 
-/* type a single text block (which may contain multiple
-   paragraphs, separated by \n\n) character by character */
+/* Wortweise statt zeilenweise: fühlte sich im Test weiterhin hastig an,
+   weil eine ganze Zeile auf einmal auftauchte, während man noch die
+   vorherige las. Jetzt erscheint jedes Wort einzeln, etwas ruhiger als
+   Buchstabe-für-Buchstabe, aber ohne den "Zeilen-Sprung". */
 function typeTextBlock(container, text, myToken, onDone) {
   const paragraphs = text.split("\n\n").filter(p => p !== "");
   let pi = 0;
@@ -360,31 +371,58 @@ function typeTextBlock(container, text, myToken, onDone) {
     if (pi >= paragraphs.length) { onDone(); return; }
 
     const para = paragraphs[pi++];
-    const p = document.createElement("p");
-    container.appendChild(p);
-
-    const cursor = document.createElement("span");
-    cursor.className = "typedCursor";
-    p.appendChild(cursor);
-
-    const chars = [...para];
-    let ci = 0;
-
-    function step() {
-      if (myToken !== runToken) return;
-      if (paused) { setTimeout(step, 150); return; }
-      if (ci >= chars.length) {
-        cursor.remove();
-        nextParagraph();
-        return;
-      }
-      p.insertBefore(document.createTextNode(chars[ci++]), cursor);
-      setTimeout(step, TYPE_SPEED_MS);
-    }
-    step();
+    revealParagraphWordByWord(container, para, myToken, nextParagraph);
   }
 
   nextParagraph();
+}
+
+/* Neue Funktion für das wortweise Einblenden eines Absatzes */
+function revealParagraphWordByWord(container, para, myToken, onDone) {
+  const p = document.createElement("p");
+  container.appendChild(p);
+
+  /* Wörter (inkl. Leerzeichen dazwischen) als einzelne <span> anlegen,
+     zunächst unsichtbar -- die Leerzeichen bleiben normale Textknoten,
+     damit der Browser ganz normal umbricht */
+  const tokens = para.split(/(\s+)/).filter(t => t !== "");
+  const wordSpans = [];
+
+  tokens.forEach(tok => {
+    if (/^\s+$/.test(tok)) {
+      p.appendChild(document.createTextNode(tok));
+    } else {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = tok;
+      p.appendChild(span);
+      wordSpans.push(span);
+    }
+  });
+
+  const cursor = document.createElement("span");
+  cursor.className = "typedCursor";
+  p.appendChild(cursor);
+
+  let wi = 0;
+  function revealNextWord() {
+    if (myToken !== runToken) return;
+    if (paused) { setTimeout(revealNextWord, 150); return; }
+
+    if (wi >= wordSpans.length) {
+      cursor.remove();
+      onDone();
+      return;
+    }
+
+    const span = wordSpans[wi++];
+    span.classList.add("revealed");
+    p.insertBefore(cursor, span.nextSibling);
+
+    const delay = fastForward ? 0 : WORD_DELAYS_MS[currentSpeed];
+    setTimeout(revealNextWord, delay);
+  }
+  revealNextWord();
 }
 
 /* ---------------------------------------------------------
@@ -404,7 +442,8 @@ function showDecisionInline(container, block, myToken, onDone) {
   h3.textContent = "What happens next?";
   const timeSpan = document.createElement("span");
   timeSpan.className = "decision-time";
-  timeSpan.textContent = DECISION_SECONDS + " s";
+  /* CHANGED: bei deaktiviertem Fragen-Timer kein Countdown anzeigen */
+  timeSpan.textContent = questionTimerEnabled ? (DECISION_SECONDS + " s") : "\u221e";
   header.appendChild(h3);
   header.appendChild(timeSpan);
 
@@ -412,6 +451,7 @@ function showDecisionInline(container, block, myToken, onDone) {
   bar.className = "countdown-bar";
   const fill = document.createElement("div");
   fill.className = "countdown-fill";
+  if (!questionTimerEnabled) fill.style.width = "100%";   /* CHANGED */
   bar.appendChild(fill);
 
   const optionsWrap = document.createElement("div");
@@ -469,20 +509,23 @@ function showDecisionInline(container, block, myToken, onDone) {
     }, 900);
   }
 
-  activeCountdownId = setInterval(() => {
-    if (myToken !== runToken) { clearInterval(activeCountdownId); activeCountdownId = null; return; }
-    if (paused) return;
-    remaining--;
-    if (remaining <= 0) {
-      timeSpan.textContent = "0 s";
-      fill.style.width = "0%";
-      resolve(null, null);
-      return;
-    }
-    timeSpan.textContent = remaining + " s";
-    fill.style.width = (remaining / DECISION_SECONDS) * 100 + "%";
-    if (remaining <= 10) fill.classList.add("low");
-  }, 1000);
+  /* Countdown nur starten, wenn der Fragen-Timer eingeschaltet ist */
+  if (questionTimerEnabled) {
+    activeCountdownId = setInterval(() => {
+      if (myToken !== runToken) { clearInterval(activeCountdownId); activeCountdownId = null; return; }
+      if (paused) return;
+      remaining--;
+      if (remaining <= 0) {
+        timeSpan.textContent = "0 s";
+        fill.style.width = "0%";
+        resolve(null, null);
+        return;
+      }
+      timeSpan.textContent = remaining + " s";
+      fill.style.width = (remaining / DECISION_SECONDS) * 100 + "%";
+      if (remaining <= 10) fill.classList.add("low");
+    }, 1000);
+  }
 }
 
 /* ---------------------------------------------------------
@@ -493,6 +536,9 @@ function showDecisionInline(container, block, myToken, onDone) {
 function renderSpread() {
   runToken++;
   const myToken = runToken;
+
+  fastForward = false;   /* CHANGED: neue Seite -> Skip-Status zurücksetzen */
+  updateSkipButton();
 
   if (activeCountdownId) { clearInterval(activeCountdownId); activeCountdownId = null; }
 
@@ -616,6 +662,7 @@ function finishPuzzle() {
   timer.stop();
   startBtn.disabled = true;
   stopBtn.disabled  = true;
+  skipBtn.disabled  = true;   /* CHANGED */
 }
 
 /* ---------------------------------------------------------
@@ -626,6 +673,7 @@ function startGame() {
   timer.start();
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
+  updateSkipButton();   /* CHANGED */
   renderSpread();
 }
 
@@ -634,13 +682,46 @@ function pauseGame() {
   timer.stop(); paused = true;
   pauseOverlay.classList.remove("hidden");
   startBtn.disabled = false; stopBtn.disabled = true;
+  updateSkipButton();   /* CHANGED */
 }
 
 function resumeGame() {
   pauseOverlay.classList.add("hidden");
   timer.start(); paused = false;
   startBtn.disabled = true; stopBtn.disabled = false;
+  updateSkipButton();   /* CHANGED */
 }
+
+/* CHANGED: Überspringen-Button -> Text/Illustrationen ohne Wartezeit
+   bis zur nächsten noch unbeantworteten Frage durchlaufen lassen */
+skipBtn.addEventListener("click", () => {
+  if (paused || !gameStarted) return;
+  fastForward = true;
+  updateSkipButton();
+});
+
+function updateSkipButton() {
+  skipBtn.disabled = fastForward || paused || !gameStarted;
+}
+
+/* CHANGED: 3-stufiger Geschwindigkeits-Regler -- existiert doppelt
+   (Overlay + Top-Bar), beide Gruppen bleiben synchron, weil beide
+   Buttons dieselbe Klasse ".speed-btn" und "data-speed" nutzen */
+speedButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentSpeed = btn.dataset.speed;
+    speedButtons.forEach(b => b.classList.toggle("active", b.dataset.speed === currentSpeed));
+  });
+});
+
+/* CHANGED: Fragen-Timer An/Aus -- nur im Start-Overlay wählbar,
+   da man sich dafür sinnvollerweise VOR dem Lesen entscheidet */
+qTimerButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    questionTimerEnabled = btn.dataset.enabled === "true";
+    qTimerButtons.forEach(b => b.classList.toggle("active", b === btn));
+  });
+});
 
 overlayStartBtn.addEventListener("click", startGame);
 resumeBtn.addEventListener("click", resumeGame);
@@ -661,7 +742,7 @@ backBtn.addEventListener("click", e => {
    --------------------------------------------------------- */
 if (localStorage.getItem("pinocchio_level1Completed") === "true") {
   startOverlay.classList.add("hidden");
-  startBtn.disabled = stopBtn.disabled = true;
+  startBtn.disabled = stopBtn.disabled = skipBtn.disabled = true;   /* CHANGED */
   const s = localStorage.getItem("pinocchio_level1Score");
   if (s) doneText.textContent =
     `You have already played through this chapter and earned +${s} Humanity. It can't be played again.`;

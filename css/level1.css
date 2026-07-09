@@ -162,6 +162,69 @@
 }
 @keyframes blink { 50% { opacity: 0; } }
 
+/* Wörter starten unsichtbar und blenden zeilenweise ein (ersetzt die alte Zeichen-für-Zeichen-Animation) */
+.story-text .word {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.story-text .word.revealed {
+  opacity: 1;
+}
+
+/* Steuerleiste für Geschwindigkeit in der Top-Bar */
+.speed-group {
+  display: flex;
+  gap: 4px;
+  background: rgba(246, 239, 226, 0.1);
+  border: 1px solid rgba(246, 239, 226, 0.35);
+  border-radius: 999px;
+  padding: 3px;
+}
+.speed-btn {
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--paper);
+}
+.speed-btn.active {
+  background: var(--gold);
+  color: var(--wood-dark);
+  border-color: var(--gold);
+}
+ 
+/* CHANGED: Einstellungs-Block im Start-Overlay (Idee 4+5) */
+.overlay-settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  margin: 4px 0 22px;
+}
+.overlay-setting-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 6px;
+  text-align: center;
+}
+.qtimer-btn {
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--paper);
+}
+.qtimer-btn.active {
+  background: var(--gold);
+  color: var(--wood-dark);
+  border-color: var(--gold);
+}
+
 /* ---------------------------------------------------------
    Inline illustrations
    --------------------------------------------------------- */

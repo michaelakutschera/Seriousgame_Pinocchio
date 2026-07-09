@@ -21,6 +21,15 @@
       <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
       <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
       <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
+      <!--Überspring-Button des Erscheines der Zeilen-->
+      <button class="btn btn-secondary" id="skipBtn" type="button" disabled>Skip</button>
+      <!--3-Stufiger Geschwindikeitsregler-->
+        <div class="speed-group" id="speedGroup">
+        <button class="btn btn-light speed-btn" type="button" data-speed="slow">Slow</button>
+        <button class="btn btn-light speed-btn active" type="button" data-speed="normal">Normal</button>
+        <button class="btn btn-light speed-btn" type="button" data-speed="fast">Fast</button>
+      </div>
+      <!--On/Off Button for the Question Timer-->
       <span class="badge"><span class="badge-icon">&#9201;</span> <span id="timerDisplay">00:00</span></span>
       <span class="badge badge-gold"><span class="badge-icon">&#10084;</span> <span id="humanityBadge">Humanity: 0</span></span>
     </div>
@@ -83,6 +92,24 @@
         been answered. <br/>
         A short evaluation follows at the end.
       </p>
+      <div class="overlay-settings">
+        <div class="overlay-setting-group">
+          <p class="overlay-setting-label">Text speed</p>
+          <div class="speed-group" id="speedGroupOverlay">
+            <button class="btn btn-light speed-btn" type="button" data-speed="slow">Slow</button>
+            <button class="btn btn-light speed-btn active" type="button" data-speed="normal">Normal</button>
+            <button class="btn btn-light speed-btn" type="button" data-speed="fast">Fast</button>
+          </div>
+        </div>
+        <div class="overlay-setting-group">
+          <p class="overlay-setting-label">Question timer</p>
+          <div class="speed-group" id="qTimerGroupOverlay">
+            <button class="btn btn-light qtimer-btn active" type="button" data-enabled="true">30s</button>
+            <button class="btn btn-light qtimer-btn" type="button" data-enabled="false">Off</button>
+          </div>
+        </div>
+      </div>
+ 
       <button class="btn btn-primary" id="overlayStartBtn" type="button">&#9654; Start Reading</button>
     </div>
   </div>
