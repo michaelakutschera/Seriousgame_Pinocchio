@@ -2,13 +2,12 @@
    level1.js  —  "The Book"
 
    4 pages, shown as 2 spreads (1+2, then 3+4). Every page
-   STARTS WITH NARRATIVE TEXT, so there is
-   always context before a question appears.
+   starts with narrative text,so there is always context before a question appears.
 
    Within a spread, the LEFT page types out first, then the RIGHT page. 
    Whenever a "blank" block is reached, typing pauses and a decision
-   box (3 plain-text options + 30s bar) appears right there
-   in the text; typing only continues once it is answered.
+   box (3 plain-text options + 30s bar/unlimeted bar) appears.
+   Typing only continues once it is answered.
 
    Page-turn ("Next") is enabled only once every blank on
    the current spread has been answered.
@@ -36,16 +35,10 @@ let fastForward = false;
      { type: "text",  text: "...plain text, \n\n = paragraph break" }
      { type: "illus", id, file, alt }
      { type: "blank", id, options: [...] }
-
-   Every page's FIRST block is "text" -- a blank never opens
-   a page, so there's always context before a question.
    --------------------------------------------------------- */
 const pages = [
 
   /* ============ PAGE 1 ============*/
-  /*Frage einbauen hier! 
-  Ändern der Anführungszeichen auf französsische.
-  Text in vier gleichgroße Teile teilen, damit die Seiten tatsächlich voll sind.*/
   [
     { type: "text", text:
       "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes. "
@@ -177,6 +170,11 @@ let gameStarted = false;
 let puzzleScore = 0;
 let correctCount = 0;
 
+/* true once the LAST spread has fully finished typing (including any
+   illustration/text after the final blank) -- gates the Finish button,
+   so the chapter-complete overlay never covers content still being read */
+let finishReady = false;
+
 /* answers[blankId] = { isCorrect, correctChoice } */
 const answers = {};
 
@@ -204,10 +202,9 @@ const bookSpreadEl     = document.querySelector(".book-spread");
 const prevBtn = document.getElementById("prevSpreadBtn");
 const nextBtn = document.getElementById("nextSpreadBtn");
 const spreadIndicator = document.getElementById("spreadIndicator");
-const spreadNavEl = document.querySelector(".spread-nav");
 
-const feedbackEl  = document.getElementById("feedback");
-const continueBtn = document.getElementById("continueBtn");
+const finishOverlay = document.getElementById("finishOverlay");
+const finishText     = document.getElementById("finishText");
 
 const startOverlay    = document.getElementById("startOverlay");
 const pauseOverlay    = document.getElementById("pauseOverlay");
@@ -224,7 +221,6 @@ const skipBtn           = document.getElementById("skipBtn");
 const speedButtons      = document.querySelectorAll(".speed-btn");   /* Top-Bar + Overlay, gleiche Klasse */
 const qTimerButtons     = document.querySelectorAll(".qtimer-btn");  /* nur im Start-Overlay */
 
-const timer = new GameTimer("timerDisplay");
 renderHumanityBadge("humanityBadge");
 
 /* ---------------------------------------------------------
@@ -504,7 +500,6 @@ function showDecisionInline(container, block, myToken, onDone) {
       wrap.innerHTML = "";
       wrap.appendChild(buildBlankResolved(block));
       updateNextButton();
-      checkAllAnswered();
       onDone();
     }, 900);
   }
@@ -539,6 +534,7 @@ function renderSpread() {
 
   fastForward = false;   /* CHANGED: neue Seite -> Skip-Status zurücksetzen */
   updateSkipButton();
+  finishReady = false;
 
   if (activeCountdownId) { clearInterval(activeCountdownId); activeCountdownId = null; }
 
@@ -573,6 +569,7 @@ function renderSpread() {
     /* spread already completed earlier -> show instantly */
     renderStaticPage(leftPageIndex,  leftPageContent);
     renderStaticPage(rightPageIndex, rightPageContent);
+    if (currentSpread === TOTAL_SPREADS - 1) finishReady = true;
     updateNextButton();
     return;
   }
@@ -582,7 +579,8 @@ function renderSpread() {
     if (myToken !== runToken) return;
     typePage(rightPageIndex, rightPageContent, myToken, () => {
       if (myToken !== runToken) return;
-      checkAllAnswered();
+      if (currentSpread === TOTAL_SPREADS - 1) finishReady = true;
+      updateNextButton();
     });
   });
 }
@@ -606,26 +604,19 @@ function updateNextButton() {
     nextBtn.disabled = !allBlanksAnsweredOnSpread();
     nextBtn.textContent = "Next \u203a";
   } else {
-    nextBtn.disabled = true;
-    nextBtn.textContent = "\u203a";
+    /* last spread: button only becomes the Finish action once the whole
+       page -- including anything after the final blank -- has been shown */
+    nextBtn.disabled = !finishReady;
+    nextBtn.textContent = finishReady ? "Finish \u2713" : "\u203a";
   }
 
-  /* if the button just became enabled, draw attention to it */
+  /* if the button just became enabled, draw attention to it via the
+     pulse animation only -- no auto-scroll, so answering a question
+     doesn't yank the view away from what's still being read */
   if (wasDisabled && !nextBtn.disabled) {
     nextBtn.classList.add("ready");
-    spreadNavEl.scrollIntoView({ behavior: "smooth", block: "center" });
   } else if (nextBtn.disabled) {
     nextBtn.classList.remove("ready");
-  }
-}
-
-function checkAllAnswered() {
-  updateNextButton();
-
-  const allIds = [];
-  pages.forEach(p => p.forEach(b => { if (b.type === "blank") allIds.push(b.id); }));
-  if (allIds.every(id => answers[id])) {
-    finishPuzzle();
   }
 }
 
@@ -637,6 +628,10 @@ prevBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", () => {
+  if (currentSpread === TOTAL_SPREADS - 1 && finishReady) {
+    finishPuzzle();
+    return;
+  }
   if (currentSpread < TOTAL_SPREADS - 1 && allBlanksAnsweredOnSpread()) {
     nextBtn.classList.remove("ready");
     currentSpread++;
@@ -650,19 +645,17 @@ nextBtn.addEventListener("click", () => {
 function finishPuzzle() {
   localStorage.setItem("pinocchio_level1PuzzleScore", puzzleScore.toString());
 
-  feedbackEl.classList.add("show");
-  feedbackEl.innerHTML =
+  finishText.innerHTML =
       `You answered <strong>${correctCount} of 6</strong> moments correctly in time \u2014 `
     + `<strong>+${puzzleScore} Humanity</strong> earned for this chapter.<br>`
     + `Continue to the evaluation to collect more.`;
+  finishOverlay.classList.remove("hidden");
 
-  continueBtn.classList.add("visible", "ready");
-  continueBtn.scrollIntoView({ behavior: "smooth", block: "center" });
-
-  timer.stop();
   startBtn.disabled = true;
   stopBtn.disabled  = true;
   skipBtn.disabled  = true;   /* CHANGED */
+  nextBtn.disabled  = true;
+  nextBtn.classList.remove("ready");
 }
 
 /* ---------------------------------------------------------
@@ -670,7 +663,6 @@ function finishPuzzle() {
    --------------------------------------------------------- */
 function startGame() {
   startOverlay.classList.add("hidden");
-  timer.start();
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
   updateSkipButton();   /* CHANGED */
@@ -679,7 +671,7 @@ function startGame() {
 
 function pauseGame() {
   if (paused || !gameStarted) return;
-  timer.stop(); paused = true;
+  paused = true;
   pauseOverlay.classList.remove("hidden");
   startBtn.disabled = false; stopBtn.disabled = true;
   updateSkipButton();   /* CHANGED */
@@ -687,12 +679,12 @@ function pauseGame() {
 
 function resumeGame() {
   pauseOverlay.classList.add("hidden");
-  timer.start(); paused = false;
+  paused = false;
   startBtn.disabled = true; stopBtn.disabled = false;
   updateSkipButton();   /* CHANGED */
 }
 
-/* CHANGED: Überspringen-Button -> Text/Illustrationen ohne Wartezeit
+/* Skip: Überspringen-Button -> Text/Illustrationen ohne Wartezeit
    bis zur nächsten noch unbeantworteten Frage durchlaufen lassen */
 skipBtn.addEventListener("click", () => {
   if (paused || !gameStarted) return;
@@ -704,7 +696,7 @@ function updateSkipButton() {
   skipBtn.disabled = fastForward || paused || !gameStarted;
 }
 
-/* CHANGED: 3-stufiger Geschwindigkeits-Regler -- existiert doppelt
+/* 3-stufiger Geschwindigkeits-Regler
    (Overlay + Top-Bar), beide Gruppen bleiben synchron, weil beide
    Buttons dieselbe Klasse ".speed-btn" und "data-speed" nutzen */
 speedButtons.forEach(btn => {
@@ -714,7 +706,7 @@ speedButtons.forEach(btn => {
   });
 });
 
-/* CHANGED: Fragen-Timer An/Aus -- nur im Start-Overlay wählbar,
+/* Fragen-Timer An/Aus -- nur im Start-Overlay wählbar,
    da man sich dafür sinnvollerweise VOR dem Lesen entscheidet */
 qTimerButtons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -733,16 +725,17 @@ stopBtn.addEventListener("click", pauseGame);
 
 backBtn.addEventListener("click", e => {
   const done = localStorage.getItem("pinocchio_level1Completed") === "true";
-  if (!done && timer.seconds > 0)
+  if (!done && gameStarted)
     if (!confirm("Leave this chapter?\n\nIt can only be completed once.")) e.preventDefault();
 });
 
 /* ---------------------------------------------------------
-   Already completed?
+   Level already completed - not possible to play it agian, without reset.
+   (skipped in DEV_MODE, so a level can be replayed freely)
    --------------------------------------------------------- */
-if (localStorage.getItem("pinocchio_level1Completed") === "true") {
+if (!DEV_MODE && localStorage.getItem("pinocchio_level1Completed") === "true") {
   startOverlay.classList.add("hidden");
-  startBtn.disabled = stopBtn.disabled = skipBtn.disabled = true;   /* CHANGED */
+  startBtn.disabled = stopBtn.disabled = skipBtn.disabled = true;
   const s = localStorage.getItem("pinocchio_level1Score");
   if (s) doneText.textContent =
     `You have already played through this chapter and earned +${s} Humanity. It can't be played again.`;

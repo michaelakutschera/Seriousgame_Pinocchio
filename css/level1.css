@@ -9,7 +9,7 @@
    ========================================================= */
 
 .book-stage {
-  max-width: 1160px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 28px 16px 80px;
 }
@@ -98,14 +98,14 @@
    narration plus an illustration (no decision boxes); page 2
    has shorter text but two decision boxes. */
 .book-spread.spread-0 .book-page {
-  min-height: 1100px;
+  min-height: 980px;
 }
 
 /* Spread 2 (pages 3+4): page 3 has two decision boxes with
    shorter surrounding text; page 4 has more text plus an
    illustration and one decision box. */
 .book-spread.spread-1 .book-page {
-  min-height: 950px;
+  min-height: 850px;
 }
 
 .book-page.left { border-right: 1px solid #ddd5b8; }
@@ -390,27 +390,6 @@
 .btn.ready {
   animation: ready-pulse 1.4s ease-out infinite;
 }
-
-/* ---------------------------------------------------------
-   Feedback + Continue
-   --------------------------------------------------------- */
-.feedback-box {
-  font-family: var(--font-body);
-  margin: 20px auto 0;
-  max-width: 760px;
-  padding: 14px 18px;
-  border-radius: 8px;
-  background: rgba(201,162,39,.12);
-  border: 1px solid var(--gold);
-  font-size: 0.95rem;
-  display: none;
-  text-align: center;
-}
-.feedback-box.show { display: block; }
-
-.continue-wrap { margin-top: 14px; text-align: center; }
-.continue-wrap .btn         { display: none; }
-.continue-wrap .btn.visible { display: inline-flex; }
 
 /* ---------------------------------------------------------
    Overlays

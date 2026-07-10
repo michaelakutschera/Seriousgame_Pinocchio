@@ -309,6 +309,30 @@ section.block h2 {
   }
 }
 
+/* ---------------------------------------------------------
+   Dev-mode "jump straight to the quiz" link, shown under a
+   level card only while DEV_MODE is true in script.js.
+   --------------------------------------------------------- */
+.level-card-slot {
+  display: flex;
+  flex-direction: column;
+}
+
+.dev-quiz-link {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 1px dashed var(--error);
+  border-radius: 6px;
+  background: rgba(163, 61, 61, 0.08);
+  color: var(--error);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.dev-quiz-link:hover { background: rgba(163, 61, 61, 0.16); }
+.dev-quiz-link.hidden { display: none; }
+
 .level-card {
   position: relative;
   border-radius: var(--radius);

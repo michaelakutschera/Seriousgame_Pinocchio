@@ -30,12 +30,12 @@ const completed = localStorage.getItem("pinocchio_level1Completed") === "true";
 const puzzleScoreRaw = localStorage.getItem("pinocchio_level1PuzzleScore");
 
 /* If someone lands here without having played the puzzle yet,
-   send them back to start it. */
-if (!completed && puzzleScoreRaw === null) {
+   send them back to start it (skipped in DEV_MODE). */
+if (!DEV_MODE && !completed && puzzleScoreRaw === null) {
   window.location.href = "../html/level_1.html";
 }
 
-if (completed) {
+if (completed && !DEV_MODE) {
   showResultsOnly();
 } else {
   initQuiz();
@@ -59,7 +59,7 @@ function initQuiz() {
   });
 
   prevBtn.addEventListener("click", () => {
-    if (currentStep > 0) showStep(currentStep - 1);
+    if (DEV_MODE && currentStep > 0) showStep(currentStep - 1);
   });
 
   nextBtn.addEventListener("click", () => {
@@ -94,7 +94,9 @@ function updateNav() {
     return;
   }
   quizNav.style.display = "flex";
-  prevBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
+  /* going back to an earlier question isn't allowed during normal
+     play -- only in DEV_MODE, for testing */
+  prevBtn.style.visibility = (DEV_MODE && currentStep !== 0) ? "visible" : "hidden";
 
   const qid = steps[currentStep].dataset.qid;
   nextBtn.disabled = selected[qid] === null;

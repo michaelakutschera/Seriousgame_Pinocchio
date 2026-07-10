@@ -11,75 +11,47 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <header class="top-bar">
+<!-- ============ TOP BAR ============ -->
+ <header class="top-bar">
     <p class="game-title">
       <em>The Adventures of Pinocchio</em>
-      <small>Level 2 — The Comic</small>
+      <small>A Serious Game about one Story told in different Media</small>
     </p>
+      
     <div class="top-bar-controls">
       <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
-      <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
-      <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
-      <span class="badge"><span class="badge-icon">&#9201;</span> <span id="timerDisplay">00:00</span></span>
+    <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
+    <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
       <span class="badge badge-gold"><span class="badge-icon">&#10084;</span> <span id="humanityBadge">Humanity: 0</span></span>
     </div>
   </header>
 
   <main class="comic-stage">
-
-    <!-- chapter heading -->
+    <!-- ============ CHAPTER HEADING ============ -->
     <div class="chapter-heading">
-      <p class="chapter-eyebrow">Level 2 &middot; The Comic</p>
-      <h1 class="chapter-title">The Fairy and the Three Lies</h1>
-      <p class="chapter-source">
-        The same chapter, retold across twelve comic panels &mdash;
-        sort each page into the right reading order.
-      </p>
-    </div>
-
-    <!-- progress / instructions -->
-    <p class="puzzle-hint" id="puzzleHint">
-      Tap one panel, then tap another to swap their places. Get every panel on
-      a page into the correct order to turn to the next spread.
-    </p>
-
-    <!-- OPEN COMIC BOOK SPREAD -->
+      <p class="chapter-eyebrow">Level 2 – The Comic</p>
+      <h1 class="chapter-title">Pinocchio's Three Lies</h1>
+  </div>
+    
+  <!-- ============ OPEN COMIC BOOK SPREAD ============ -->
     <div class="comic-spread">
 
       <!-- LEFT PAGE: panels 1-6 -->
       <section class="comic-page left" aria-label="Left comic page">
-        <header class="comic-page-header">
-          <span class="comic-page-title">Page 1</span>
-          <span class="comic-page-status" id="leftStatus">0 / 6 correct</span>
-        </header>
         <div class="panel-grid" id="leftGrid"></div>
         <span class="page-number">&#8212; 1 &#8212;</span>
       </section>
 
       <!-- RIGHT PAGE: panels 7-12 -->
       <section class="comic-page right" aria-label="Right comic page">
-        <header class="comic-page-header">
-          <span class="comic-page-title">Page 2</span>
-          <span class="comic-page-status" id="rightStatus">0 / 6 correct</span>
-        </header>
         <div class="panel-grid" id="rightGrid"></div>
         <span class="page-number">&#8212; 2 &#8212;</span>
       </section>
-
-    </div><!-- /.comic-spread -->
-
-    <!-- FEEDBACK + CONTINUE -->
-    <div class="feedback-box" id="feedback"></div>
-    <div class="continue-wrap">
-      <a class="btn btn-primary" id="continueBtn" href="level_2_quiz.html">
-        Continue to Evaluation &rarr;
-      </a>
-    </div>
-
+      </div>
   </main>
 
-  <!-- OVERLAYS -->
+  <!-- ============ OVERLAYS ============ -->
+  <!-- ============ LEVELSTART OVERLAY ============ -->
   <div class="overlay" id="startOverlay">
     <div class="overlay-box">
       <h2>Level 2 &#8212; The Comic</h2>
@@ -99,11 +71,23 @@
     </div>
   </div>
 
+  <!-- ============ OVERLAY PAUSE ============ -->
   <div class="overlay hidden" id="pauseOverlay">
     <div class="overlay-box">
       <h2>Paused</h2>
-      <p>The timer is paused.</p>
+      <p>The game is paused.</p>
       <button class="btn btn-primary" id="resumeBtn" type="button">&#9654; Resume</button>
+    </div>
+  </div>
+
+  <!-- ============ FINISH OVERLAY ============ -->
+  <div class="overlay hidden" id="finishOverlay">
+    <div class="overlay-box">
+      <h2>Chapter Complete</h2>
+      <p id="finishText"></p>
+      <a class="btn btn-primary" id="continueBtn" href="level_2_quiz.html">
+        Continue to Evaluation &rarr;
+      </a>
     </div>
   </div>
 
@@ -114,6 +98,32 @@
       <a class="btn btn-primary" href="../index.html">Return to Start</a>
     </div>
   </div>
+
+  <!-- ============ FOOTER ============ -->
+   <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-content">
+        <h3>Projcet:</h3>
+        <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+        136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+        Summersemester 2026<br/>
+        University Vienna</p>
+        </div>
+        <div class="footer-content">
+          <h3>Contact:</h3>
+          <p> Created: Michaela Kutschera BA <br/>
+              E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+              &copy; 2026</p>
+        </div>
+        <div class="footer-content">
+          <h3>Source:</h3>
+          <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+            translated by Carol Della Chiesa <br/>  
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+        </div>
+      </div> 
+    </div>
+  </footer>
 
   <script src="../js/script.js"></script>
   <script src="../js/level2.js"></script>

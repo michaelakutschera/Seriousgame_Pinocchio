@@ -11,43 +11,37 @@
 </head>
 <body>
 
-  <!-- TOP BAR -->
+  <!-- ============ TOP BAR ============ -->
   <header class="top-bar">
     <p class="game-title">
       <em>The Adventures of Pinocchio</em>
-      <small>Level 1 — The Book</small>
+      <small>A Serious Game about one Story told in different Media</small>
     </p>
     <div class="top-bar-controls">
       <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
       <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
       <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
-      <!--Überspring-Button des Erscheines der Zeilen-->
+      <!--Skip-Button: Immediatley displaying the paragraphs-->
       <button class="btn btn-secondary" id="skipBtn" type="button" disabled>Skip</button>
-      <!--3-Stufiger Geschwindikeitsregler-->
+      <!--3-level speed control for the text's appearance-->
         <div class="speed-group" id="speedGroup">
         <button class="btn btn-light speed-btn" type="button" data-speed="slow">Slow</button>
         <button class="btn btn-light speed-btn active" type="button" data-speed="normal">Normal</button>
         <button class="btn btn-light speed-btn" type="button" data-speed="fast">Fast</button>
       </div>
-      <!--On/Off Button for the Question Timer-->
-      <span class="badge"><span class="badge-icon">&#9201;</span> <span id="timerDisplay">00:00</span></span>
+      <!--On/Off-Button for the Question Timer-->
       <span class="badge badge-gold"><span class="badge-icon">&#10084;</span> <span id="humanityBadge">Humanity: 0</span></span>
     </div>
   </header>
 
   <main class="book-stage">
-
-    <!-- chapter heading (shown above the spread, not inside a page) -->
+  <!-- Level heading -->
     <div class="chapter-heading">
       <p class="chapter-eyebrow">Level 1 &middot; The Book</p>
-      <h1 class="chapter-title">Pinocchio's Three Lies</h1>
-      <p class="chapter-source">
-        From <em>The Adventures of Pinocchio</em> by Carlo Collodi (1883),
-        translated by Carol Della Chiesa
-      </p>
+        <h1 class="chapter-title">Pinocchio's Three Lies</h1>
     </div>
 
-    <!-- BOOK SPREAD -->
+    <!-- ============ BOOK SPREAD ============ -->
     <div class="book-spread">
 
       <article class="book-page left" aria-label="Left page">
@@ -59,38 +53,29 @@
         <div class="story-text" id="rightPageContent"></div>
         <span class="page-number" id="rightPageNum">&#8212; 2 &#8212;</span>
       </article>
+    </div>
 
-    </div><!-- /.book-spread -->
-
-    <!-- PAGE-TURN CONTROLS -->
+    <!-- ============ PAGE-TURN CONTROLS ============ -->
     <div class="spread-nav">
       <button class="btn btn-light" id="prevSpreadBtn" type="button" disabled>&#8249; Previous</button>
       <span class="spread-indicator" id="spreadIndicator">Pages 1&#8211;2 of 4</span>
       <button class="btn btn-light" id="nextSpreadBtn" type="button" disabled>Next &#8250;</button>
-    </div>
-
-    <!-- FEEDBACK + CONTINUE (shown once all 5 blanks are answered) -->
-    <div class="feedback-box" id="feedback"></div>
-    <div class="continue-wrap">
-      <a class="btn btn-primary" id="continueBtn" href="level_1_quiz.html">
-        Continue to Evaluation &rarr;
-      </a>
-    </div>
-
+      </div>
   </main>
 
-  <!-- OVERLAYS -->
+  <!-- ============ OVERLAYS ============ -->
+   <!-- ============ LEVELSTART OVERLAY ============ -->
   <div class="overlay" id="startOverlay">
     <div class="overlay-box">
       <h2>Level 1 – The Book</h2>
       <p>
-        Read through the chapter, four pages in total.<br/>
-        At five points in the story, you willl see three possible
+        Read through the chapter.<br/>
+        At five points in the story, you willl see three possible<br/>
         continuations directly below the gap in the text.<br/>
-        You have <strong>30 seconds</strong> to pick the right one.
-        You can only turn the page once every gap on the current spread has
-        been answered. <br/>
-        A short evaluation follows at the end.
+        Decide whether you want <strong>unlimited time</strong><br/>
+        per question or <strong>30 sceonds</strong>
+        to pick the right one.<br/>
+        A short evaluation follows at the end of the level.
       </p>
       <div class="overlay-settings">
         <div class="overlay-setting-group">
@@ -114,11 +99,23 @@
     </div>
   </div>
 
+  <!-- ============ OVERLAY PAUSE ============ -->
   <div class="overlay hidden" id="pauseOverlay">
     <div class="overlay-box">
       <h2>Paused</h2>
-      <p>The timer is paused.</p>
+      <p>The game is paused.</p>
       <button class="btn btn-primary" id="resumeBtn" type="button">&#9654; Resume</button>
+    </div>
+  </div>
+
+  <!-- ============ FINISH OVERLAY ============ -->
+  <div class="overlay hidden" id="finishOverlay">
+    <div class="overlay-box">
+      <h2>Chapter Complete</h2>
+      <p id="finishText"></p>
+      <a class="btn btn-primary" id="continueBtn" href="level_1_quiz.html">
+        Continue to Evaluation &rarr;
+      </a>
     </div>
   </div>
 
@@ -129,6 +126,32 @@
       <a class="btn btn-primary" href="../index.html">Return to Start</a>
     </div>
   </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-content">
+        <h3>Projcet:</h3>
+        <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+        136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+        Summersemester 2026<br/>
+        University Vienna</p>
+        </div>
+        <div class="footer-content">
+          <h3>Contact:</h3>
+          <p> Created: Michaela Kutschera BA <br/>
+              E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+              &copy; 2026</p>
+        </div>
+        <div class="footer-content">
+          <h3>Source:</h3>
+          <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+            translated by Carol Della Chiesa <br/>  
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+        </div>
+      </div> 
+    </div>
+  </footer>
 
   <script src="../js/script.js"></script>
   <script src="../js/level1.js"></script>

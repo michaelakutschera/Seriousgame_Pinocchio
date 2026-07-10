@@ -48,11 +48,9 @@ const allPanels = [
    --------------------------------------------------------- */
 const leftGrid   = document.getElementById("leftGrid");
 const rightGrid  = document.getElementById("rightGrid");
-const leftStatus = document.getElementById("leftStatus");
-const rightStatus= document.getElementById("rightStatus");
 
-const feedbackEl  = document.getElementById("feedback");
-const continueBtn = document.getElementById("continueBtn");
+const finishOverlay = document.getElementById("finishOverlay");
+const finishText     = document.getElementById("finishText");
 
 const startOverlay    = document.getElementById("startOverlay");
 const pauseOverlay    = document.getElementById("pauseOverlay");
@@ -64,7 +62,6 @@ const startBtn        = document.getElementById("startBtn");
 const stopBtn         = document.getElementById("stopBtn");
 const backBtn         = document.getElementById("backBtn");
 
-const timer = new GameTimer("timerDisplay");
 renderHumanityBadge("humanityBadge");
 
 /* ---------------------------------------------------------
@@ -148,11 +145,11 @@ function slotToPage(slot)  { return slot < PANELS_PER_PAGE ? "left" : "right"; }
 function slotToLocal(slot) { return slot < PANELS_PER_PAGE ? slot : slot - PANELS_PER_PAGE; }
 
 function renderAll() {
-  renderGrid("left",  leftGrid,  leftStatus,  0);
-  renderGrid("right", rightGrid, rightStatus, PANELS_PER_PAGE);
+  renderGrid(leftGrid,  0);
+  renderGrid(rightGrid, PANELS_PER_PAGE);
 }
 
-function renderGrid(pageKey, gridEl, statusEl, slotOffset) {
+function renderGrid(gridEl, slotOffset) {
   gridEl.innerHTML = "";
 
   for (let local = 0; local < PANELS_PER_PAGE; local++) {
@@ -179,8 +176,6 @@ function renderGrid(pageKey, gridEl, statusEl, slotOffset) {
     cell.addEventListener("click", () => handlePanelClick(slot));
     gridEl.appendChild(cell);
   }
-
-  updateStatus(pageKey, statusEl, slotOffset);
 }
 
 function buildPlaceholder(panel) {
@@ -198,16 +193,6 @@ function buildPlaceholder(panel) {
   wrap.appendChild(num);
   wrap.appendChild(fname);
   return wrap;
-}
-
-function updateStatus(pageKey, statusEl, slotOffset) {
-  let correctCount = 0;
-  for (let local = 0; local < PANELS_PER_PAGE; local++) {
-    const slot = slotOffset + local;
-    if (currentOrder[slot].correctSlot === slot) correctCount++;
-  }
-  statusEl.textContent = `${correctCount} / ${PANELS_PER_PAGE} correct`;
-  statusEl.classList.toggle("complete", correctCount === PANELS_PER_PAGE);
 }
 
 /* ---------------------------------------------------------
@@ -288,16 +273,13 @@ function finishPuzzle() {
   const score = computeScore();
   localStorage.setItem("pinocchio_level2PuzzleScore", score.toString());
 
-  feedbackEl.classList.add("show");
-  feedbackEl.innerHTML =
+  finishText.innerHTML =
       `You solved the whole comic in <strong>${swapCount}</strong> swap${swapCount === 1 ? "" : "s"} `
     + `(best possible: ${minSwapsTotal}).<br>`
     + `<strong>+${score} Humanity</strong> earned for this chapter. `
     + `Continue to the evaluation to collect more.`;
+  finishOverlay.classList.remove("hidden");
 
-  continueBtn.classList.add("visible");
-
-  timer.stop();
   startBtn.disabled = true;
   stopBtn.disabled  = true;
 }
@@ -307,7 +289,6 @@ function finishPuzzle() {
    --------------------------------------------------------- */
 function startGame() {
   startOverlay.classList.add("hidden");
-  timer.start();
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
 
@@ -319,14 +300,14 @@ function startGame() {
 
 function pauseGame() {
   if (paused || !gameStarted || finished) return;
-  timer.stop(); paused = true;
+  paused = true;
   pauseOverlay.classList.remove("hidden");
   startBtn.disabled = false; stopBtn.disabled = true;
 }
 
 function resumeGame() {
   pauseOverlay.classList.add("hidden");
-  timer.start(); paused = false;
+  paused = false;
   startBtn.disabled = true; stopBtn.disabled = false;
 }
 
@@ -340,14 +321,15 @@ stopBtn.addEventListener("click", pauseGame);
 
 backBtn.addEventListener("click", e => {
   const done = localStorage.getItem("pinocchio_level2Completed") === "true";
-  if (!done && timer.seconds > 0)
+  if (!done && gameStarted)
     if (!confirm("Leave this chapter?\n\nIt can only be completed once.")) e.preventDefault();
 });
 
 /* ---------------------------------------------------------
    Already completed?
+   (skipped in DEV_MODE, so a level can be replayed freely)
    --------------------------------------------------------- */
-if (localStorage.getItem("pinocchio_level2Completed") === "true") {
+if (!DEV_MODE && localStorage.getItem("pinocchio_level2Completed") === "true") {
   startOverlay.classList.add("hidden");
   startBtn.disabled = stopBtn.disabled = true;
   const s = localStorage.getItem("pinocchio_level2Score");

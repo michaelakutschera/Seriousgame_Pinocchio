@@ -32,9 +32,7 @@
 }
 
 .chapter-title {
-  font-family: 'Bangers', var(--font-display);
-  letter-spacing: 0.04em;
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-size: clamp(1.4rem, 3vw, 2rem);
   margin: 0 0 6px;
   color: var(--wood-dark);
 }
@@ -101,32 +99,6 @@
 }
 
 .comic-page.left { border-right: 1px solid #d8d3c2; }
-
-.comic-page-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  font-family: var(--font-body);
-}
-
-.comic-page-title {
-  font-family: 'Bangers', var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  color: var(--wood-dark);
-}
-
-.comic-page-status {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-  white-space: nowrap;
-}
-
-.comic-page-status.complete {
-  color: var(--success);
-}
 
 /* page numbers, same placement as Level 1 */
 .page-number {
@@ -249,27 +221,6 @@
   justify-content: center;
   line-height: 1;
 }
-
-/* ---------------------------------------------------------
-   Feedback + Continue (same as Level 1)
-   --------------------------------------------------------- */
-.feedback-box {
-  font-family: var(--font-body);
-  margin: 20px auto 0;
-  max-width: 760px;
-  padding: 14px 18px;
-  border-radius: 8px;
-  background: rgba(201,162,39,.12);
-  border: 1px solid var(--gold);
-  font-size: 0.95rem;
-  display: none;
-  text-align: center;
-}
-.feedback-box.show { display: block; }
-
-.continue-wrap { margin-top: 14px; text-align: center; }
-.continue-wrap .btn         { display: none; }
-.continue-wrap .btn.visible { display: inline-flex; }
 
 /* ---------------------------------------------------------
    Overlays (shared look with Level 1)

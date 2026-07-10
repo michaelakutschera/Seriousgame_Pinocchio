@@ -6,6 +6,17 @@
    - Small header helpers
    ========================================================= */
 
+/* =========================================================
+   Dev mode
+   While true: every level/quiz page is reachable directly and
+   replayable, ignoring lock state and "already completed"
+   guards. Set to false before deploying to restore the normal,
+   strict one-time, in-order progression.
+   ========================================================= */
+   
+/* ============= DEV-MODE =============*/
+const DEV_MODE = true; /*Dev-Mode beenden --> FALSE setzen*/
+
 const HUMANITY_KEY = "pinocchio_totalHumanity";
 
 /**
@@ -44,43 +55,4 @@ function resetAllProgress() {
 function renderHumanityBadge(elementId) {
   const el = document.getElementById(elementId);
   if (el) el.textContent = "Humanity: " + getTotalHumanity();
-}
-
-/* =========================================================
-   Timer
-   A simple count-up timer used on every level page.
-   ========================================================= */
-class GameTimer {
-  constructor(displayElementId) {
-    this.seconds = 0;
-    this.intervalId = null;
-    this.displayEl = document.getElementById(displayElementId);
-    this._render();
-  }
-
-  start() {
-    if (this.intervalId) return;
-    this.intervalId = setInterval(() => {
-      this.seconds += 1;
-      this._render();
-    }, 1000);
-  }
-
-  stop() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-  }
-
-  get isRunning() {
-    return this.intervalId !== null;
-  }
-
-  _render() {
-    if (!this.displayEl) return;
-    const m = Math.floor(this.seconds / 60).toString().padStart(2, "0");
-    const s = (this.seconds % 60).toString().padStart(2, "0");
-    this.displayEl.textContent = m + ":" + s;
-  }
 }

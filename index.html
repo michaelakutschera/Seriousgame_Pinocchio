@@ -29,7 +29,7 @@
       Pinocchio's most famous moment, about lying and his growing nose: <br/>
       Is told four times in four different media: 
       a book, a comic, a film, and a video game.<br/>
-      Play through all four levels, collect Humanity, and decide Pinocchio's fate.
+      Play through all four levels, collect Humanity Points, and decide Pinocchio's fate.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary" id="startGameBtn" href="html/level_1.html">▶ Start the Game — Level 1: The Book</a>
@@ -55,40 +55,41 @@
         <div class="card">
           <h3>Why does it matter?</h3>
           <p>
-           Every story is brought to life through a medium, which in turn shapes
-          our perception of it. Each medium has its own specific characteristics,
-          and forces the story to change and adapt.<br/>
-          The game therefore asks: What remains the same, and what changes? How does the medium influence our perception? 
+            Every story is brought to life through a medium, which in turn shapes
+            our perception of it. Each medium has its own specific characteristics,
+            and forces the story to change and adapt.<br/>
+            The game therefore asks: What remains the same, and what changes? How does the medium influence our perception? 
           </p>
         </div>
       </div>
     </section>
 
-    <div class="thread-divider"><span><h2>Levels</h2></span></div>
-
     <!-- ============ LEVEL OVERVIEW ============ -->
     <section class="block">
-      <h2>Choose a Chapter</h2>
-      <p style="max-width: 680px; color: var(--ink-soft); margin-bottom: 22px;">
-        Play the levels in order 1 to 4. A new level unlocks once the previous one is completed.
-      </p>
+      <h2>Choose a Level</h2>
       <div class="level-grid level-grid-2x2" id="levelGrid">
 
-        <a class="level-card" id="levelCard1" href="html/level_1.html">
-          <span class="level-tag">Level 1</span>
-          <h3>The Book</h3>
-          <p>Pages from the novel that types itself out as you read and you must<br/>
-             complete the story at five key moments in order to finish the chapter.</p>
-          <span class="level-status" id="levelStatus1">Start &rarr;</span>
-        </a>
+        <div class="level-card-slot">
+          <a class="level-card" id="levelCard1" href="html/level_1.html">
+            <span class="level-tag">Level 1</span>
+            <h3>The Book</h3>
+            <p>Pages from the novel that types itself out as you read and you must<br/>
+               complete the story at five key moments in order to finish the chapter.</p>
+            <span class="level-status" id="levelStatus1">Start &rarr;</span>
+          </a>
+          <a class="dev-quiz-link hidden" id="devQuizLink1" href="html/level_1_quiz.html">Dev: Open Quiz &rarr;</a>
+        </div>
 
-        <a class="level-card" id="levelCard2" href="html/level_2.html">
-          <span class="level-tag">Level 2</span>
-          <h3>The Comic</h3>
-          <p>An open comic book with twelve shuffeled panels.<br/>
-          Put the panels in the correct order reading order.</p>
-          <span class="level-status" id="levelStatus2">Locked</span>
-        </a>
+        <div class="level-card-slot">
+          <a class="level-card" id="levelCard2" href="html/level_2.html">
+            <span class="level-tag">Level 2</span>
+            <h3>The Comic</h3>
+            <p>An open comic book with twelve shuffeled panels.<br/>
+            Put the panels in the correct order reading order.</p>
+            <span class="level-status" id="levelStatus2">Locked</span>
+          </a>
+          <a class="dev-quiz-link hidden" id="devQuizLink2" href="html/level_2_quiz.html">Dev: Open Quiz &rarr;</a>
+        </div>
 
         <a class="level-card" id="levelCard3" href="html/level_3.html">
           <span class="level-tag">Level 3</span>
@@ -107,24 +108,14 @@
       </div>
     </section>
 
-    <div class="thread-divider"><span><h2>How to Play</h2></span></div>
-
     <!-- ============ CONTROLS ============ -->
     <section class="block">
       <h2>Controls &amp; Rules</h2>
-      <div class="three-col">
-        <div class="card">
-          <h3>Timer</h3>
-          <p>
-            Each level has a timer in the top bar, counting how long you spend on that
-            level. It starts when you press <strong>Start</strong> and pauses when
-            you press <strong>Stop</strong>.
-          </p>
-        </div>
+      <div class="level-grid level-grid-2x2" id="levelGrid">
         <div class="card">
           <h3>Start &amp; Stop</h3>
           <p>
-            <strong>Start</strong> begins a level and its timer.
+            <strong>Start</strong> begins a level.
             <strong>Stop</strong> pauses everything, so you can take a break without
             losing your place.
           </p>
@@ -138,6 +129,7 @@
           </p>
         </div>
       </div>
+    </div>
       <div class="card card-full" style="margin-top: 22px;">
         <h3>After each level</h3>
         <p>
@@ -147,11 +139,9 @@
       </div>
     </section>
 
-    <div class="thread-divider"><span><h2>Reward System</h2></span></div>
-
-    <!-- ============ HUMANITY / ENDING ============ -->
+    <!-- ============ HUMANITY/ENDING ============ -->
     <section class="block">
-      <h2>Will Pinocchio become a real boy?</h2>
+      <h2>Reward System</h2>
       <div class="two-col">
         <div class="card">
           <h3>Collecting Humanity</h3>
@@ -176,9 +166,9 @@
         </div>
       </div>
     </section>
-
   </main>
 
+  <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
     <div class="footer-grid">
       <div class="footer-content">
@@ -198,7 +188,7 @@
           <h3>Source:</h3>
           <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
             translated by Carol Della Chiesa <br/>  
-            Text for Level 1 based on: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
         </div>
       </div> 
     </div>
@@ -224,7 +214,7 @@
        A level is:
        - "completed"  if its *Completed flag is true
        - "unlocked"   if it's not completed but the previous
-                       level IS completed (or it's Level 1)
+                       level is completed.
        - "locked"     otherwise
        --------------------------------------------------------- */
     function updateLevelCards() {
@@ -241,10 +231,12 @@
         localStorage.getItem("pinocchio_level4Completed") === "true"
       ];
 
+      const BUILT_LEVELS = 2; // levels 3+4 have no page yet, so dev mode can't unlock those
+
       for (let i = 1; i <= 4; i++) {
         const card   = document.getElementById("levelCard" + i);
         const status = document.getElementById("levelStatus" + i);
-        const prereqMet = completedFlags[i - 1];
+        const prereqMet = completedFlags[i - 1] || (DEV_MODE && i <= BUILT_LEVELS);
         const isDone    = ownCompleted[i - 1];
 
         card.classList.remove("locked", "unlocked", "completed");
@@ -260,6 +252,9 @@
           status.textContent = "Locked";
           card.removeAttribute("href");
         }
+
+        const devQuizLink = document.getElementById("devQuizLink" + i);
+        if (devQuizLink) devQuizLink.classList.toggle("hidden", !DEV_MODE);
       }
     }
 
