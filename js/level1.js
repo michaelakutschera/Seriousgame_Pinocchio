@@ -1,5 +1,5 @@
 /* =========================================================
-   level1.js  —  "The Book"
+   level1.js - "The Book"
 
    4 pages, shown as 2 spreads (1+2, then 3+4). Every page
    starts with narrative text,so there is always context before a question appears.
@@ -18,15 +18,14 @@
 const DECISION_SECONDS = 30;
 const POINTS_PER_BLANK = 10;
 
-/*Wort-Verzögerung statt Zeichen- oder Zeilen-Verzögerung, 3 Stufen wählbar */
+/* 3-level speed control for the text's appearance */
 const WORD_DELAYS_MS = { slow: 350, normal: 260, fast: 100 };
 let currentSpeed = "normal";
 
-/* globaler Schalter, ob der 30s-Fragen-Timer überhaupt aktiv ist */
+/* Question-Timer-Button: 30 seconds or unlimited */
 let questionTimerEnabled = true;
 
-/* wenn true, wird laufender Text/Illustration ohne Wartezeit
-   bis zur nächsten Frage durchgereicht (Überspringen-Button) */
+/* Skip-Button*/
 let fastForward = false;
 
 /* ---------------------------------------------------------
@@ -56,8 +55,9 @@ const pages = [
     },
     {type: "blank", id: "blank0", options: [
       {text: "And they ran after me and I ran and ran, till at last they caught me and tied my neck with a rope and hanged me to a tree.", correct: true},
-      {text: "Comming soon", correct: false},
-      {text: "Coming soon", correct: false}
+      {text: "And they caught me and stabbed me with their long knives and searched my pockets.", correct: false},
+      {text: "And they gave up chasing me, so I ran back to Inn of the Red Lobster.", correct: false}
+      
       ]},
     ],  
   /* ============ PAGE 2 ============ */
@@ -70,15 +70,15 @@ const pages = [
     },
     { type: "blank", id: "blank1", options: [
       { text: "As he spoke, his nose, long though it was, became at least two inches longer.", correct: true },
-      { text: "As he spoke, his nose stayed exactly the same length as before.",              correct: false },
-      { text: "As he spoke, he began to cry softly, without saying another word.",            correct: false }
+      { text: "As he spoke, his nose stayed exactly the same length as before.", correct: false },
+      { text: "As he spoke, he began to cry softly, without saying another word.", correct: false }
     ]},
     { type: "text", text:
         "\n\n\u201cAnd where did you lose them?\u201d\n\n\u201cIn the wood near by.\u201d"
     },
     { type: "blank", id: "blank2", options: [
-      { text: "At this second lie, his nose grew a few more inches.",     correct: true },
-      { text: "At this second lie, his nose shrank back a little.",       correct: false },
+      { text: "At this second lie, his nose grew a few more inches.", correct: true },
+      { text: "At this second lie, his nose shrank back a little.", correct: false },
       { text: "At this second lie, both of his shoes fell off his feet.", correct: false }
     ]},
     { type: "illus", id: "illus1", file: "../images/Mazzanti_1.jpg",
@@ -354,10 +354,7 @@ function typePage(pageIndex, container, myToken, onDone) {
   nextBlock();
 }
 
-/* Wortweise statt zeilenweise: fühlte sich im Test weiterhin hastig an,
-   weil eine ganze Zeile auf einmal auftauchte, während man noch die
-   vorherige las. Jetzt erscheint jedes Wort einzeln, etwas ruhiger als
-   Buchstabe-für-Buchstabe, aber ohne den "Zeilen-Sprung". */
+/* The text appears word by word. Available in three different sppeds. */
 function typeTextBlock(container, text, myToken, onDone) {
   const paragraphs = text.split("\n\n").filter(p => p !== "");
   let pi = 0;
@@ -373,16 +370,13 @@ function typeTextBlock(container, text, myToken, onDone) {
   nextParagraph();
 }
 
-/* Neue Funktion für das wortweise Einblenden eines Absatzes */
+/* Skip-Function */
 function revealParagraphWordByWord(container, para, myToken, onDone) {
   const p = document.createElement("p");
   container.appendChild(p);
 
-  /* Wörter (inkl. Leerzeichen dazwischen) als einzelne <span> anlegen,
-     zunächst unsichtbar -- die Leerzeichen bleiben normale Textknoten,
-     damit der Browser ganz normal umbricht */
-  const tokens = para.split(/(\s+)/).filter(t => t !== "");
-  const wordSpans = [];
+const tokens = para.split(/(\s+)/).filter(t => t !== "");
+const wordSpans = [];
 
   tokens.forEach(tok => {
     if (/^\s+$/.test(tok)) {
@@ -438,7 +432,7 @@ function showDecisionInline(container, block, myToken, onDone) {
   h3.textContent = "What happens next?";
   const timeSpan = document.createElement("span");
   timeSpan.className = "decision-time";
-  /* CHANGED: bei deaktiviertem Fragen-Timer kein Countdown anzeigen */
+  /* Deactivated Question-Timer no Countdown shown. */
   timeSpan.textContent = questionTimerEnabled ? (DECISION_SECONDS + " s") : "\u221e";
   header.appendChild(h3);
   header.appendChild(timeSpan);
@@ -447,7 +441,7 @@ function showDecisionInline(container, block, myToken, onDone) {
   bar.className = "countdown-bar";
   const fill = document.createElement("div");
   fill.className = "countdown-fill";
-  if (!questionTimerEnabled) fill.style.width = "100%";   /* CHANGED */
+  if (!questionTimerEnabled) fill.style.width = "100%";
   bar.appendChild(fill);
 
   const optionsWrap = document.createElement("div");
@@ -504,7 +498,7 @@ function showDecisionInline(container, block, myToken, onDone) {
     }, 900);
   }
 
-  /* Countdown nur starten, wenn der Fragen-Timer eingeschaltet ist */
+  /* Countdown starts only, wehen the Question-Timer is active. */
   if (questionTimerEnabled) {
     activeCountdownId = setInterval(() => {
       if (myToken !== runToken) { clearInterval(activeCountdownId); activeCountdownId = null; return; }
@@ -532,7 +526,7 @@ function renderSpread() {
   runToken++;
   const myToken = runToken;
 
-  fastForward = false;   /* CHANGED: neue Seite -> Skip-Status zurücksetzen */
+  fastForward = false;
   updateSkipButton();
   finishReady = false;
 
@@ -544,13 +538,11 @@ function renderSpread() {
   leftPageContent.innerHTML  = "";
   rightPageContent.innerHTML = "";
 
-  /* fixed-height class so the page already has its final size
-     before any text/decision boxes are typed in */
+  /* Fixed-height of the pages */
   bookSpreadEl.classList.remove("spread-0", "spread-1");
   bookSpreadEl.classList.add("spread-" + currentSpread);
 
-  /* always start a new spread at the top of the book, so the
-     beginning of each page is visible without scrolling */
+  /* Startingat the top of the book, visible without scrolling */
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   leftPageNum.textContent  = "\u2014 " + (leftPageIndex + 1)  + " \u2014";
@@ -566,7 +558,6 @@ function renderSpread() {
   const rightAnswered = pages[rightPageIndex].every(b => b.type !== "blank" || answers[b.id]);
 
   if (leftAnswered && rightAnswered) {
-    /* spread already completed earlier -> show instantly */
     renderStaticPage(leftPageIndex,  leftPageContent);
     renderStaticPage(rightPageIndex, rightPageContent);
     if (currentSpread === TOTAL_SPREADS - 1) finishReady = true;
@@ -574,7 +565,7 @@ function renderSpread() {
     return;
   }
 
-  /* type left page, then right page */
+  /* Type left page, then right page */
   typePage(leftPageIndex, leftPageContent, myToken, () => {
     if (myToken !== runToken) return;
     typePage(rightPageIndex, rightPageContent, myToken, () => {
@@ -586,7 +577,7 @@ function renderSpread() {
 }
 
 /* ---------------------------------------------------------
-   Page-turning logic
+   Page-turning
    --------------------------------------------------------- */
 function allBlanksAnsweredOnSpread() {
   const leftPageIndex  = currentSpread * 2;
@@ -604,15 +595,11 @@ function updateNextButton() {
     nextBtn.disabled = !allBlanksAnsweredOnSpread();
     nextBtn.textContent = "Next \u203a";
   } else {
-    /* last spread: button only becomes the Finish action once the whole
-       page -- including anything after the final blank -- has been shown */
+    /* Finish action once the whole page has been shown */
     nextBtn.disabled = !finishReady;
     nextBtn.textContent = finishReady ? "Finish \u2713" : "\u203a";
   }
 
-  /* if the button just became enabled, draw attention to it via the
-     pulse animation only -- no auto-scroll, so answering a question
-     doesn't yank the view away from what's still being read */
   if (wasDisabled && !nextBtn.disabled) {
     nextBtn.classList.add("ready");
   } else if (nextBtn.disabled) {
@@ -653,7 +640,7 @@ function finishPuzzle() {
 
   startBtn.disabled = true;
   stopBtn.disabled  = true;
-  skipBtn.disabled  = true;   /* CHANGED */
+  skipBtn.disabled  = true;
   nextBtn.disabled  = true;
   nextBtn.classList.remove("ready");
 }
@@ -665,7 +652,7 @@ function startGame() {
   startOverlay.classList.add("hidden");
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
-  updateSkipButton();   /* CHANGED */
+  updateSkipButton();
   renderSpread();
 }
 
@@ -674,18 +661,17 @@ function pauseGame() {
   paused = true;
   pauseOverlay.classList.remove("hidden");
   startBtn.disabled = false; stopBtn.disabled = true;
-  updateSkipButton();   /* CHANGED */
+  updateSkipButton();
 }
 
 function resumeGame() {
   pauseOverlay.classList.add("hidden");
   paused = false;
   startBtn.disabled = true; stopBtn.disabled = false;
-  updateSkipButton();   /* CHANGED */
+  updateSkipButton();
 }
 
-/* Skip: Überspringen-Button -> Text/Illustrationen ohne Wartezeit
-   bis zur nächsten noch unbeantworteten Frage durchlaufen lassen */
+/* Skip-Button: Show text and illustrationen without waiting -> next question. */
 skipBtn.addEventListener("click", () => {
   if (paused || !gameStarted) return;
   fastForward = true;
@@ -696,9 +682,7 @@ function updateSkipButton() {
   skipBtn.disabled = fastForward || paused || !gameStarted;
 }
 
-/* 3-stufiger Geschwindigkeits-Regler
-   (Overlay + Top-Bar), beide Gruppen bleiben synchron, weil beide
-   Buttons dieselbe Klasse ".speed-btn" und "data-speed" nutzen */
+/* 3-level-Speed-Button: Overlay and Level 1.*/
 speedButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     currentSpeed = btn.dataset.speed;
@@ -706,8 +690,7 @@ speedButtons.forEach(btn => {
   });
 });
 
-/* Fragen-Timer An/Aus -- nur im Start-Overlay wählbar,
-   da man sich dafür sinnvollerweise VOR dem Lesen entscheidet */
+/* Question-Timer: On/Off (only Overlay)*/
 qTimerButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     questionTimerEnabled = btn.dataset.enabled === "true";

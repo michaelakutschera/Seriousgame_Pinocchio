@@ -1,16 +1,11 @@
 /* =========================================================
    quiz.css
-   Full-viewport, step-based evaluation page (no scrolling).
+   Step-based evaluation page.
    Reuses the green & gold palette from style.css.
    ========================================================= */
 
-html, body.quiz-body {
-  height: 100%;
-  overflow: hidden;
-}
-
 .quiz-stage {
-  height: calc(100vh - 60px); /* viewport minus top bar */
+  min-height: calc(100vh - 60px); /* viewport minus top bar */
   display: flex;
   align-items: center;
   justify-content: center;

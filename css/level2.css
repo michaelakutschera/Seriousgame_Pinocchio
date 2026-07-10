@@ -228,13 +228,30 @@
 .overlay {
   position: fixed; inset: 0;
   background: rgba(31,61,43,.88);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 200; padding: 24px; text-align: center;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  z-index: 200; padding: 24px;
+  text-align: center;
 }
 .overlay.hidden { display: none; }
-.overlay-box { max-width: 460px; color: var(--paper); }
-.overlay-box h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 10px; }
-.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: .97rem; text-align: left; }
+.overlay-box { 
+  max-width: 460px;
+  color:
+  var(--paper);
+}
+
+.overlay-box h2 {
+  color: var(--paper);
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.overlay-box p  {
+  color: #dde8d8;
+  margin-bottom: 22px;
+  font-size: .97rem;
+  text-align: block; }
 
 /* ---------------------------------------------------------
    Responsive

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 1 · Evaluation — Pinocchio: One Story, Many Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+</head>
+<body class="quiz-body">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="top-bar">
+    <p class="game-title">
+      <em>The Adventures of Pinocchio</em>
+      <small>A Serious Game about one Story told in different Media</small>
+    </p>
+    <div class="top-bar-controls">
+      <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
+      <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
+    </div>
+  </header>
+
+  <main class="quiz-stage">
+    <div class="quiz-card">
+      <h2>Thinking About the Book as a Medium</h2>
+      <p class="quiz-progress" id="progressText">Question 1 of 4</p>
+
+      <div class="quiz-steps">
+
+        <!-- Question 1 -->
+        <div class="quiz-step active" data-qid="q1">
+          <p class="q-text">1. How does this chapter let you know that Pinocchio's nose is growing?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">The illustrations that accompany level 1 show the nose getting longer and longer, so it
+              pictures rather than describes whats happening.
+            </button>
+            <button class="option-btn" data-value="b">The narrator describes the nose becoming longer, because of Pinocchio's lies.</button> <!--Correct-->
+            <button class="option-btn" data-value="c">The Fairy, comment on the nose in their spoken dialogue, so the player learn about it through what
+              the characters say than through the narrator.
+            </button>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-step" data-qid="q2">
+          <p class="q-text">2. How does a book let readers know what a character feels or thinks on the inside?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">Through a first-person narration where Pinocchio himnself tells the whole story.
+              So readers read his thoughts directly.
+            </button>
+            <button class="option-btn" data-value="b">Through detailed descriptions of exactly what is happening inside the character's mind
+              at every moment, as if the reader were inside his head.</button>
+            <button class="option-btn" data-value="c">Through a narrator's words and the character's dialogue and actions.
+              Readers only know what the narrator tell them or what the character says and does.</button> <!--Correct-->
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-step" data-qid="q3">
+          <p class="q-text">3. This level contains two illustrations across four pages. What does this tell us about how illustrations work in a book?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">A book does not need illustrations at all.</button>
+            <button class="option-btn" data-value="b">A book uses illustrations, as occasional support for the reader's imagination.</button> <!--Correct-->
+            <button class="option-btn" data-value="c">A book has always illustrations to support the reader's imagination.</button>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="quiz-step" data-qid="q4">
+          <p class="q-text">4. The text says Pinocchio "the Marionette mourned for hours" over his nose. Compared to e.g. a film, how does a book handle a moment like this?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">A book cannot describe the passing of time at all, only single actions.</button> <!--Correct-->
+            <button class="option-btn" data-value="b">A book shows every minute of the crying in real time, exactly like a film would.</button>
+            <button class="option-btn" data-value="c">A book can sum up hours of crying in a single sentence; a film would usually have to show that time passing on screen.</button>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="quiz-step" data-qid="results">
+          <div class="quiz-results" id="resultsContent">
+            <!-- filled in by quiz.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quiz-nav" id="quizNav">
+        <button class="btn btn-light" id="prevBtn" type="button">&larr; Previous</button>
+        <button class="btn btn-primary" id="nextBtn" type="button" disabled>Next &rarr;</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-content">
+        <h3>Projcet:</h3>
+        <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+        136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+        Summersemester 2026<br/>
+        University Vienna</p>
+        </div>
+        <div class="footer-content">
+          <h3>Contact:</h3>
+          <p> Created: Michaela Kutschera BA <br/>
+              E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+              &copy; 2026</p>
+        </div>
+        <div class="footer-content">
+          <h3>Source:</h3>
+          <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+            translated by Carol Della Chiesa <br/>  
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+        </div>
+      </div> 
+    </div>
+  </footer>
+  
+<!-- ============ JS. SCRIPTS ============ -->
+  <script src="../js/script.js"></script>
+  <script src="../js/quiz1.js"></script>
+</body>
+</html>

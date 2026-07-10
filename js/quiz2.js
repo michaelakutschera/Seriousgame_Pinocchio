@@ -2,16 +2,13 @@
    quiz2.js
    Step-based evaluation for Level 2 ("The Comic").
 
-   - 3 multiple-choice questions about the COMIC as a medium
+   - 4 multiple-choice questions about the COMIC as a medium
      (5 Humanity each if correct)
-   - 1 three-step rating scale (flat +5 Humanity for
-     completing an honest self-reflection)
    - combined with the puzzle score from level_2.html
    ========================================================= */
 
-const evalAnswerKey = { q1: "b", q2: "a", q3: "a" };
+const evalAnswerKey = { q1: "c", q2: "a", q3: "b", q4: "a" };
 const POINTS_PER_MC = 5;
-const REFLECTION_BONUS = 5;
 
 renderHumanityBadge("humanityBadge");
 
@@ -23,7 +20,7 @@ const quizNav = document.getElementById("quizNav");
 const progressText = document.getElementById("progressText");
 const resultsContent = document.getElementById("resultsContent");
 
-const selected = { q1: null, q2: null, q3: null, scale: null };
+const selected = { q1: null, q2: null, q3: null, q4: null };
 let currentStep = 0;
 
 const completed = localStorage.getItem("pinocchio_level2Completed") === "true";
@@ -108,11 +105,11 @@ function updateNav() {
    --------------------------------------------------------- */
 function finishEvaluation() {
   let mcCorrect = 0;
-  ["q1", "q2", "q3"].forEach((qid) => {
+  ["q1", "q2", "q3", "q4"].forEach((qid) => {
     if (selected[qid] === evalAnswerKey[qid]) mcCorrect++;
   });
 
-  const evalScore = mcCorrect * POINTS_PER_MC + REFLECTION_BONUS;
+  const evalScore = mcCorrect * POINTS_PER_MC;
   const puzzleScore = parseInt(puzzleScoreRaw, 10) || 0;
   const levelTotal = puzzleScore + evalScore;
   const newTotal = addHumanity(levelTotal);
@@ -150,7 +147,7 @@ function showResultsOnly() {
 function buildResultsHTML({ puzzleScore, mcCorrect, evalScore, levelTotal, newTotal, alreadyDone }) {
   const breakdown = alreadyDone
     ? `This chapter has already been completed.`
-    : `Panel-ordering puzzle: ${puzzleScore} &middot; Medium questions: ${mcCorrect}/3 correct (+${(mcCorrect || 0) * POINTS_PER_MC}) &middot; Reflection: +${REFLECTION_BONUS}`;
+    : `Panel-ordering puzzle: ${puzzleScore} &middot; Medium questions: ${mcCorrect}/4 correct (+${(mcCorrect || 0) * POINTS_PER_MC})`;
 
   return `
     <p class="quiz-eyebrow">Level 2 complete</p>
