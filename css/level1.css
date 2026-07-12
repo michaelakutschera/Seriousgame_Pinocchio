@@ -35,7 +35,7 @@
 .chapter-title {
   font-size: clamp(1.4rem, 3vw, 2rem);
   margin: 0 0 6px;
-  color: var(--wood-dark);
+  color: var(--forest);
 }
 
 .chapter-source {
@@ -147,7 +147,7 @@
   line-height: 0.78;
   float: left;
   padding: 4px 8px 0 0;
-  color: var(--wood-dark);
+  color: var(--forest);
 }
 
 /* blinking typewriter cursor */
@@ -174,14 +174,18 @@
 /* Steuerleiste für Geschwindigkeit in der Top-Bar */
 .speed-group {
   display: flex;
+  align-items: center;
   gap: 4px;
+  height: var(--control-height);
   background: rgba(246, 239, 226, 0.1);
   border: 1px solid rgba(246, 239, 226, 0.35);
   border-radius: 999px;
-  padding: 3px;
+  padding: 0 4px;
+  box-sizing: border-box;
 }
 .speed-btn {
-  padding: 5px 10px;
+  height: calc(var(--control-height) - 10px);
+  padding: 0 12px;
   font-size: 0.78rem;
   border-radius: 999px;
   background: transparent;
@@ -190,12 +194,10 @@
 }
 .speed-btn.active {
   background: var(--gold);
-  color: var(--wood-dark);
+  color: var(--forest);
   border-color: var(--gold);
 }
- 
-/* CHANGED: Einstellungs-Block im Start-Overlay (Idee 4+5) */
-.overlay-settings {
+ .overlay-settings {
   display: flex;
   flex-wrap: wrap;
   gap: 22px;
@@ -212,7 +214,8 @@
   text-align: center;
 }
 .qtimer-btn {
-  padding: 5px 10px;
+  height: calc(var(--control-height) - 10px);
+  padding: 0 12px;
   font-size: 0.78rem;
   border-radius: 999px;
   background: transparent;
@@ -221,7 +224,7 @@
 }
 .qtimer-btn.active {
   background: var(--gold);
-  color: var(--wood-dark);
+  color: var(--forest);
   border-color: var(--gold);
 }
 
@@ -298,7 +301,7 @@
 .decision-header h3 {
   font-family: var(--font-display);
   font-size: 0.95rem;
-  color: var(--wood-dark);
+  color: var(--forest);
   margin: 0;
 }
 
@@ -391,19 +394,8 @@
   animation: ready-pulse 1.4s ease-out infinite;
 }
 
-/* ---------------------------------------------------------
-   Overlays
-   --------------------------------------------------------- */
-.overlay {
-  position: fixed; inset: 0;
-  background: rgba(31,61,43,.88);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 200; padding: 24px; text-align: center;
-}
-.overlay.hidden { display: none; }
-.overlay-box { max-width: 460px; color: var(--paper); }
-.overlay-box h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 10px; }
-.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: .97rem; }
+/* Overlays (start/pause/finish/done) are styled globally in
+   style.css, so every level & quiz page looks the same. */
 
 /* ---------------------------------------------------------
    Responsive

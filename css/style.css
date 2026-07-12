@@ -1,23 +1,22 @@
 /* =========================================================
    style.css
    Shared styles for the Pinocchio Serious Game
-   (header, buttons, badges, layout, index page sections)
+   (header, buttons, badges, layout, footer, index page sections)
    ========================================================= */
 
 :root {
-  /* -- Palette: warm wood/brown primary + Pinocchio gold accent.
-     Forest green (--wood) is reserved for the in-game pause/finish
-     overlays (level1.css / level2.css) and used nowhere else. -- */
-  --paper:        #f6efe0;   /* warm cream paper, neutral (no green tint) */
-  --paper-dark:   #ead9bd;
-  --ink:          #2b2420;   /* warm near-black ink */
-  --ink-soft:     #6b5d4d;   /* warm taupe for secondary text */
-  --wood:         #3f6b4f;   /* dark forest green -- overlays only */
-  --wood-dark:    #7a4a17;   /* primary brand brown (header, footer, headings, links) */
-  --gold:         #c9a227;   /* wax-seal / marionette gold -- buttons, badges, borders only */
-  --thread:       #7a4a17;   /* small-caps label accent -- brown, gold fails contrast on paper */
-  --success:      #3d6636;
-  --error:        #a33d3d;
+  /* -- Palette: forest green primary + gold accent. -- */
+  --paper:            #f6efe0;   /* warm cream paper, neutral*/
+  --paper-dark:       #ead9bd;
+  --ink:              #2b2420;   /* warm near-black ink */
+  --ink-soft:         #5b6259;   /* neutral taupe-green for secondary text */
+  --forest:           #2f4d3a;   /* primary brand green (header, footer, headings, links) */
+  --overlay-green:    #1f3d2b;   /* darker green scrim behind pause/finish/done overlays */
+  --overlay-green-rgb: 31, 61, 43; /* same colour as --overlay-green, as r,g,b for rgba() use */
+  --gold:             #c9a227;   /* buttons, badges, borders */
+  --thread:           #2f4d3a;   /* small-caps label accent*/
+  --success:          #3d6636;
+  --error:            #a33d3d;
 
   /* -- Type -- */
   --font-display: 'Playfair Display', Georgia, serif;
@@ -27,6 +26,9 @@
   --radius: 10px;
   --shadow: 0 6px 18px rgba(44, 36, 32, 0.18);
   --shadow-soft: 0 2px 8px rgba(44, 36, 32, 0.12);
+
+  /* -- Shared size for every header control (buttons, badge, speed pills) -- */
+  --control-height: 42px;
 }
 
 * { box-sizing: border-box; }
@@ -37,16 +39,16 @@ html, body {
   font-family: var(--font-body);
   background: var(--paper);
   color: var(--ink);
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 img { max-width: 100%; display: block; }
 
-a { color: var(--wood-dark); }
+a { color: var(--forest); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  color: var(--wood-dark);
+  color: var(--forest);
   margin-top: 0;
 }
 
@@ -63,7 +65,7 @@ h1, h2, h3, h4 {
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
-  background: var(--wood-dark);
+  background: var(--forest);
   padding: 10px 20px;
   box-shadow: var(--shadow-soft);
 }
@@ -101,22 +103,25 @@ h1, h2, h3, h4 {
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 9px 18px;
+  height: var(--control-height);
+  padding: 0 20px;
   border-radius: 999px;
   border: 2px solid transparent;
   cursor: pointer;
   transition: transform 0.08s ease, background 0.15s ease, color 0.15s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   line-height: 1;
+  box-sizing: border-box;
 }
 
 .btn:active { transform: scale(0.97); }
 
 .btn-primary {
   background: var(--gold);
-  color: var(--wood-dark);
+  color: var(--paper);
 }
 .btn-primary:hover { background: #e0b34a; }
 
@@ -129,15 +134,15 @@ h1, h2, h3, h4 {
 
 .btn-light {
   background: var(--paper);
-  color: var(--wood-dark);
-  border-color: var(--wood-dark);
+  color: var(--forest);
+  border-color: var(--forest);
 }
 .btn-light:hover { background: var(--paper-dark); }
 
 .btn-danger {
   background: transparent;
   color: var(--paper);
-  border-color: var(--thread);
+  border-color: var(--gold);
 }
 .btn-danger:hover { background: rgba(178, 59, 59, 0.1); }
 
@@ -155,13 +160,16 @@ h1, h2, h3, h4 {
 .badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 6px 12px;
+  height: var(--control-height);
+  padding: 0 18px;
   border-radius: 999px;
   border: 2px solid transparent;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .badge-gold {
@@ -172,13 +180,30 @@ h1, h2, h3, h4 {
 .badge-icon { font-size: 1rem; }
 
 /* =========================================================
+   Overlays (shared across all levels & quizzes: start/pause/
+   finish/done screens)
+   ========================================================= */
+
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(var(--overlay-green-rgb), .88);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 24px; text-align: center;
+}
+.overlay.hidden { display: none; }
+.overlay-box { max-width: 460px; color: var(--paper); }
+.overlay-box h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 10px; }
+.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: .97rem; }
+
+/* =========================================================
    Page wrapper / generic sections
    ========================================================= */
 
 .page {
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px 60px;
+  padding: 0 32px 60px;
+  text-align: center;
 }
 
 .hero {
@@ -204,9 +229,9 @@ h1, h2, h3, h4 {
 }
 
 .hero p.lead {
-  max-width: 640px;
+  max-width: 760px;
   margin: 0 auto 28px;
-  font-size: 1.08rem;
+  font-size: 1.18rem;
   color: var(--ink-soft);
 }
 
@@ -224,13 +249,13 @@ section.block {
 section.block h2 {
   font-size: clamp(1.5rem, 3vw, 2rem);
   margin-bottom: 18px;
-  color: var(--wood-dark);
+  color: var(--forest);
 }
 
 .two-col {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
 }
 
 .card-full {
@@ -241,13 +266,14 @@ section.block h2 {
   background: #fffdf8;
   border: 1px solid var(--paper-dark);
   border-radius: var(--radius);
-  padding: 22px;
+  padding: 32px;
   box-shadow: var(--shadow-soft);
+  font-size: 1.08rem;
 }
 
 .card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-size: 1.35rem;
+  margin-bottom: 10px;
 }
 
 /* =========================================================
@@ -256,13 +282,11 @@ section.block h2 {
 
 .level-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
 }
 
-/* Always exactly 2 columns / 2 rows for the 4 level cards,
-   so 3+1 never happens. Not optimized for narrow phones --
-   this game is meant to be played in a browser. */
+/* 2 rows for the 4 level cards, */
 .level-grid-2x2 {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -300,14 +324,14 @@ section.block h2 {
 .level-card {
   position: relative;
   border-radius: var(--radius);
-  padding: 22px;
+  padding: 32px;
   background: #fffdf8;
   border: 1px solid var(--paper-dark);
   box-shadow: var(--shadow-soft);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  min-height: 230px;
+  gap: 12px;
+  min-height: 280px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   text-decoration: none;
   color: inherit;
@@ -315,14 +339,14 @@ section.block h2 {
 }
 
 .level-card p {
-  font-size: 0.92rem;
+  font-size: 1.05rem;
   color: var(--ink-soft);
   margin: 0;
   flex-grow: 1;
 }
 
 .level-card .level-tag {
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -330,12 +354,13 @@ section.block h2 {
 }
 
 .level-card h3 {
+  font-size: 1.5rem;
   margin: 2px 0 0;
 }
 
 .level-card .level-status {
   margin-top: auto;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--success);
 }
@@ -344,8 +369,8 @@ section.block h2 {
    Footer
    ========================================================= */
 .site-footer {
-  background: var(--wood-dark);
-  color: rgba(255,255,255,0.85);
+  background: var(--forest);
+  color: var(--paper);
   padding: 36px 40px;
   margin-top: auto;
   box-sizing: border-box;
@@ -368,7 +393,7 @@ section.block h2 {
 .site-footer h3 {
   font-family: var(--font-display);
   font-size: 1rem;
-  color: #fff;
+  color: var(--paper);
   margin: 0 0 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -379,7 +404,7 @@ section.block h2 {
 .site-footer p,
 .site-footer a {
   font-size: 0.84rem;
-  color: rgba(255,255,255,0.80);
+  color: --pa;
   line-height: 1.7;
   margin: 0;
 }
@@ -391,7 +416,7 @@ section.block h2 {
  
 @media (max-width: 600px) {
   .site-footer .footer-grid {
-    flex-direction: column; /* <- HIER war auch ein Fehler: grid-template-columns durch flex-direction ersetzen */
+    flex-direction: column;
     gap: 24px;
   }
   .site-footer .footer-content {
