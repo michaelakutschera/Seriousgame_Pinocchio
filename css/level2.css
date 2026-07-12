@@ -14,6 +14,27 @@
 }
 
 /* ---------------------------------------------------------
+Overlay
+--------------------------------------------------------- */
+
+ .overlay-settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  margin: 4px 0 22px;
+}
+.overlay-setting-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
    Chapter heading
    --------------------------------------------------------- */
 .chapter-heading {
@@ -34,7 +55,7 @@
 .chapter-title {
   font-size: clamp(1.4rem, 3vw, 2rem);
   margin: 0 0 6px;
-  color: var(--wood-dark);
+  color: var(--forest);
 }
 
 .chapter-source {
@@ -172,7 +193,7 @@
 .panel .panel-placeholder .panel-number {
   font-family: 'Bangers', var(--font-display);
   font-size: 1.6rem;
-  color: var(--wood-dark);
+  color: var(--forest);
 }
 
 .panel .panel-placeholder .panel-filename {
@@ -222,36 +243,8 @@
   line-height: 1;
 }
 
-/* ---------------------------------------------------------
-   Overlays (shared look with Level 1)
-   --------------------------------------------------------- */
-.overlay {
-  position: fixed; inset: 0;
-  background: rgba(31,61,43,.88);
-  display: flex; 
-  align-items: center;
-  justify-content: center;
-  z-index: 200; padding: 24px;
-  text-align: center;
-}
-.overlay.hidden { display: none; }
-.overlay-box { 
-  max-width: 460px;
-  color:
-  var(--paper);
-}
-
-.overlay-box h2 {
-  color: var(--paper);
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.overlay-box p  {
-  color: #dde8d8;
-  margin-bottom: 22px;
-  font-size: .97rem;
-  text-align: block; }
+/* Overlays (start/pause/finish/done) are styled globally in
+   style.css, so every level & quiz page looks the same. */
 
 /* ---------------------------------------------------------
    Responsive
