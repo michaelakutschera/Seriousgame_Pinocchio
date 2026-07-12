@@ -6,6 +6,9 @@
    feel, but they grow if content needs more room — nothing
    is ever clipped). Decision options + countdown bar appear
    inline, directly where the blank is in the text.
+
+   Overlays (start/pause/finish/done) are styled globally in
+   style.css, so every level & quiz page looks the same.
    ========================================================= */
 
 .book-stage {
@@ -266,97 +269,6 @@
 }
 
 /* ---------------------------------------------------------
-   Blank blocks — inline decision boxes / resolved sentences
-   --------------------------------------------------------- */
-.blank-block {
-  margin: 14px 0;
-}
-
-.blank-result {
-  border-radius: 4px;
-  padding: 8px 10px;
-  font-style: italic;
-}
-.blank-result.correct   { background: rgba(79,121,66,.16);  color: #2f4a28; }
-.blank-result.incorrect { background: rgba(163,61,61,.13); color: #6e2a2a; }
-
-.decision-box {
-  background: #f5f0e4;
-  border: 1px solid #ddd5b8;
-  border-left: 4px solid var(--gold);
-  border-radius: 6px;
-  padding: 14px 16px;
-  font-family: var(--font-body);
-}
-
-.decision-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-
-.decision-header h3 {
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  color: var(--forest);
-  margin: 0;
-}
-
-.decision-time {
-  font-weight: 700;
-  color: var(--gold);
-  font-size: 0.92rem;
-  white-space: nowrap;
-}
-
-.countdown-bar {
-  height: 5px;
-  background: #e2dcc8;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-.countdown-fill {
-  height: 100%;
-  width: 100%;
-  background: var(--gold);
-  transition: width 1s linear, background-color .3s;
-}
-.countdown-fill.low { background: #c0392b; }
-
-.decision-options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.decision-btn {
-  text-align: left;
-  font-family: var(--font-book);
-  font-size: 0.92rem;
-  line-height: 1.45;
-  border-radius: 6px;
-  padding: 10px 12px;
-  cursor: pointer;
-  background: transparent;
-  color: var(--ink);
-  border: 1.5px solid #ccc3a8;
-  transition: border-color .12s, background .12s;
-}
-
-.decision-btn:hover:not(:disabled) {
-  border-color: var(--gold);
-  background: rgba(201,162,39,.07);
-}
-
-.decision-btn.chosen-correct   { border-color: #4f7942 !important; background: rgba(79,121,66,.16) !important; font-weight: 600; }
-.decision-btn.chosen-incorrect { border-color: #c0392b !important; background: rgba(192,57,43,.10) !important; }
-.decision-btn:disabled { cursor: default; }
-
-/* ---------------------------------------------------------
    Page-turn controls
    --------------------------------------------------------- */
 .spread-nav {
@@ -393,9 +305,6 @@
 .btn.ready {
   animation: ready-pulse 1.4s ease-out infinite;
 }
-
-/* Overlays (start/pause/finish/done) are styled globally in
-   style.css, so every level & quiz page looks the same. */
 
 /* ---------------------------------------------------------
    Responsive

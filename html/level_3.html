@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 3 · The Audiobook — Pinocchio: One Story, Many Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/level3.css" />
+</head>
+<body>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="top-bar">
+    <p class="game-title">
+      <em>The Adventures of Pinocchio</em>
+      <small>A Serious Game about one Story told in different Media</small>
+    </p>
+    <div class="top-bar-controls">
+      <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
+      <button class="btn btn-secondary" id="startBtn" type="button">&#9654; Start</button>
+      <button class="btn btn-secondary" id="stopBtn"  type="button" disabled>&#9646;&#9646; Stop</button>
+    </div>
+  </header>
+
+  <main class="level-stage">
+  <!-- Level heading -->
+    <div class="chapter-heading">
+      <p class="chapter-eyebrow">Level 3 – The Audiobook</p>
+        <h1 class="chapter-title">Pinocchio's Three Lies</h1>
+    </div>
+
+    <!-- ============ AUDIO STAGE ============ -->
+    <div class="audio-stage">
+
+      <audio id="levelAudio" src="../audio/level3_audio.mp3" preload="metadata"></audio>
+
+      <div class="audio-visual" id="audioVisual" aria-hidden="true">
+        <span class="audio-note">&#9835;</span>
+      </div>
+
+      <p class="audio-caption">Listen closely. At six moments the recording will pause and ask which word you just heard.</p>
+
+      <div class="audio-progress">
+        <div class="audio-progress-bar">
+          <div class="audio-progress-fill" id="audioProgressFill"></div>
+        </div>
+        <span class="audio-time" id="audioTime">0:00 / 0:00</span>
+      </div>
+
+      <!-- Filled by level3.js with the word decision box at each checkpoint -->
+      <div class="checkpoint-zone" id="checkpointZone"></div>
+
+      <button class="btn btn-light transcript-toggle" id="transcriptToggleBtn" type="button">
+        Show Transcript
+      </button>
+      <!-- level3.js swaps the text of #transcriptLine to match the
+           current point in the recording — only one line is ever
+           shown at a time, not the full text. -->
+      <div class="transcript-panel hidden" id="transcriptPanel">
+        <p class="transcript-line" id="transcriptLine">Transcript will appear here once you press Start.</p>
+      </div>
+    </div>
+  </main>
+
+    <!-- ============ OVERLAYS ============ -->
+  <!-- ============ LEVELSTART OVERLAY ============ -->
+  <div class="overlay" id="startOverlay">
+    <div class="overlay-box">
+      <h2>Level 3 – </h2>
+      <p>Comming Soon.</p>
+      <button class="btn btn-primary" id="overlayStartBtn" type="button">&#9654; Start</button>
+    </div>
+  </div>
+
+  <!-- ============ OVERLAY PAUSE ============ -->
+  <div class="overlay hidden" id="pauseOverlay">
+    <div class="overlay-box">
+      <h2>Paused</h2>
+      <p>The game is paused.</p>
+      <button class="btn btn-primary" id="resumeBtn" type="button">&#9654; Resume</button>
+    </div>
+  </div>
+
+  <!-- ============ FINISH OVERLAY ============ -->
+  <div class="overlay hidden" id="finishOverlay">
+    <div class="overlay-box">
+      <h2>Chapter Complete</h2>
+      <p id="finishText"></p>
+      <a class="btn btn-primary" id="continueBtn" href="level_3_quiz.html">
+        Continue to Evaluation &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="doneOverlay">
+    <div class="overlay-box">
+      <h2>Already Completed</h2>
+      <p id="doneText">You have already played through this chapter.</p>
+      <a class="btn btn-primary" href="../index.html">Return to Start</a>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-content">
+        <h3>Projcet:</h3>
+        <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+        136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+        Summersemester 2026<br/>
+        University Vienna</p>
+        </div>
+        <div class="footer-content">
+          <h3>Contact:</h3>
+          <p> Created: Michaela Kutschera BA <br/>
+              E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+              &copy; 2026</p>
+        </div>
+        <div class="footer-content">
+          <h3>Source:</h3>
+          <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+            translated by Carol Della Chiesa <br/>  
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+        </div>
+      </div> 
+    </div>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script src="../js/level3.js"></script>
+</body>
+</html>

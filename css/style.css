@@ -206,6 +206,16 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
+/* Shared page wrapper for level screens that don't need a book/comic
+   layout of their own (currently Level 3's audio stage) — keeps the
+   same breathing room below the top bar and above the footer as
+   .book-stage (level1.css) / .comic-stage (level2.css). */
+.level-stage {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 16px 80px;
+}
+
 .hero {
   text-align: center;
   padding: 56px 20px 40px;
@@ -426,6 +436,99 @@ section.block h2 {
     padding: 28px 20px;
   }
 }
+
+/* =========================================================
+   Decision boxes — inline choice UI shared by levels that ask
+   the player to pick between a few options (e.g. Level 1's
+   sentence blanks, Level 3's word checkpoints)
+   ========================================================= */
+.blank-block {
+  margin: 14px 0;
+}
+
+.blank-result {
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-style: italic;
+}
+.blank-result.correct   { background: rgba(79,121,66,.16);  color: #2f4a28; }
+.blank-result.incorrect { background: rgba(163,61,61,.13); color: #6e2a2a; }
+
+.decision-box {
+  background: #f5f0e4;
+  border: 1px solid #ddd5b8;
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+}
+
+.decision-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.decision-header h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--forest);
+  margin: 0;
+}
+
+.decision-time {
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.countdown-bar {
+  height: 5px;
+  background: #e2dcc8;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.countdown-fill {
+  height: 100%;
+  width: 100%;
+  background: var(--gold);
+  transition: width 1s linear, background-color .3s;
+}
+.countdown-fill.low { background: #c0392b; }
+
+.decision-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.decision-btn {
+  text-align: left;
+  font-family: var(--font-book);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid #ccc3a8;
+  transition: border-color .12s, background .12s;
+}
+
+.decision-btn:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: rgba(201,162,39,.07);
+}
+
+.decision-btn.chosen-correct   { border-color: #4f7942 !important; background: rgba(79,121,66,.16) !important; font-weight: 600; }
+.decision-btn.chosen-incorrect { border-color: #c0392b !important; background: rgba(192,57,43,.10) !important; }
+.decision-btn:disabled { cursor: default; }
 
 /* =========================================================
    Reduced motion

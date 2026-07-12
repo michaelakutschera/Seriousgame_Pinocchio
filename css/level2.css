@@ -5,6 +5,9 @@
    grid of 6 panels (12 total). Panels are clicked in pairs
    to swap positions. Correctly placed panels get a green
    "Humanity" frame; everything else stays plain black/white.
+  
+   Overlays (start/pause/finish/done) are styled globally in
+   style.css, so every level & quiz page looks the same.
    ========================================================= */
 
 .comic-stage {
@@ -56,22 +59,6 @@ Overlay
   font-size: clamp(1.4rem, 3vw, 2rem);
   margin: 0 0 6px;
   color: var(--forest);
-}
-
-.chapter-source {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  margin: 0;
-}
-
-.puzzle-hint {
-  text-align: center;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  max-width: 640px;
-  margin: 14px auto 22px;
 }
 
 /* ---------------------------------------------------------
@@ -242,9 +229,6 @@ Overlay
   justify-content: center;
   line-height: 1;
 }
-
-/* Overlays (start/pause/finish/done) are styled globally in
-   style.css, so every level & quiz page looks the same. */
 
 /* ---------------------------------------------------------
    Responsive

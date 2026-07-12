@@ -28,7 +28,7 @@
     <p class="lead">
       Pinocchio's most famous moment, about lying and his growing nose: <br/>
       Is told four times in four different media: 
-      a book, a comic, a film, and a video game.<br/>
+      a book, a comic, an audiobook, and a video game.<br/>
       Play through all four levels, collect Humanity Points, and decide Pinocchio's fate.
     </p>
     <div class="hero-actions">
@@ -49,7 +49,7 @@
             The chapters 17 and 18 from <em>Le avventure di Pinocchio.<br/>
             Storia di un burattino</em> (1883) from Carlo Collodi are told<br/>
             in the English translation, in form 
-            of a book, a comic, a film and a video game. 
+            of a book, a comic, an audiobook and a video game. 
           </p>
         </div>
         <div class="card">
@@ -93,7 +93,7 @@
 
         <a class="level-card" id="levelCard3" href="html/level_3.html">
           <span class="level-tag">Level 3</span>
-          <h3>The Film</h3>
+          <h3>The Audiobook</h3>
           <p>Coming soon</p>
           <span class="level-status" id="levelStatus3">Locked</span>
         </a>
@@ -231,7 +231,7 @@
         localStorage.getItem("pinocchio_level4Completed") === "true"
       ];
 
-      const BUILT_LEVELS = 2; // levels 3+4 have no page yet, so dev mode can't unlock those
+      const BUILT_LEVELS = 3; // level 4 has no page yet, so dev mode can't unlock that one
 
       for (let i = 1; i <= 4; i++) {
         const card   = document.getElementById("levelCard" + i);
@@ -268,9 +268,9 @@
       const heroBtn = document.getElementById("startGameBtn");
       const levels = [
         { id: 1, completed: localStorage.getItem("pinocchio_level1Completed") === "true", href: "html/level_1.html", label: "Level 1: The Book" },
-        { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "html/level_2.html", label: "Level 2: The Comic" }
+        { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "html/level_2.html", label: "Level 2: The Comic" },        
+        { id: 3, completed: localStorage.getItem("pinocchio_level3.Completed") == "true", href: "html/level_3.html", label: "Level 3: The Audiobook" }
         /* Einfügen, wenn vorhanden!!!
-        { id: 3, completed: localStorage.getItem("pinocchio_level3.Completed") == "true", href: "html/level_3.html", label: "Level 3: The Film" },
         { id: 4, completed: localStorage.getItem("pinocchio_level4Completed") == "true", href:"html/level_4.html", label: "Level 4: The Video Game"}*/
       ];
 

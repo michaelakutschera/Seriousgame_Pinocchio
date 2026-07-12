@@ -1,0 +1,152 @@
+/* =========================================================
+level3.css  —  "The Audiobook"
+
+Overlays (start/pause/finish/done) and the shared decision-box
+UI (word checkpoints) are styled globally in style.css, so every
+level & quiz page looks the same.
+========================================================= */
+
+/* ---------------------------------------------------------
+Chapter heading — above the audio stage
+--------------------------------------------------------- */
+.chapter-heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chapter-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.chapter-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0 0 6px;
+  color: var(--forest);
+}
+
+/* ---------------------------------------------------------
+   Audio stage — the whole card holding player, progress,
+   checkpoints and transcript toggle
+   --------------------------------------------------------- */
+.audio-stage {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.audio-visual {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,162,39,.18) 0%, rgba(201,162,39,.05) 70%);
+  border: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audio-note {
+  font-size: 2.4rem;
+  color: var(--gold);
+}
+
+.audio-caption {
+  font-family: var(--font-body);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin: 0 0 22px;
+}
+
+.audio-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.audio-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: #e2dcc8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.audio-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--forest);
+  transition: width 0.25s linear;
+}
+
+.audio-time {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  min-width: 84px;
+  text-align: right;
+}
+
+/* ---------------------------------------------------------
+   Checkpoint zone — holds the decision-box (word checkpoint,
+   styled in style.css) while a checkpoint is active
+   --------------------------------------------------------- */
+.checkpoint-zone {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.checkpoint-zone .decision-box {
+  width: 100%;
+  text-align: left;
+}
+
+/* ---------------------------------------------------------
+   Transcript toggle + panel
+   --------------------------------------------------------- */
+.transcript-toggle {
+  margin-top: 6px;
+}
+
+.transcript-panel {
+  margin-top: 16px;
+  max-height: 320px;
+  overflow-y: auto;
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--paper-dark);
+  border-radius: 6px;
+  padding: 16px 18px;
+  font-family: var(--font-book);
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.transcript-panel.hidden { display: none; }
+
+.transcript-line {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 500px) {
+  .audio-stage { padding: 26px 18px; }
+}

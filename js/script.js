@@ -19,11 +19,10 @@ const DEV_MODE = true; /*Dev-Mode beenden --> FALSE setzen*/
 
 const HUMANITY_KEY = "pinocchio_totalHumanity";
 
-/**
- * Approximate maximum humanity obtainable per level (puzzle + evaluation).
- * Levels 2-4 are not built yet, but this constant is used by the
- * index page to explain the ending logic and can be reused later.
- */
+
+ /* Approximate maximum humanity obtainable per level (puzzle + evaluation).
+ * Levels 3-4 are not built yet, but this constant is used by the
+ * index page to explain the ending logic and can be reused later.*/
 const HUMANITY_MAX_PER_LEVEL = 70;
 const TOTAL_LEVELS = 4;
 const HUMANITY_MAX = HUMANITY_MAX_PER_LEVEL * TOTAL_LEVELS; // 280
