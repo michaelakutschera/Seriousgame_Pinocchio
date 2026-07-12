@@ -5,16 +5,18 @@
    ========================================================= */
 
 :root {
-  /* -- Palette: forest green + Pinocchio gold -- */
-  --paper:        #f4f1e3;   /* warm, faintly sage-tinted paper */
-  --paper-dark:   #e2e4cf;
-  --ink:          #21281f;   /* near-black, slightly green ink */
-  --ink-soft:     #51604c;
-  --wood:         #3f6b4f;   /* mid forest green */
-  --wood-dark:    #9f570e;   /* brown */
-  --gold:         #c9a227;   /* wax-seal / marionette gold */
-  --thread:       #c9a227;   /* signature thread, now gold */
-  --success:      #4f7942;
+  /* -- Palette: warm wood/brown primary + Pinocchio gold accent.
+     Forest green (--wood) is reserved for the in-game pause/finish
+     overlays (level1.css / level2.css) and used nowhere else. -- */
+  --paper:        #f6efe0;   /* warm cream paper, neutral (no green tint) */
+  --paper-dark:   #ead9bd;
+  --ink:          #2b2420;   /* warm near-black ink */
+  --ink-soft:     #6b5d4d;   /* warm taupe for secondary text */
+  --wood:         #3f6b4f;   /* dark forest green -- overlays only */
+  --wood-dark:    #7a4a17;   /* primary brand brown (header, footer, headings, links) */
+  --gold:         #c9a227;   /* wax-seal / marionette gold -- buttons, badges, borders only */
+  --thread:       #7a4a17;   /* small-caps label accent -- brown, gold fails contrast on paper */
+  --success:      #3d6636;
   --error:        #a33d3d;
 
   /* -- Type -- */
@@ -62,14 +64,13 @@ h1, h2, h3, h4 {
   gap: 12px;
   flex-wrap: wrap;
   background: var(--wood-dark);
-  color: var(--paper);
   padding: 10px 20px;
   box-shadow: var(--shadow-soft);
 }
 
 .top-bar .game-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   color: var(--paper);
   margin: 0;
   white-space: nowrap;
@@ -78,11 +79,11 @@ h1, h2, h3, h4 {
 .top-bar .game-title small {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--paper);
 }
 
 .top-bar-controls {
@@ -105,7 +106,6 @@ h1, h2, h3, h4 {
   border: 2px solid transparent;
   cursor: pointer;
   transition: transform 0.08s ease, background 0.15s ease, color 0.15s ease;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -136,7 +136,7 @@ h1, h2, h3, h4 {
 
 .btn-danger {
   background: transparent;
-  color: var(--thread);
+  color: var(--paper);
   border-color: var(--thread);
 }
 .btn-danger:hover { background: rgba(178, 59, 59, 0.1); }
@@ -149,27 +149,24 @@ h1, h2, h3, h4 {
 }
 
 /* =========================================================
-   Status badges (timer, humanity counter)
+   Status badges (Humanity Points)
    ========================================================= */
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(246, 239, 226, 0.1);
-  border: 1px solid rgba(246, 239, 226, 0.35);
-  color: var(--paper);
+  border: 2px solid transparent;
   white-space: nowrap;
 }
 
 .badge-gold {
-  background: rgba(201, 152, 46, 0.18);
   border-color: var(--gold);
-  color: var(--gold);
+  color: var(--paper);
 }
 
 .badge-icon { font-size: 1rem; }
@@ -202,7 +199,7 @@ h1, h2, h3, h4 {
 }
 
 .hero h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.3rem);
   margin: 0 0 14px;
 }
 
@@ -220,29 +217,6 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-/* string / thread divider — signature motif */
-.thread-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin: 46px 0 30px;
-  color: var(--thread);
-}
-.thread-divider::before,
-.thread-divider::after {
-  content: "";
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(to var(--dir, right), transparent, var(--thread) 50%, transparent);
-  max-width: 220px;
-}
-.thread-divider span {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-}
-
 section.block {
   margin: 50px 0;
 }
@@ -257,16 +231,6 @@ section.block h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 22px;
-}
-
-.three-col {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-@media (max-width: 700px) {
-  .three-col { grid-template-columns: 1fr; }
 }
 
 .card-full {
@@ -345,77 +309,16 @@ section.block h2 {
   gap: 10px;
   min-height: 230px;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
-
-.level-card.is-active {
-  border-color: var(--gold);
-}
-
-.level-card.is-active:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-
-.level-card .level-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--thread);
-  font-weight: 700;
-}
-
-.level-card .swatch {
-  width: 100%;
-  height: 64px;
-  border-radius: 6px;
-  margin-bottom: 4px;
-}
-
-.swatch.book   { background: repeating-linear-gradient(135deg, #2c2420 0 6px, #f6efe2 6px 12px); }
-.swatch.comic  { background: linear-gradient(135deg, #ffffff 0%, #ffffff 49%, #e8462e 50%, #2c2420 100%); }
-.swatch.film   { background: radial-gradient(circle at 30% 30%, #fcefc7 0%, #2c2420 70%); }
-.swatch.game   { background: repeating-conic-gradient(#3f9b5f 0% 25%, #2c2420 0% 50%) 0 0/16px 16px; }
 
 .level-card p {
   font-size: 0.92rem;
   color: var(--ink-soft);
   margin: 0;
   flex-grow: 1;
-}
-
-.level-card .level-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 6px;
-}
-
-.tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-}
-
-.tag-open {
-  background: rgba(79, 121, 66, 0.15);
-  color: var(--success);
-}
-
-.tag-locked {
-  background: rgba(87, 74, 62, 0.12);
-  color: var(--ink-soft);
-}
-
-/* ---------------------------------------------------------
-   Level cards as links (index page overview)
-   --------------------------------------------------------- */
-.level-card {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
 }
 
 .level-card .level-tag {
@@ -437,34 +340,6 @@ section.block h2 {
   color: var(--success);
 }
 
-/* unlocked, playable card */
-.level-card.unlocked {
-  border-color: var(--gold);
-}
-.level-card.unlocked:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-}
-
-/* completed card */
-.level-card.completed .level-status {
-  color: var(--wood-dark);
-}
-.level-card.completed {
-  border-color: var(--success);
-}
-
-/* locked card -> not clickable, greyed out */
-.level-card.locked {
-  opacity: 0.55;
-  cursor: default;
-  pointer-events: none;
-}
-.level-card.locked .level-status {
-  color: var(--ink-soft);
-  font-weight: 600;
-}
-
 /* =========================================================
    Footer
    ========================================================= */
@@ -481,7 +356,7 @@ section.block h2 {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.5rem;
-  max-width: 1200px; /* <- HIER war der Fehler: 120px statt 1200px! */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
