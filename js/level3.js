@@ -36,7 +36,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp2", time: 116.1,
+    id: "cp2", time: 116.2,
     prompt: "Which word did you just hear?",
     options: [
       { text: "gold pieces", correct: true },
@@ -45,7 +45,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp3", time: 157.24,
+    id: "cp3", time: 157.10,
     prompt: "Which word did you just hear?",
     options: [
       { text: "noses", correct: true },
@@ -63,7 +63,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp5", time: 198.18,
+    id: "cp5", time: 198.9,
     prompt: "Which word did you just hear?",
     options: [
       { text: "Woodpeckers", correct: true },
@@ -76,51 +76,46 @@ const CHECKPOINT_POINTS  = 10;
 /* ---------------------------------------------------------
    Transcript, one caption line at a time.
 
-   `time` = the exact second (into the recording) at which this
-   line starts being spoken. These are manual, hand-picked
-   values so a line stays on screen exactly as long as it actually takes
-   to say it.
-
-   To re-sync: play the recording and, for each line, note the
-   moment (in seconds) it starts being spoken, then update
-   `time` below. A line's display window runs from its own
-   `time` up to the next line's `time`, so splitting a line in
-   two just means giving the second half its own, later `time`.
+   `time` = the moment (into the recording) at which this line
+   starts being spoken, written as "m:ss" or "m:ss.s".
    --------------------------------------------------------- */
+function T(mmss) {
+  const [m, s] = String(mmss).split(":");
+  return Number(m) * 60 + Number(s);
+}
+
 const transcriptLines = [
-  { time: 0.0,   text: "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes." },
-  { time: 5.2,   text: "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:" },
-  { time: 10.2,  text: "“Come here now and tell me how it came about that you found yourself in the hands of the Assassins.”" },
-  { time: 15.2,  text: "“It happened that Fire-Eater gave me five gold pieces to give to my Father, but on the way, I met a Fox and a Cat, who asked me,"}, 
-  { time: 23.7,  text: "‘Do you want the five pieces to become two thousand?’ And I said, ‘Yes.’ And they said, ‘Come with us to the Field of Wonders.’ And I said, ‘Let’s go.’"},
-  { time: 32.3,  text: "Then they said, ‘Let us stop at the Inn of the Red Lobster for dinner and after midnight we’ll set out again.’ We ate and went to sleep. When I awoke"},
-  { time: 41.3,  text: "they were gone and I started out in the darkness all alone. On the road I met two Assassins dressed in black coal sacks, who said to me,"},
-  { time: 49.8,  text: "‘Your money or your life!’ and I said, ‘I haven’t any money’; for, you see, I had put the money under my tongue. One of them tried to put"},
-  { time: 53.9,  text: "his hand in my mouth and I bit it off and spat it out; but it wasn’t a hand, it was a cat’s paw. And they ran after me and I ran and ran,"},
-  { time: 68.2,  text: "till at last they caught me and tied my neck with a rope and hanged me to a tree, saying, ‘Tomorrow we’ll come back for you and you’ll be"},
-  { time: 75.5,  text: "dead and your mouth will be open, and then we’ll take the gold pieces that you have hidden under your tongue.’”"},
-  { time: 84.0,  text: "“Where are the gold pieces now?” the Fairy asked." },
-  { time: 87.3,  text: "“I lost them,” answered Pinocchio, but he told a lie, for he had them in his pocket." },
-  { time: 91.0,  text: "As he spoke, his nose, long though it was, became at least two inches longer." },
-  { time: 96.5,  text: "“And where did you lose them?” “In the wood near by.”" },
-  { time: 99.7,  text: "At this second lie, his nose grew a few more inches." },
-  { time: 102.8, text: "“If you lost them in the near-by wood,” said the Fairy, “we’ll look for them and find them, for everything that is lost there is always found.”" },
-  { time: 110.2, text: "“Ah, now I remember,” replied the Marionette, becoming more and more confused. “I did not lose the gold pieces, but I swallowed them when I drank the medicine.”" },
-  { time: 119.0, text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. If he turned to the right, he knocked"},
-  { time: 128.0, text: "it against the bed or into the windowpanes; if he turned to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy’s eyes out."},
-  
-  
-  { time: 1, text: "The Fairy sat looking at him and laughing." },
-
-
-  { time: 142.5, text: "“Why do you laugh?” the Marionette asked her, worried now at the sight of his growing nose. “I am laughing at your lies.” “How do you know I am lying?”" },
-  { time: 151.5, text: "“Lies, my boy, are known in a moment. There are two kinds of lies, lies with short legs and lies with long noses. Yours, just now, happen to have long noses.”" },
-  { time: 160.8, text: "Pinocchio, not knowing where to hide his shame, tried to escape from the room, but his nose had become so long that he could not get it out of the door." },
-  { time: 170.1, text: "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. No matter how he tried, it would not go through the door." },
-  { time: 179.1, text: "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, so that he would stop telling lies, the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes half out of his head from terror, she began to feel sorry for him and clapped her hands together." },
-  { time: 197.8, text: "A thousand woodpeckers flew in through the window and settled themselves on Pinocchio’s nose. They pecked and pecked so hard at that enormous nose that in a few moments, it was the same size as before." },
-  { time: 208.6, text: "“How good you are, my Fairy,” said Pinocchio, drying his eyes, “and how much I love you!”" },
-  { time: 213.7, text: "“I love you, too,” answered the Fairy, “and if you wish to stay with me, you may be my little brother and I’ll be your good little sister.”" }
+  { time: T("0:00"),    text: "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes." },
+  { time: T("0:05.2"),  text: "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:" },
+  { time: T("0:10.2"),  text: "“Come here now and tell me how it came about that you found yourself in the hands of the Assassins.”" },
+  { time: T("0:15.2"),  text: "“It happened that Fire-Eater gave me five gold pieces to give to my Father, but on the way, I met a Fox and a Cat, who asked me," },
+  { time: T("0:23.7"),  text: "‘Do you want the five pieces to become two thousand?’ And I said, ‘Yes.’ And they said, ‘Come with us to the Field of Wonders.’ And I said, ‘Let’s go.’" },
+  { time: T("0:32.3"),  text: "Then they said, ‘Let us stop at the Inn of the Red Lobster for dinner and after midnight we’ll set out again.’ We ate and went to sleep. When I awoke" },
+  { time: T("0:41.3"),  text: "they were gone and I started out in the darkness all alone. On the road I met two Assassins dressed in black coal sacks, who said to me," },
+  { time: T("0:49.8"),  text: "‘Your money or your life!’ and I said, ‘I haven’t any money’; for, you see, I had put the money under my tongue. One of them tried to put" },
+  { time: T("0:57.9"),  text: "his hand in my mouth and I bit it off and spat it out; but it wasn’t a hand, it was a cat’s paw. And they ran after me and I ran and ran," },
+  { time: T("1:08.2"),  text: "till at last they caught me and tied my neck with a rope and hanged me to a tree, saying, ‘Tomorrow we’ll come back for you and you’ll be" },
+  { time: T("1:15.5"),  text: "dead and your mouth will be open, and then we’ll take the gold pieces that you have hidden under your tongue.’”" },
+  { time: T("1:24"),    text: "“Where are the gold pieces now?” the Fairy asked." },
+  { time: T("1:27"),    text: "“I lost them,” answered Pinocchio, but he told a lie, for he had them in his pocket." },
+  { time: T("1:31"),    text: "As he spoke, his nose, long though it was, became at least two inches longer." },
+  { time: T("1:36.6"),  text: "“And where did you lose them?” “In the wood near by.”" },
+  { time: T("1:39.7"),  text: "At this second lie, his nose grew a few more inches." },
+  { time: T("1:42.8"),  text: "“If you lost them in the near-by wood,” said the Fairy, “we’ll look for them and find them, for everything that is lost there is always found.”" },
+  { time: T("1:50.2"),  text: "“Ah, now I remember,” replied the Marionette, becoming more and more confused. “I did not lose the gold pieces, but I swallowed them when I drank the medicine.”" },
+  { time: T("1:59"),    text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. If he turned to the right, he knocked" },
+  { time: T("2:06.6"),  text: "it against the bed or into the windowpanes; if he turned to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy’s eyes out." },
+  { time: T("2:18"),    text: "The Fairy sat looking at him and laughing." },
+  { time: T("2:20.1"),  text: "“Why do you laugh?” the Marionette asked her, worried now at the sight of his growing nose. “I am laughing at your lies.” “How do you know I am lying?”" },
+  { time: T("2:28.5"),  text: "“Lies, my boy, are known in a moment. There are two kinds of lies, lies with short legs and lies with long noses. Yours, just now, happen to have long noses.”" },
+  { time: T("2:40.8"),  text: "Pinocchio, not knowing where to hide his shame, tried to escape from the room, but his nose had become so long that he could not get it out of the door." },
+  { time: T("2:49.7"),  text: "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. No matter how he tried, it would not go through the door." },
+  { time: T("2:57.3"),  text: "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, so that he would stop telling lies, the worst habit any boy may acquire." },
+  { time: T("3:07.7"),  text: "But when she saw him, pale with fright and with his eyes half out of his head from terror, she began to feel sorry for him and clapped her hands together." },
+  { time: T("3:17"),    text: "A thousand woodpeckers flew in through the window and settled themselves on Pinocchio’s nose. They pecked and pecked so hard at that enormous nose" },
+  { time: T("3:26.3"),  text: "that in a few moments, it was the same size as before." },
+  { time: T("3:29"),    text: "“How good you are, my Fairy,” said Pinocchio, drying his eyes, “and how much I love you!”" },
+  { time: T("3:34.2"),  text: "“I love you, too,” answered the Fairy, “and if you wish to stay with me, you may be my little brother and I’ll be your good little sister.”" }
 ];
 
 /* ---------------------------------------------------------
