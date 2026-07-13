@@ -4,14 +4,10 @@
    One continuous audio recording of the same chapter as Level 1.
    The recording just plays, in real time, once.
 
-   At six moments (the same six story beats as Level 1's blanks)
-   the recording pauses and asks which single word you just
-   heard, with only DECISION_SECONDS to answer — much shorter
-   than Level 1's 30s, because you can't reread a sentence you
-   just listened to.
+   At six moments the recording pauses and asks which single word you just
+   heard, with only 5 seconds to answer.
 
-   Scoring: 10 Humanity per correct checkpoint (max 60), same
-   budget as Level 1's six blanks.
+   Scoring: 10 Humanity per correct checkpoint (max. 60).
    ========================================================= */
 
 const DECISION_SECONDS   = 5;
@@ -20,99 +16,121 @@ const CHECKPOINT_POINTS  = 10;
 /* ---------------------------------------------------------
    Checkpoint definitions.
    --------------------------------------------------------- */
-/* Ändern der time, Ändern der Antworten/Auswahlmöglichkeiten*/
-   const checkpoints = [
+  const checkpoints = [
   {
-    id: "cp0", time: 30,
+    id: "cp0", time: 46.75,
     prompt: "Which word did you just hear?",
     options: [
       { text: "Assassins", correct: true },
-      { text: "Puppeteers", correct: false },
-      { text: "Fishermen", correct: false }
+      { text: "Partisans", correct: false },
+      { text: "Artisans", correct: false }
     ]
   },
   {
-    id: "cp1", time: 65,
+    id: "cp1", time: 95.3,
     prompt: "Which word did you just hear?",
     options: [
-      { text: "Longer", correct: true },
-      { text: "Shorter", correct: false },
-      { text: "Wider", correct: false }
+      { text: "inches", correct: true },
+      { text: "itches", correct: false },
+      { text: "stitches", correct: false }
     ]
   },
   {
-    id: "cp2", time: 100,
+    id: "cp2", time: 116.1,
     prompt: "Which word did you just hear?",
     options: [
-      { text: "Wood", correct: true },
-      { text: "Town", correct: false },
-      { text: "River", correct: false }
+      { text: "gold pieces", correct: true },
+      { text: "gold peace", correct: false },
+      { text: "gold creases", correct: false }
     ]
   },
   {
-    id: "cp3", time: 135,
+    id: "cp3", time: 157.24,
     prompt: "Which word did you just hear?",
     options: [
-      { text: "Medicine", correct: true },
-      { text: "Water", correct: false },
-      { text: "Soup", correct: false }
+      { text: "noses", correct: true },
+      { text: "roses", correct: false },
+      { text: "doses", correct: false }
     ]
   },
   {
-    id: "cp4", time: 170,
+    id: "cp4", time: 182.745,
     prompt: "Which word did you just hear?",
     options: [
-      { text: "Noses", correct: true },
-      { text: "Ears", correct: false },
-      { text: "Tails", correct: false }
+      { text: "good lesson", correct: true },
+      { text: "good blessing", correct: false },
+      { text: "good reason", correct: false }
     ]
   },
   {
-    id: "cp5", time: 200,
+    id: "cp5", time: 198.18,
     prompt: "Which word did you just hear?",
     options: [
       { text: "Woodpeckers", correct: true },
-      { text: "Sparrows", correct: false },
-      { text: "Butterflies", correct: false }
+      { text: "Would pick her", correct: false },
+      { text: "Wood pickers", correct: false }
     ]
   }
 ];
 
 /* ---------------------------------------------------------
    Transcript, one caption line at a time.
+
+   `time` = the exact second (into the recording) at which this
+   line starts being spoken. These are manual, hand-picked
+   values so a line stays on screen exactly as long as it actually takes
+   to say it.
+
+   To re-sync: play the recording and, for each line, note the
+   moment (in seconds) it starts being spoken, then update
+   `time` below. A line's display window runs from its own
+   `time` up to the next line's `time`, so splitting a line in
+   two just means giving the second half its own, later `time`.
    --------------------------------------------------------- */
-/*Transkript richtig anpassen.*/
-   const transcriptLines = [
-  "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes.",
-  "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:",
-  "“Come here now and tell me how it came about that you found yourself in the hands of the Assassins.”",
-  "“It happened that Fire-Eater gave me five gold pieces to give to my Father, but on the way, I met a Fox and a Cat, who asked me, ‘Do you want the five pieces to become two thousand?’ And I said, ‘Yes.’ And they said, ‘Come with us to the Field of Wonders.’ And I said, ‘Let’s go.’ Then they said, ‘Let us stop at the Inn of the Red Lobster for dinner and after midnight we’ll set out again.’ We ate and went to sleep. When I awoke they were gone and I started out in the darkness all alone.",
-  "On the road I met two Assassins dressed in black coal sacks, who said to me, ‘Your money or your life!’ and I said, ‘I haven’t any money’; for, you see, I had put the money under my tongue. One of them tried to put his hand in my mouth and I bit it off and spat it out; but it wasn’t a hand, it was a cat’s paw.",
-  "And they ran after me and I ran and ran, till at last they caught me and tied my neck with a rope and hanged me to a tree, saying, ‘Tomorrow we’ll come back for you and you’ll be dead and your mouth will be open, and then we’ll take the gold pieces that you have hidden under your tongue.’”",
-  "“Where are the gold pieces now?” the Fairy asked.",
-  "“I lost them,” answered Pinocchio, but he told a lie, for he had them in his pocket.",
-  "As he spoke, his nose, long though it was, became at least two inches longer.",
-  "“And where did you lose them?” “In the wood near by.”",
-  "At this second lie, his nose grew a few more inches.",
-  "“If you lost them in the near-by wood,” said the Fairy, “we’ll look for them and find them, for everything that is lost there is always found.”",
-  "“Ah, now I remember,” replied the Marionette, becoming more and more confused. “I did not lose the gold pieces, but I swallowed them when I drank the medicine.”",
-  "At this third lie, his nose became longer than ever, so long that he could not even turn around. If he turned to the right, he knocked it against the bed or into the windowpanes; if he turned to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy’s eyes out.",
-  "The Fairy sat looking at him and laughing.",
-  "“Why do you laugh?” the Marionette asked her, worried now at the sight of his growing nose. “I am laughing at your lies.” “How do you know I am lying?”",
-  "“Lies, my boy, are known in a moment. There are two kinds of lies, lies with short legs and lies with long noses. Yours, just now, happen to have long noses.”",
-  "Pinocchio, not knowing where to hide his shame, tried to escape from the room, but his nose had become so long that he could not get it out of the door.",
-  "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. No matter how he tried, it would not go through the door.",
-  "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, so that he would stop telling lies, the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes half out of his head from terror, she began to feel sorry for him and clapped her hands together.",
-  "A thousand woodpeckers flew in through the window and settled themselves on Pinocchio’s nose. They pecked and pecked so hard at that enormous nose that in a few moments, it was the same size as before.",
-  "“How good you are, my Fairy,” said Pinocchio, drying his eyes, “and how much I love you!”",
-  "“I love you, too,” answered the Fairy, “and if you wish to stay with me, you may be my little brother and I’ll be your good little sister.”"
+const transcriptLines = [
+  { time: 0.0,   text: "In a twinkling, Pinocchio felt fine. With one leap he was out of bed and into his clothes." },
+  { time: 5.2,   text: "The Fairy, seeing him run and jump around the room gay as a bird on wing, said to him:" },
+  { time: 10.2,  text: "“Come here now and tell me how it came about that you found yourself in the hands of the Assassins.”" },
+  { time: 15.2,  text: "“It happened that Fire-Eater gave me five gold pieces to give to my Father, but on the way, I met a Fox and a Cat, who asked me,"}, 
+  { time: 23.7,  text: "‘Do you want the five pieces to become two thousand?’ And I said, ‘Yes.’ And they said, ‘Come with us to the Field of Wonders.’ And I said, ‘Let’s go.’"},
+  { time: 32.3,  text: "Then they said, ‘Let us stop at the Inn of the Red Lobster for dinner and after midnight we’ll set out again.’ We ate and went to sleep. When I awoke"},
+  { time: 41.3,  text: "they were gone and I started out in the darkness all alone. On the road I met two Assassins dressed in black coal sacks, who said to me,"},
+  { time: 49.8,  text: "‘Your money or your life!’ and I said, ‘I haven’t any money’; for, you see, I had put the money under my tongue. One of them tried to put"},
+  { time: 53.9,  text: "his hand in my mouth and I bit it off and spat it out; but it wasn’t a hand, it was a cat’s paw. And they ran after me and I ran and ran,"},
+  { time: 68.2,  text: "till at last they caught me and tied my neck with a rope and hanged me to a tree, saying, ‘Tomorrow we’ll come back for you and you’ll be"},
+  { time: 75.5,  text: "dead and your mouth will be open, and then we’ll take the gold pieces that you have hidden under your tongue.’”"},
+  { time: 84.0,  text: "“Where are the gold pieces now?” the Fairy asked." },
+  { time: 87.3,  text: "“I lost them,” answered Pinocchio, but he told a lie, for he had them in his pocket." },
+  { time: 91.0,  text: "As he spoke, his nose, long though it was, became at least two inches longer." },
+  { time: 96.5,  text: "“And where did you lose them?” “In the wood near by.”" },
+  { time: 99.7,  text: "At this second lie, his nose grew a few more inches." },
+  { time: 102.8, text: "“If you lost them in the near-by wood,” said the Fairy, “we’ll look for them and find them, for everything that is lost there is always found.”" },
+  { time: 110.2, text: "“Ah, now I remember,” replied the Marionette, becoming more and more confused. “I did not lose the gold pieces, but I swallowed them when I drank the medicine.”" },
+  { time: 119.0, text: "At this third lie, his nose became longer than ever, so long that he could not even turn around. If he turned to the right, he knocked"},
+  { time: 128.0, text: "it against the bed or into the windowpanes; if he turned to the left, he struck the walls or the door; if he raised it a bit, he almost put the Fairy’s eyes out."},
+  
+  
+  { time: 1, text: "The Fairy sat looking at him and laughing." },
+
+
+  { time: 142.5, text: "“Why do you laugh?” the Marionette asked her, worried now at the sight of his growing nose. “I am laughing at your lies.” “How do you know I am lying?”" },
+  { time: 151.5, text: "“Lies, my boy, are known in a moment. There are two kinds of lies, lies with short legs and lies with long noses. Yours, just now, happen to have long noses.”" },
+  { time: 160.8, text: "Pinocchio, not knowing where to hide his shame, tried to escape from the room, but his nose had become so long that he could not get it out of the door." },
+  { time: 170.1, text: "Crying as if his heart would break, the Marionette mourned for hours over the length of his nose. No matter how he tried, it would not go through the door." },
+  { time: 179.1, text: "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, so that he would stop telling lies, the worst habit any boy may acquire. But when she saw him, pale with fright and with his eyes half out of his head from terror, she began to feel sorry for him and clapped her hands together." },
+  { time: 197.8, text: "A thousand woodpeckers flew in through the window and settled themselves on Pinocchio’s nose. They pecked and pecked so hard at that enormous nose that in a few moments, it was the same size as before." },
+  { time: 208.6, text: "“How good you are, my Fairy,” said Pinocchio, drying his eyes, “and how much I love you!”" },
+  { time: 213.7, text: "“I love you, too,” answered the Fairy, “and if you wish to stay with me, you may be my little brother and I’ll be your good little sister.”" }
 ];
 
 /* ---------------------------------------------------------
    DOM
    --------------------------------------------------------- */
 const audio             = document.getElementById("levelAudio");
+const progressBar       = document.getElementById("audioProgressBar");
 const progressFill      = document.getElementById("audioProgressFill");
+const progressThumb     = document.getElementById("audioProgressThumb");
+const devPlayPauseBtn   = document.getElementById("devPlayPauseBtn");
 const timeLabel         = document.getElementById("audioTime");
 const checkpointZone    = document.getElementById("checkpointZone");
 const transcriptToggle  = document.getElementById("transcriptToggleBtn");
@@ -181,6 +199,7 @@ function updateProgressUI() {
   const dur = audio.duration || 0;
   const pct = dur ? (audio.currentTime / dur) * 100 : 0;
   progressFill.style.width = pct + "%";
+  progressThumb.style.left = pct + "%";
   timeLabel.textContent = formatTime(audio.currentTime) + " / " + formatTime(dur);
 }
 
@@ -189,17 +208,13 @@ function updateProgressUI() {
    --------------------------------------------------------- */
 function buildTranscriptBoundaries() {
   const dur = audio.duration;
-  if (!dur || !isFinite(dur)) return;
 
-  const wordCounts = transcriptLines.map(line => line.split(/\s+/).filter(Boolean).length);
-  const totalWords = wordCounts.reduce((sum, n) => sum + n, 0);
-
-  let wordsSoFar = 0;
-  transcriptBoundaries = transcriptLines.map((text, i) => {
-    const start = (wordsSoFar / totalWords) * dur;
-    wordsSoFar += wordCounts[i];
-    const end = (wordsSoFar / totalWords) * dur;
-    return { text, start, end };
+  transcriptBoundaries = transcriptLines.map((line, i) => {
+    const start = line.time;
+    const end = i + 1 < transcriptLines.length
+      ? transcriptLines[i + 1].time
+      : (isFinite(dur) ? dur : Infinity);
+    return { text: line.text, start, end };
   });
 }
 
@@ -271,15 +286,10 @@ function activateCheckpoint(cp) {
     if (activeCountdownId) clearInterval(activeCountdownId);
     activeCountdownId = null;
 
-    const correctChoice = cp.options.find(o => o.correct);
     const isCorrect = !!(chosen && chosen.correct);
 
     buttons.forEach(b => (b.disabled = true));
     if (chosenBtn) chosenBtn.classList.add(isCorrect ? "chosen-correct" : "chosen-incorrect");
-    if (!isCorrect) {
-      const ci = choices.indexOf(correctChoice);
-      if (buttons[ci]) buttons[ci].classList.add("chosen-correct");
-    }
 
     if (isCorrect) { puzzleScore += CHECKPOINT_POINTS; correctCount++; }
     answers[cp.id] = { isCorrect };
@@ -391,6 +401,60 @@ transcriptToggle.addEventListener("click", () => {
   const isHidden = transcriptPanel.classList.toggle("hidden");
   transcriptToggle.textContent = isHidden ? "Show Transcript" : "Hide Transcript";
 });
+
+/* ---------------------------------------------------------
+   Dev-only scrubbing — drag the progress bar like a music-app
+   seek bar, to jump around and test transcript timing and
+   checkpoints without waiting through the whole track.
+   --------------------------------------------------------- */
+if (DEV_MODE) {
+  progressBar.classList.add("dev-scrubbable");
+  progressThumb.classList.remove("hidden");
+
+  let scrubbing = false;
+
+  function timeFromPointer(e) {
+    const dur = isFinite(audio.duration) ? audio.duration : 0;
+    const rect = progressBar.getBoundingClientRect();
+    const ratio = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
+    return ratio * dur;
+  }
+
+  function scrubToPointer(e) {
+    audio.currentTime = timeFromPointer(e);
+    updateProgressUI();
+    updateTranscriptLine();
+  }
+
+  progressBar.addEventListener("pointerdown", (e) => {
+    scrubbing = true;
+    progressBar.classList.add("dragging");
+    progressBar.setPointerCapture(e.pointerId);
+    scrubToPointer(e);
+  });
+
+  progressBar.addEventListener("pointermove", (e) => {
+    if (scrubbing) scrubToPointer(e);
+  });
+
+  function stopScrub() {
+    scrubbing = false;
+    progressBar.classList.remove("dragging");
+  }
+  progressBar.addEventListener("pointerup", stopScrub);
+  progressBar.addEventListener("pointercancel", stopScrub);
+
+  /* Dev play/pause — bypasses pauseOverlay, which otherwise covers
+     #audioTime and makes the seconds unreadable while timing lines. */
+  devPlayPauseBtn.classList.remove("hidden");
+  devPlayPauseBtn.textContent = audio.paused ? "Dev: Play" : "Dev: Pause";
+
+  devPlayPauseBtn.addEventListener("click", () => {
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+  audio.addEventListener("play",  () => { devPlayPauseBtn.textContent = "Dev: Pause"; });
+  audio.addEventListener("pause", () => { devPlayPauseBtn.textContent = "Dev: Play"; });
+}
 
 /* ---------------------------------------------------------
    Level already completed - not possible to play it again, without reset.

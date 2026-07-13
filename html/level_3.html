@@ -43,11 +43,19 @@
       <p class="audio-caption">Listen closely. At six moments the recording will pause and ask which word you just heard.</p>
 
       <div class="audio-progress">
-        <div class="audio-progress-bar">
-          <div class="audio-progress-fill" id="audioProgressFill"></div>
+        <!-- In DEV_MODE this bar becomes scrubbable (click/drag) to test transcript timing & checkpoints. -->
+        <div class="audio-progress-bar" id="audioProgressBar">
+          <div class="audio-progress-track">
+            <div class="audio-progress-fill" id="audioProgressFill"></div>
+          </div>
+          <div class="audio-progress-thumb hidden" id="audioProgressThumb"></div>
         </div>
         <span class="audio-time" id="audioTime">0:00 / 0:00</span>
       </div>
+
+      <!-- Dev-only: play/pause without the pause overlay, so the seconds
+           in #audioTime stay readable while timing the transcript. -->
+      <button class="btn btn-light hidden" id="devPlayPauseBtn" type="button">Dev: Pause</button>
 
       <!-- Filled by level3.js with the word decision box at each checkpoint -->
       <div class="checkpoint-zone" id="checkpointZone"></div>
@@ -64,7 +72,7 @@
     </div>
   </main>
 
-    <!-- ============ OVERLAYS ============ -->
+  <!-- ============ OVERLAYS ============ -->
   <!-- ============ LEVELSTART OVERLAY ============ -->
   <div class="overlay" id="startOverlay">
     <div class="overlay-box">

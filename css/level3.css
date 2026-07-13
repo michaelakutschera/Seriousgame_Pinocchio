@@ -77,7 +77,18 @@ Chapter heading — above the audio stage
 }
 
 .audio-progress-bar {
+  position: relative;
   flex: 1;
+  height: 6px;
+  /* Extra invisible padding around the visible track, so the drag
+     hit-area is bigger than the thin bar itself (dev scrub only). */
+  padding: 9px 0;
+  margin: -9px 0;
+}
+
+.audio-progress-bar.dev-scrubbable { cursor: pointer; }
+
+.audio-progress-track {
   height: 6px;
   background: #e2dcc8;
   border-radius: 3px;
@@ -90,6 +101,25 @@ Chapter heading — above the audio stage
   background: var(--forest);
   transition: width 0.25s linear;
 }
+
+.audio-progress-bar.dragging .audio-progress-fill { transition: none; }
+
+.audio-progress-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--forest);
+  border: 2px solid #fffdf8;
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-50%);
+  cursor: grab;
+}
+.audio-progress-thumb:active { cursor: grabbing; }
+.audio-progress-thumb.hidden { display: none; }
 
 .audio-time {
   font-family: var(--font-body);
