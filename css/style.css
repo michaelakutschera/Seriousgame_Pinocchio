@@ -206,10 +206,7 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
-/* Shared page wrapper for level screens that don't need a book/comic
-   layout of their own (currently Level 3's audio stage) — keeps the
-   same breathing room below the top bar and above the footer as
-   .book-stage (level1.css) / .comic-stage (level2.css). */
+/* Shared page wrapper for level screens that don't need a book/comic layout of their own */
 .level-stage {
   max-width: 1400px;
   margin: 0 auto;
@@ -414,7 +411,7 @@ section.block h2 {
 .site-footer p,
 .site-footer a {
   font-size: 0.84rem;
-  color: --pa;
+  color: var(--paper);
   line-height: 1.7;
   margin: 0;
 }

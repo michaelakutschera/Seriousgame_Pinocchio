@@ -171,6 +171,7 @@ Chapter heading — above the audio stage
 .transcript-panel.hidden { display: none; }
 
 .transcript-line {
+  text-align: center;
   margin: 0;
 }
 

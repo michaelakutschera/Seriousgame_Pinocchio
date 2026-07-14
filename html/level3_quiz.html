@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 3 · Evaluation — Pinocchio: One Story, Many Media</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+</head>
+<body class="quiz-body">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="top-bar">
+    <p class="game-title">
+      <em>The Adventures of Pinocchio</em>
+      <small>A Serious Game about one Story told in different Media</small>
+    </p>
+    <div class="top-bar-controls">
+      <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
+      <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
+    </div>
+  </header>
+
+  <main class="quiz-stage">
+    <div class="quiz-card">
+      <h2>Thinking About the Audiobook as a Medium</h2>
+      <p class="quiz-progress" id="progressText">Question 1 of 4</p>
+
+      <div class="quiz-steps">
+        <!-- Question 1 -->
+        <div class="quiz-step active" data-qid="q1">
+            <p class="q-text">1. In level 1 Pinocchio's growing nose was described in words, in level 2 shown as images. How does the audiobook show the same idea?</p>
+            <div class="quiz-options">
+                <button class="option-btn" data-value="a">Through a sound effect, like a creaking or stretching noise, whenever the nose grows.</button>
+                <button class="option-btn" data-value="b">Through a small illustration that appears next to the audio player each time the nose grows.</button>
+                <button class="option-btn" data-value="c">It doesn't show it visually at all. You only hear the narrator describe it, the same way the book does.</button> <!--Correct-->
+
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="quiz-step" data-qid="q2">
+          <p class="q-text">2. When the recording paused and asked you to pick the word you had just heard, what did you rely on most?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">Rewinding the recording to listen again before answering.</button>
+            <button class="option-btn" data-value="b">Your memory of the sentence you had just heard, since the checkpoint only showd word choices.</button><!--Correct-->
+            <button class="option-btn" data-value="c">Guessing at random, since the checkpoint gave no clues about the missing word.</button>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="quiz-step" data-qid="q3">
+          <p class="q-text">3. An audiobook is different because&hellip;</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">... it comes with a searchable transcript, so you can jump straight to any word without listening to the recording.</button>
+            <button class="option-btn" data-value="b">... it is only audiable in one direction and there is no possibility to rewind.</button><!--Correct-->
+            <button class="option-btn" data-value="c">... it is stoppable at any time to answer the checkpoint.</button>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="quiz-step" data-qid="q4">
+          <p class="q-text">4. A book and comic let you read at your own pace, pausing whenever you like. How is listening to the audiobook different?</p>
+          <div class="quiz-options">
+            <button class="option-btn" data-value="a">The recording sets the pace and it keeps moving forward in real time.</button> <!--Correct-->
+            <button class="option-btn" data-value="b">It's exactly the same: you can pause and think for as long as you like at any point.</button>
+            <button class="option-btn" data-value="c">It's always slower than reading, because the rate of speech is not adjustable.</button>
+          </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="quiz-step" data-qid="results">
+          <div class="quiz-results" id="resultsContent">
+            <!-- filled in by quiz.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="quiz-nav" id="quizNav">
+        <button class="btn btn-light" id="prevBtn" type="button">&larr; Previous</button>
+        <button class="btn btn-primary" id="nextBtn" type="button" disabled>Next &rarr;</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-content">
+        <h3>Projcet:</h3>
+        <p>Serious Game: The Adventures of Pinocchio in different Media<br/>
+        136033-1 SE Creating Web Experiences for the Digital Humanities<br/>
+        Summersemester 2026<br/>
+        University Vienna</p>
+        </div>
+        <div class="footer-content">
+          <h3>Contact:</h3>
+          <p> Created: Michaela Kutschera MA<br/>
+              E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
+              &copy; 2026</p>
+        </div>
+        <div class="footer-content">
+          <h3>Source:</h3>
+          <p><em>The Adventures of Pinocchio</em> from Carlo Collodi (1883)<br/>
+            translated by Carol Della Chiesa <br/>  
+            Text: <a href="https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016">https://www.gutenberg.org/files/500/500-h/500-h.htm#link2HCH0016</a></p>
+        </div>
+      </div> 
+    </div>
+  </footer>
+  
+<!-- ============ JS. SCRIPTS ============ -->
+  <script src="../js/script.js"></script>
+  <script src="../js/quiz3.js"></script>
+</body>
+</html>

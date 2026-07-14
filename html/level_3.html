@@ -40,8 +40,6 @@
         <span class="audio-note">&#9835;</span>
       </div>
 
-      <p class="audio-caption">Listen closely. At six moments the recording will pause and ask which word you just heard.</p>
-
       <div class="audio-progress">
         <!-- In DEV_MODE this bar becomes scrubbable (click/drag) to test transcript timing & checkpoints. -->
         <div class="audio-progress-bar" id="audioProgressBar">
@@ -64,8 +62,7 @@
         Show Transcript
       </button>
       <!-- level3.js swaps the text of #transcriptLine to match the
-           current point in the recording — only one line is ever
-           shown at a time, not the full text. -->
+           current point in the recording. -->
       <div class="transcript-panel hidden" id="transcriptPanel">
         <p class="transcript-line" id="transcriptLine">Transcript will appear here once you press Start.</p>
       </div>
@@ -76,8 +73,12 @@
   <!-- ============ LEVELSTART OVERLAY ============ -->
   <div class="overlay" id="startOverlay">
     <div class="overlay-box">
-      <h2>Level 3 – </h2>
-      <p>Comming Soon.</p>
+      <h2>Level 3 – The Audiobook</h2>
+      <p>This chapter is told through an <strong> audio recording</strong> of the book.<br/>
+      At <strong>six moments</strong>, the recording will pause<br/>
+      and ask which word you just heard.<br/>
+      Select the right word within <strong>5 seconds </strong>to continue.<br/>
+      A short evaluation follows at the end of the level.</p>
       <button class="btn btn-primary" id="overlayStartBtn" type="button">&#9654; Start</button>
     </div>
   </div>
@@ -96,7 +97,7 @@
     <div class="overlay-box">
       <h2>Chapter Complete</h2>
       <p id="finishText"></p>
-      <a class="btn btn-primary" id="continueBtn" href="level_3_quiz.html">
+      <a class="btn btn-primary" id="continueBtn" href="level3_quiz.html">
         Continue to Evaluation &rarr;
       </a>
     </div>
@@ -122,7 +123,7 @@
         </div>
         <div class="footer-content">
           <h3>Contact:</h3>
-          <p> Created: Michaela Kutschera BA <br/>
+          <p> Created: Michaela Kutschera MA<br/>
               E-Mail: <a href="a11831654@unet.univie.ac.at">a11831654@unet.univie.ac.at</a><br>
               &copy; 2026</p>
         </div>
