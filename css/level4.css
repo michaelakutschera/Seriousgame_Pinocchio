@@ -1,0 +1,339 @@
+/* =========================================================
+level4.css  —  "Social Media"
+
+Overlays (start/pause/finish/done) and the shared decision-box
+UI (community note + troll-round choices reuse .decision-btn)
+are styled globally in style.css, so every level & quiz page
+looks the same. This file only covers the feed itself.
+========================================================= */
+
+/* ---------------------------------------------------------
+Chapter heading — above the feed stage
+--------------------------------------------------------- */
+.chapter-heading {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.chapter-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.chapter-title {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin: 0 0 6px;
+  color: var(--forest);
+  text-align: center;
+}
+
+/* ---------------------------------------------------------
+   Feed stage / app frame — the "phone" the feed lives in
+   --------------------------------------------------------- */
+.feed-stage {
+  display: flex;
+  justify-content: center;
+}
+
+.feed-app {
+  width: 100%;
+  max-width: 560px;
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-platform-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--forest);
+}
+
+.feed-platform-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--paper);
+  letter-spacing: 0.02em;
+}
+
+.trending-meter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--paper);
+}
+
+.trending-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  opacity: 0.85;
+}
+
+.trending-value {
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.trending-value.bump {
+  animation: trending-bump 0.5s ease;
+}
+
+@keyframes trending-bump {
+  0%   { transform: scale(1);   color: #f0d778; }
+  40%  { transform: scale(1.35); color: #f0d778; }
+  100% { transform: scale(1);   color: var(--gold); }
+}
+
+/* ---------------------------------------------------------
+   Feed list — scrolling column of post/round cards
+   --------------------------------------------------------- */
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+@keyframes feed-item-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.feed-item-in {
+  animation: feed-item-in 0.3s ease both;
+}
+
+/* ---------------------------------------------------------
+   A single post card
+   --------------------------------------------------------- */
+.feed-post {
+  background: var(--paper);
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.feed-reply-context {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.feed-post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.feed-avatar {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.feed-post-names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.feed-post-name {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.feed-post-handle {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+.feed-post-text {
+  font-family: var(--font-book);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0 0 10px;
+  white-space: pre-wrap;
+}
+
+.feed-post-stats {
+  display: flex;
+  gap: 18px;
+}
+
+.feed-stat {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   Round cards — shared frame for all interactive moments
+   --------------------------------------------------------- */
+.feed-round-card {
+  background: #fbf6e8;
+  border: 1.5px dashed var(--gold);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.round-prompt {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--forest);
+  margin: 0 0 12px;
+}
+
+.feed-round-card .feed-post {
+  background: #fffdf8;
+  margin-bottom: 12px;
+}
+
+/* ---------------------------------------------------------
+   ACTION 1 — Sockpuppet round
+   --------------------------------------------------------- */
+.sockpuppet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sockpuppet-account {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  font-family: var(--font-body);
+  background: #fffdf8;
+  border: 1.5px solid #ccc3a8;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color .12s, background .12s;
+}
+
+.sockpuppet-account:hover:not(:disabled) {
+  border-color: var(--gold);
+  background: rgba(201,162,39,.07);
+}
+
+.sockpuppet-handle {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--forest);
+}
+
+.sockpuppet-text {
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.sockpuppet-account:disabled { cursor: default; }
+
+.sockpuppet-account.unmasked {
+  border-color: #4f7942;
+  background: rgba(79,121,66,.16);
+}
+
+.sockpuppet-account.dismissed {
+  border-color: #ccc3a8;
+  background: transparent;
+  opacity: 0.55;
+}
+
+.sockpuppet-reveal {
+  margin-top: 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2f4a28;
+}
+
+/* ---------------------------------------------------------
+   ACTIONS 2-4 — Community Note round
+   --------------------------------------------------------- */
+.note-target-label {
+  font-family: var(--font-book);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  border-left: 3px solid var(--paper-dark);
+  padding-left: 10px;
+  margin: 0 0 12px;
+}
+
+/* ---------------------------------------------------------
+   ACTION 5 — Troll round
+   --------------------------------------------------------- */
+.troll-post {
+  opacity: 0.92;
+}
+
+.troll-post.reported {
+  opacity: 0.5;
+}
+
+.troll-post.reported .feed-post-text::after {
+  content: " (reported)";
+  font-style: italic;
+  font-weight: 700;
+  color: var(--error);
+}
+
+/* ---------------------------------------------------------
+   ACTION 6 — Boost round
+   --------------------------------------------------------- */
+.boost-round {
+  text-align: center;
+}
+
+.boost-btn {
+  margin-top: 4px;
+}
+
+.boost-btn.boosted {
+  background: var(--success);
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 500px) {
+  .feed-platform-bar { padding: 12px 14px; }
+  .feed-list { padding: 12px; max-height: 65vh; }
+  .feed-post, .feed-round-card { padding: 12px; }
+}
