@@ -2,6 +2,39 @@
    level4.js — "Social Media"
    ========================================================= */
 
+
+/* =========================================================
+  Start Overlay: Random selection of four names for the players 
+  social Meida character..
+  ========================================================= */
+   
+  const name = ["Carlo Collodi", "Carol Della Chiesa", "Anton Grumann", "Ulrike Schimming"]
+    function randomName() {
+    const randomIndex = Math.floor(Math.random()*name.length);
+    return name[randomIndex];
+    }
+  const button = document.getElementById("nameButton");
+  const show = document.getElementById("showName");
+  button.addEventListener("click", function() {
+  show.textContent = randomName();
+});
+
+/* =========================================================
+  Start Overlay: Selection of one image for players
+  social Meida character.
+  ========================================================= */
+const selectButtons = document.querySelectorAll(".selectButton");
+
+selectButtons.forEach(function(button) {
+  button.addEventListener("click", function () {
+  selectButtons.forEach(b => b.classList.remove("selected"));
+  button.classList.add("selected");
+  const image = button.querySelector("img");
+  console.log("Selected image:", image.src);
+  console.log("Selected option:", image.alt);
+  });
+});
+
 /* ---------------------------------------------------------
    AUTHORS — every account that can post/reply, in one place.
    "kind" is just for your own orientation - helps you see who's who at a glance.
