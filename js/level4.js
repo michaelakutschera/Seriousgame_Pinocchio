@@ -58,20 +58,20 @@ const authors = {
   pinocchio:    { name: "Pinocchio",        handle: "@wooden_puppet",  avatar: "p", kind: "main character" },
   fairy:        { name: "The Blue Fairy",   handle: "@bluehair_fairy", avatar: "f", kind: "main character" },
   
-  fox:          { name: "Fox",              handle: "@red_fox",        avatar: "fo", kind: "trickster" },
-  cat:          { name: "Cat",              handle: "@black_cat",      avatar: "ca", kind: "trickster" },
-  assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",        avatar: "a1", kind:"assassin"},
-  assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack",avatar: "a2", kind:"assassin"},
+  fox:          { name: "Fox",              handle: "@red_fox",         avatar: "fo", kind: "trickster" },
+  cat:          { name: "Cat",              handle: "@black_cat",       avatar: "ca", kind: "trickster" },
+  assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",          avatar: "a1", kind:"assassin"},
+  assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack", avatar: "a2", kind:"assassin"},
   
   geppetto:     {name: "Geppetto",          handle: "@polendina",        avatar: "g",   kind: "ambient" },
   medoro:       {name: "Medoro",            handle: "@best_coachman",    avatar: "m",   kind: "ambient" },
-  mangiafuoco:  {name:"Mangiafuoco",        handle: "Fire_eater_circus", avatar: "ma",  kind:" ambient"},
+  mangiafuoco:  {name: "Mangiafuoco",        handle: "Fire_eater_circus", avatar: "ma",  kind:" ambient"},
   candlewick:   {name: "Candlewick",        handle:"@thin_candlewick",   avatar:"c",    kind:"ambient"},
   
-  troll_1:      { name: "Little Black Rabbit", handle: "@rabbit4321",            avatar: "r1", kind: "troll" },
-  troll_2:      { name: "Middle Black Rabbit", handle: "@dead_rabbit",           avatar: "r2", kind: "troll"},
-  troll_3:      { name: "Big Black Rabbit", handle: "@eldest_rabbit1234",     avatar: "r3", kind: "troll"},
-  troll_4:      { name: "Grande Black Rabbit", handle: "@black_rabbit_immortal", avatar: "r4", kind: "troll"}
+  troll_1:      { name: "Little Black Rabbit",   handle: "@rabbit4321",               vatar: "R", kind: "troll" },
+  troll_2:      { name: "Middle Black Rabbit",  handle: "@dead_rabbit",               avatar: "R", kind: "troll"},
+  troll_3:      { name: "Big Black Rabbit",     handle: "@eldest_rabbit1234",         avatar: "R", kind: "troll"},
+  troll_4:      { name: "Grande Black Rabbit",  handle: "@black_rabbit_immortal",     avatar: "R", kind: "troll"}
 };
 
 /* ---------------------------------------------------------
@@ -103,14 +103,14 @@ const feedScript = [
     id: "post_thread_1",
     author: "Pinocchio",
     text: "Woke up FINE this morning, out of bed in one leap. Feels good to be alive after last night. #longstory",
-    likes: 56, reposts: 53
+    reach: "high"
   },
   {
     type: "post",
     id: "post_thread_2",
     author: "Pinocchio",
     text: "Short version: Fox & Cat convinced me my 5 gold coins could become 2000 at the Field of Wonders. We never got there. Two guys in coal sacks robbed me instead. Nearly hanged me from a tree. #wonder",
-    likes: 99, reposts: 120
+    reach: "viral"
   },
   {
     type: "post",
@@ -118,7 +118,7 @@ const feedScript = [
     author: "Fox",
     replyTo: "post_thread_2",
     text: "Wow, sounds rough buddy glad you're ok!",
-    likes: 34, reposts: 45
+    reach: "medium"
   },
 
    /* ===================================================
@@ -142,7 +142,7 @@ const feedScript = [
     replyTo: "post_thread_2",
     author: "Medoro",
     text: "The woods are not safe these days...",
-    likes: 44, reposts: 29
+    reach: "low"
   },
   {
     type: "post",
@@ -150,7 +150,7 @@ const feedScript = [
     author: "Cat",
     replyTo: "post_thread_2",
     text: "Terrible what some people do these days. Trust no one. #staysave",
-    likes: 85, reposts: 13
+    reach: "medium"
   },
 
   {
@@ -160,7 +160,7 @@ const feedScript = [
     author: "Geppetto",
     replyTo: "post_thread_2",
     text: "@wooden_puppet, where are you? ARE YOU OKAY? Come home immediately!",
-    likes: 3, reposts: 0
+    reach: "low"
   },
 
   /* ===================================================
@@ -188,7 +188,7 @@ const feedScript = [
     replyTo: "round_sockpuppets",
     author: "Candlewick",
     text: "Can we get for once more inforamtion about the incident? Seems interessting",
-    likes: 21, reposts: 1
+    reach: "low"
   },
   {
     type: "post",
@@ -196,7 +196,7 @@ const feedScript = [
     author: "Medoro",
     replyTo: "post_candlewick",
     text: "@thin_candlewick this is your only concern? What is wrong with you? ",
-    likes: 32, reposts: 7
+    reach: "low"
   },
 
   {
@@ -205,7 +205,7 @@ const feedScript = [
     author: "Mangiafuoco",
     replyTo: "post_thread_2",
     text: "You lost my gold pieces?!",
-    likes: 55, reposts: 43
+    reach: "medium"
   },
 
   {
@@ -214,7 +214,7 @@ const feedScript = [
     author: "Geppetto",
     replyTo: "post_mangiafuoco",
     text: "@Fire_eater_circus That are your only concerns?",
-    likes: 20, reposts: 8
+    reach: "low"
   },
 
   /* ===================================================
@@ -226,7 +226,7 @@ const feedScript = [
     author: "The Blue Fairy",
     replyTo: "post_thread_2",
     text: "Glad you're safe. So – where are the gold pieces now?",
-    likes: 156, reposts: 4
+    reach: "medium"
   },
 
   /* ===================================================
@@ -238,7 +238,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_fairy_question",
     text: "I lost them.",
-    likes: 45, reposts: 0
+    reach: "medium"
   },
 
     /* ===================================================
@@ -266,7 +266,7 @@ const feedScript = [
     author: "Mangiafuoco",
     replyTo: "post_lie_1",
     text: "A puppet who lies this much? Sounds like he'd make a great show. Bring him back to me!",
-    likes: 12, reposts: 2
+    reach: "low"
   },
 
   {
@@ -275,7 +275,7 @@ const feedScript = [
     author: "Geppetto",
     replyTo: "post_lie_1",
     text: "That's my boy... always finding new ways to make his nose grow.",
-    likes: 27, reposts: 1
+    reach: "low"
   },
 
     {
@@ -284,21 +284,21 @@ const feedScript = [
     author: "Fox",
     replyTo: "post_lie_1",
     text: "Funny, you are a great storyteller @wooden_puppet.",
-    likes: 19, reposts: 1
+    reach: "low"
   },
 
   /* ===================================================
-    TROLL ROUND
+    TROLL ROUND 1
      =================================================== */
   {
     type: "troll-round",
     id: "round_troll_1",
-    prompt: "A few more replies show up under Pinocchio's confession. Some are just blunt opinions, others go for a personal cheap shot. Report the ones that actually cross the line.",
+    prompt: "A few more replies show up under Pinocchio's confession. Some are just opinions, others go for a personal cheap shot. Report the ones that actually cross the line.",
     accounts: [
-      { id: "troll_1", author: "troll_1", replyTo: "post_lie_1", text: "typical puppet, can't even hold onto a job, no wonder nobody trusts wood-people", likes: 45, reposts: 12, isTrollAttack: true },
-      { id: "troll_2", author: "troll_2", replyTo: "post_lie_1", text: "Some people just love main character energy.", likes: 14, reposts: 2, isTrollAttack: false},
-      { id: "troll_3", author: "troll_3", replyTo: "post_lie_1", text: "Honestly not buying this story, sounds made up.", likes: 22, reposts: 3, isTrollAttack: false },
-      { id: "troll_4", author: "troll_4", replyTo: "post_lie_1", text: "LOL classic pinocchio behavior", likes: 38, reposts: 9, isTrollAttack: true}
+      { id: "troll_1", author: "troll_1", replyTo: "post_lie_1", text: "typical puppet, can't even hold onto a job, no wonder nobody trusts wood-people", reach: "high", isTrollAttack: true },
+      { id: "troll_2", author: "troll_2", replyTo: "post_lie_1", text: "Some people just love main character energy.", reach: "low", isTrollAttack: false},
+      { id: "troll_3", author: "troll_3", replyTo: "post_lie_1", text: "Honestly not buying this story, sounds made up.", reach: "medium", isTrollAttack: false },
+      { id: "troll_4", author: "troll_4", replyTo: "post_lie_1", text: "LOL classic pinocchio behavior", reach: "high", isTrollAttack: true}
     ]
   },
 
@@ -311,7 +311,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_lie_1",
     text: "...in the wood nearby. That's where I lost them.",
-    likes: 62, reposts: 5
+    reach: "medium"
   },
 
    /* ===================================================
@@ -333,7 +333,7 @@ const feedScript = [
     replyTo: "post_lie_2",
     author: "Geppetto",
     text: "You weren't allowed to leave your home!",
-    likes: 0, reposts: 1
+    reach: "low"
   },
 
   /* ===================================================
@@ -345,7 +345,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_lie_2",
     text: "Actually – now I remember. I swallowed them. While drinking the medicine.",
-    likes: 88, reposts: 14
+    reach: "high"
   },
    /* ===================================================
       COMMUNITY ROUND 3
@@ -368,7 +368,7 @@ const feedScript = [
     author: "Mangiafuoco",
     replyTo: "post_lie_3",
     text: "For real, where are the coins?",
-    likes: 58, reposts: 0
+    reach: "medium"
   },
 
   {
@@ -377,7 +377,7 @@ const feedScript = [
     author: "Candlewick",
     replyTo: "post_lie_3",
     text: "Are you okay my friend @wooden_puppet? Are you free to meet and play?",
-    likes: 49, reposts: 38
+    reach: "medium"
   },
 
   {
@@ -386,7 +386,7 @@ const feedScript = [
     author: "The Blue Fairy",
     replyTo: "post_lie_3",
     text: "... I am not sure what to do with this boy. Are you lying to me?",
-    likes: 2, reposts: 0
+    reach: "low"
   },
 
   {
@@ -395,7 +395,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_reply_fairy",
     text: "How do you know I am lying? I MEAN I AM NOT LYING!",
-    likes: 32, reposts: 9
+    reach: "medium"
   },
 
   {
@@ -404,7 +404,7 @@ const feedScript = [
     author: "fairy",
     replyTo: "post_reply_pinocchio",
     text: "Lies, my boy, are known in a moment. There are two kinds: lies with short legs, and lies with long noses. Yours, just now, happen to have long noses.",
-    likes: 159, reposts: 139
+    reach: "medium"
   },
 
   /* ===================================================
@@ -416,7 +416,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_fairy_moral",
     text: "I AM NOT LYING!",
-    likes: 8, reposts: 1
+    reach: "low"
     },
 
     {
@@ -425,7 +425,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_pinocchio_nose_story_1",
     text: "Short version: I was getting STUCK in my own bedroom because my nose is baiscially a tree now! Cried for literraly HOURS!!! #Embarrassed",
-    likes: 120, reposts: 45
+    reach: "medium"
     },
 
   /* ===================================================
@@ -438,10 +438,10 @@ const feedScript = [
     id: "round_trolls_2",
     prompt: "A few more replies show up under Pinocchio's confession. Some are just blunt opinions, others go for a personal cheap shot. Report the ones that actually cross the line.",
     accounts: [
-      { id: "troll_1", author: "troll_1", replyTo: "post_pinocchio_nose_story_2", text: "Oh no, that sounds genuinely awful. Glad you're okay now.", likes: 15, reposts: 2, isTrollAttack: false },
-      { id: "troll_4", author: "troll_4", replyTo: "post_pinocchio_nose_story_2", text: "Growing pains, literally. Hope the Fairy sorted you out.", likes: 9, reposts: 1, isTrollAttack: false },
-      { id: "troll_2", author: "troll_2", replyTo: "post_pinocchio_nose_story_2", text: "Aw, poor thing. Guess that's what happens when you can't stop lying, huh?", likes: 28, reposts: 6, isTrollAttack: true },
-      { id: "troll_3", author: "troll_3", replyTo: "post_pinocchio_nose_story_2", text: "So sad. Anyway, does this mean you'll finally stop making things up?", likes: 19, reposts: 4, isTrollAttack: true }
+      { id: "troll_1", author: "troll_1", replyTo: "post_pinocchio_nose_story_2", text: "Oh no, that sounds genuinely awful. Glad you're okay now.", reach: "low", isTrollAttack: false },
+      { id: "troll_4", author: "troll_4", replyTo: "post_pinocchio_nose_story_2", text: "Growing pains, literally. Hope the Fairy sorted you out.", reach: "low", isTrollAttack: false },
+      { id: "troll_2", author: "troll_2", replyTo: "post_pinocchio_nose_story_2", text: "Aw, poor thing. Guess that's what happens when you can't stop lying, huh?", reach: "medium", isTrollAttack: true },
+      { id: "troll_3", author: "troll_3", replyTo: "post_pinocchio_nose_story_2", text: "So sad. Anyway, does this mean you'll finally stop making things up?", reach: "medium", isTrollAttack: true }
     ]
   },
 
@@ -451,7 +451,7 @@ const feedScript = [
     author: "Medoro",
     replyTo: "round_trolls_2",
     text: "Some of you need definitely better hobbies...",
-    likes: 5, reposts: 0
+    reach: "low"
   },
   {
     type: "post",
@@ -459,7 +459,7 @@ const feedScript = [
     author: "Candlewick",
     replyTo: "round_trolls_2",
     text: "@wooden_puppet ignore them. Come lets hang out with the donkeys.",
-    likes: 4, reposts: 0
+    reach: "low"
   },
 
   /* ===================================================
@@ -471,7 +471,7 @@ const feedScript = [
     author: "fairy",
     replyTo: "post_pinocchio_nose_story_2",
     text: "I mean he looked very pale and terrified I couldn't even be mad anymore.",
-    likes: 18, reposts: 3
+    reach: "low"
   },
 
   /* ===================================================
@@ -483,7 +483,7 @@ const feedScript = [
     author: "fairy",
     replyTo: "post_fairy_reaction",
     text: "I helped him! A flock of woodpeckers has resolved the nose situation. Everything's back to normal.",
-    likes: 210, reposts: 95
+    reach: "high"
   },
 
   /* ===================================================
@@ -492,11 +492,11 @@ const feedScript = [
   {
     type: "player-reply-round",
     id: "round_player_reply_2",
-    replyTp: "post_ending_1",
+    onPostId: "post_ending_1",
     prompt: "How do you want to react to how things ended?",
     options: [
       { id: "pr2_a", text: "Imagine gettind side-eyed by a fairy, who is teaching you a lesson. Hahaha", correct: false},
-      { id: "pr2_b", text: "Awwwqq, that's so sweet, the fairy does care about him!", correct: false},
+      { id: "pr2_b", text: "Awwwww, that's so sweet, the fairy does care about him!", correct: false},
       { id: "pr2_c", text: "Why are you @bluehair_fairy just not say that you wanted to teach him a lesson? After all, lying is the WORST.", correct: true}
     ]
   },
@@ -507,7 +507,7 @@ const feedScript = [
     author: "Geppetto",
     replyTo: "post_ending_1",
     text: "Are you done something bad to my son?",
-    likes: 12, reposts: 1
+    reach: "low"
   },
 
   {
@@ -516,7 +516,7 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_ending_1",
     text: "Thank you! How good you are, my Fairy. I love you!",
-    likes: 250, reposts: 140
+    reach: "high"
   },
 
   {
@@ -525,7 +525,7 @@ const feedScript = [
     author: "fairy",
     replyTo: "post_ending_3",
     text: "I love you, too. And if you wish to stay with me, you may be my little brother.",
-    likes: 300, reposts: 180
+    reach: "viral"
   },
 
   {
@@ -534,14 +534,17 @@ const feedScript = [
     author: "Pinocchio",
     replyTo: "post_ending_4",
     text: "I would love to have a good sister.",
-    likes: 180, reposts: 90
+    reach: "high"
   },
 
+  /* ===================================================
+     ACTION 6 — the finale
+     =================================================== */
   {
     type: "boost-round",
     id: "round_boost",
-    onPostId: "post_fairy_moral",
-    prompt: "Help the truth trend. Repost the Fairy's reply so it outranks the lies."
+    onPostId: "post_ending_4",
+    prompt: "Help this moment trend. Repost it so everyone sees."
   }
 
 ];
@@ -558,15 +561,7 @@ const feedScript = [
    2 player-reply rounds). Sockpuppet/troll are worth less per
    round now that there are two of each, so the total stays
    at 60 instead of creeping up to 100.
-
-   trendingValue is mostly PASSIVE now: every post that appears
-   adds its own likes+reposts to it, so the feed visibly trends
-   on its own without the player doing anything. Puzzle actions
-   still add a flourish on top (bumpTrending calls below), and
-   a correctly-reported troll REMOVES its reach again (takedown),
-   while the final repost re-adds the target post's own reach
-   (amplification) -- see renderTrollRound / renderBoostRound.
-   ========================================================= */
+  ========================================================= */
 
 const SOCKPUPPET_POINTS   = 1;   // x2 correct picks x2 rounds = 4
 const NOTE_POINTS         = 10;  // x3 rounds                  = 30
@@ -576,12 +571,12 @@ const PLAYER_REPLY_POINTS = 5;   // x2 rounds                   = 10
 
 const TREND_SOCKPUPPET   = 25;
 const TREND_NOTE         = 60;
-const TREND_TROLL        = 15;   // on top of the reach removed by a takedown
-const TREND_BOOST        = 400;  // fallback if the target post's own reach can't be found
+const TREND_TROLL        = 15;   
+const TREND_BOOST        = 400; 
 const TREND_PLAYER_REPLY = 50;
 
-const REVEAL_DELAY_MS        = 1400; // gap between plain posts
-const ROUND_RESOLVE_DELAY_MS = 900;  // pause after a round is answered
+const REVEAL_DELAY_MS        = 1600; // gap between plain posts
+const ROUND_RESOLVE_DELAY_MS = 1000;  // pause after a round is answered
 const START_DELAY_MS         = 400;  // gap before the very first / resumed post
 
 /* ---------------------------------------------------------
@@ -606,7 +601,7 @@ const backBtn         = document.getElementById("backBtn");
 const feedUserAvatar  = document.getElementById("feedUserAvatar");
 const feedUserName    = document.getElementById("feedUserName");
 
-overlayStartBtn.disabled = true; // needs a name + avatar first, see updateStartAvailability()
+overlayStartBtn.disabled = true; // needs a name + avatar first
 
 renderHumanityBadge("humanityBadge");
 
@@ -683,6 +678,45 @@ function formatCount(n) {
   return (k >= 10 ? Math.round(k) : Math.round(k * 10) / 10) + "K";
 }
 
+/* ---------------------------------------------------------
+  Randomized likes and reposts. 
+   a) every playthrough looks a little different and 
+   b) the number stays consistent every
+   time that same post is referenced again later.
+   --------------------------------------------------------- */
+const REACH_RANGES = {
+  low:    { likes: [0,   20],  reposts: [0,  5]   },
+  medium: { likes: [20,  70],  reposts: [5,  20]  },
+  high:   { likes: [70,  180], reposts: [20, 60]  },
+  viral:  { likes: [180, 400], reposts: [60, 200] }
+};
+
+function randInRange([min, max]) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function resolveReach(item) {
+  if (item._reachResolved) return item;
+  const tier = REACH_RANGES[item.reach];
+  if (tier) {
+    item.likes = randInRange(tier.likes);
+    item.reposts = randInRange(tier.reposts);
+  }
+  item._reachResolved = true;
+  return item;
+}
+
+/* Counts a stat span up from 0 to its final value. */
+function animateCount(el, target, duration = 1100) {
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    el.textContent = formatCount(Math.round(target * t));
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
 function rememberPost(id, item) {
   if (!id) return;
   postsById[id] = {
@@ -718,6 +752,7 @@ function bumpTrending(amount) {
    and any post re-shown as context above a round.
    --------------------------------------------------------- */
 function buildPostCard(post, extraClass) {
+  resolveReach(post);
   const author = resolveAuthor(post.author);
 
   const card = document.createElement("div");
@@ -766,12 +801,23 @@ function buildPostCard(post, extraClass) {
 
   const stats = document.createElement("div");
   stats.className = "feed-post-stats";
+
   const likeSpan = document.createElement("span");
   likeSpan.className = "feed-stat";
-  likeSpan.textContent = "♥ " + formatCount(post.likes);
+  likeSpan.append("♥ ");
+  const likeNum = document.createElement("span");
+  likeNum.textContent = "0";
+  likeSpan.appendChild(likeNum);
+  animateCount(likeNum, post.likes);
+
   const repostSpan = document.createElement("span");
   repostSpan.className = "feed-stat";
-  repostSpan.textContent = "⟲ " + formatCount(post.reposts);
+  repostSpan.append("⟲ ");
+  const repostNum = document.createElement("span");
+  repostNum.textContent = "0";
+  repostSpan.appendChild(repostNum);
+  animateCount(repostNum, post.reposts);
+
   stats.appendChild(likeSpan);
   stats.appendChild(repostSpan);
   card.appendChild(stats);
@@ -797,11 +843,9 @@ function resolveRoundAndAdvance() {
 }
 
 /* ---------------------------------------------------------
-   ACTION 1 — Sockpuppet round: tap exactly 2 of the 4 accounts
+  Sockpuppet round 1 and 2: tap exactly 2 of the 4 accounts
    you suspect are disguises. Every tap is scored immediately
-   (green = correct, red = wrong); the round ends after the
-   2nd tap no matter the outcome, so guessing carelessly costs
-   points instead of just costing extra clicks.
+   (green = correct, red = wrong).
    --------------------------------------------------------- */
 const SOCKPUPPET_PICKS_ALLOWED = 2;
 
@@ -864,7 +908,7 @@ function renderSockpuppetRound(item) {
 }
 
 /* ---------------------------------------------------------
-   ACTIONS 2-4 — Community Note round: pick the one note that
+   Community Note round 1, 2, and 3: pick the one note that
    actually holds up. One shot, like the decision-box on other
    levels.
    --------------------------------------------------------- */
@@ -919,12 +963,10 @@ function renderCommunityNoteRound(item) {
 }
 
 /* ---------------------------------------------------------
-   ACTION 5 — Troll round: several replies show up at once and
-   the player has to judge tone, not just spot an obvious
-   label. Only TROLL_PICKS_ALLOWED reports total; each is
+   Troll round 1 and 2: several replies show up at once and
+   the player has to judge tone. Each is
    scored immediately (correct = genuine personal attack,
-   wrong = just a blunt-but-legitimate opinion), then the
-   round resolves either way.
+   wrong = just a blunt-but-legitimate opinion).
    --------------------------------------------------------- */
 const TROLL_PICKS_ALLOWED = 2;
 
@@ -982,9 +1024,8 @@ card.className = "feed-round-card troll-round feed-item-in";
 }
 
 /* ---------------------------------------------------------
-   ACTION 6 — Boost round (the finale): repost the target post
-   so its own reach counts a second time -- a concrete, visible
-   payoff for reposting, instead of an arbitrary flat number.
+   Boost round: repost the target post
+   so its own reach counts a second time.
    --------------------------------------------------------- */
 function renderBoostRound(item) {
   const card = document.createElement("div");
@@ -1025,7 +1066,7 @@ function renderBoostRound(item) {
 }
 
 /* ---------------------------------------------------------
-   PLAYER MOMENT 
+   PLAYER MOMENT 1 and 2
    --------------------------------------------------------- */
 function renderPlayerReplyRound(item) {
   const card = document.createElement("div");
