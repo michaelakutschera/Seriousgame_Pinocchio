@@ -122,7 +122,7 @@
         <div class="card">
           <h3>Start &amp; Stop</h3>
           <p>
-            <strong>Start</strong> begins a level.
+            <strong>Start</strong> begins a level.</br>
             <strong>Stop</strong> pauses everything, so you can take a break without
             losing your place.
           </p>
@@ -140,9 +140,9 @@
       <div class="card card-full" style="margin-top: 22px;">
         <h3>After each level</h3>
         <p>
-          Every level ends with a short evaluation. These questions
-          are not about <em>what happened</em> in the chapters.<br/>
-          Is is about <em>how the medium itself</em> told it</p>
+          Every level ends with a <strong>short evaluation</strong>. <br/>
+          These questions are not about <em>what happened</em> in the chapters.<br/>
+          Is is about <em>how the medium itself</em> told it.</p>
       </div>
     </section>
 
@@ -163,12 +163,13 @@
         <div class="card">
           <h3>The Ending</h3>
           <p>
-            After Level 4, Pinocchio's fate depends on how much Humanity Points you've
-            collected across all four levels. Collect enough, and the Fairy with the blue hair 
-            will turn him into a real boy. <br/>
+            After Level 4, Pinocchio's fate depends on how much Humanity Points</br>
+            you've collected across all four levels. </br>
+            Collect enough, and the Fairy with the blue hair 
+            will turn him into a <strong>real boy</strong>. <br/>
             Fall short – by running out  
             of time or misreading how a medium works
-            – and Pinocchio remains a wooden puppet.
+            – and Pinocchio remains a <strong>wooden puppet</strong>.
           </p>
         </div>
       </div>
@@ -238,7 +239,7 @@
         localStorage.getItem("pinocchio_level4Completed") === "true"
       ];
 
-      const BUILT_LEVELS = 3; // level 4 has no page yet, so dev mode can't unlock that one
+      const BUILT_LEVELS = 4;
 
       for (let i = 1; i <= 4; i++) {
         const card   = document.getElementById("levelCard" + i);
