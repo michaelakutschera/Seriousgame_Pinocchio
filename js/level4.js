@@ -1,5 +1,12 @@
 /* =========================================================
    level4.js — "Social Media"
+
+   Pinocchio tells his story on social media, and the player
+   has to carry out various actions at different points, such
+   as selecting Community Notes, responding correctly themselves, 
+   and identifying trolls.
+
+    Scoring: 10 Humanity per correct checkpoint (max. 60).
    ========================================================= */
 
 
@@ -35,7 +42,7 @@
 });
 
 /* =========================================================
-  Start Overlay: Selection of one image for players
+  Selection of one image for players
   social Meida character.
   ========================================================= */
 const selectButtons = document.querySelectorAll(".selectButton");
@@ -51,8 +58,7 @@ selectButtons.forEach(function(button) {
 });
 
 /* ---------------------------------------------------------
-   AUTHORS — every account that can post/reply, in one place.
-   "kind" is just for your own orientation - helps you see who's who at a glance.
+   AUTHORS — every account that can post/reply.
    --------------------------------------------------------- */
 const authors = {
   pinocchio:    { name: "Pinocchio",        handle: "@wooden_puppet",  avatar: "p", kind: "main character" },
@@ -78,25 +84,18 @@ const authors = {
    FEED SCRIPT — the whole level, top to bottom, as one
    ordered list. Each entry is either:
 
-     type: "post"               -> a normal post/reply, just
-                                    shown, not interactive
-     type: "sockpuppet-round"   -> ACTION 1: spot the disguised
-                                    accounts among the replies
-     type: "communitynote-round"-> ACTIONS 2-4: pick the most
-                                    helpful Community Note for
-                                    one of Pinocchio's 3 lies
-     type: "troll-round"        -> ACTION 5: report/downvote an
-                                    unfair comment
-     type: "player-reply-round" -> the player picks a line, which
-                                    is then posted under their own
-                                    chosen name + avatar
+     type: "post"                   -> a normal post/reply
+     type: "sockpuppet-round"       -> Spot the disguised accounts among the replies
+     type: "communitynote-round"    ->  Pick the most helpful Community Note for one of Pinocchio's 3 lies
+     type: "troll-round"            -> Report/downvote an unfair comments
+     type: "player-reply-round"     -> the player picks a line, which is then posted under their own
+                                       chosen name + avatar
 
    --------------------------------------------------------- */
 const feedScript = [
 
   /* ===================================================
-     OPENING: Pinocchio's thread about
-     the night with the Assassins. 
+     OPENING: Pinocchio's thread about the night with the Assassins. 
      =================================================== */
   {
     type: "post",
@@ -166,9 +165,7 @@ const feedScript = [
   /* ===================================================
      SOCKPUPPET ROUND 1
      Among the masked "assassin" accounts replying deeper in
-     the thread, 2 are Fox & Cat in disguise. Everything else
-     is ambient noise. correctIds = the ones the player should
-     tap.
+     the thread, 2 are Fox & Cat in disguise.
      =================================================== */
   {
     type: "sockpuppet-round",
@@ -218,7 +215,7 @@ const feedScript = [
   },
 
   /* ===================================================
-     The Fairy asks the question that sets up all 3 lies
+     The Fairy asks the question that sets up all 3 lies.
      =================================================== */
   {
     type: "post",
@@ -256,11 +253,7 @@ const feedScript = [
     ]
   },
 
-  /* ===================================================
-     A couple of reactions to the Community Note.
-     =================================================== */
-  /*Anderer Text und noch ein oder zwei Posts mehr!!!*/
-     {
+  {
     type: "post",
     id: "post_reply_mangiafuoco_lie_1",
     author: "Mangiafuoco",
@@ -429,9 +422,7 @@ const feedScript = [
     },
 
   /* ===================================================
-     TROLl ROUND 2 —  Black Rabbit 1 & 2 already got caught.
-     This time it's Rabbit 3 & 4 sneaking back in under
-     nicer-sounding fake names to mock Pinocchio again. 
+     TROLl ROUND 2
      =================================================== */
   {
     type: "troll-round",
@@ -461,10 +452,7 @@ const feedScript = [
     text: "@wooden_puppet ignore them. Come lets hang out with the donkeys.",
     reach: "low"
   },
-
-  /* ===================================================
-     FAIRY
-  =================================================== */
+  
   {
     type: "post",
     id: "post_fairy_reaction",
@@ -538,8 +526,8 @@ const feedScript = [
   },
 
   /* ===================================================
-     ACTION 6 — the finale
-     =================================================== */
+     FINALE
+    =================================================== */
   {
     type: "boost-round",
     id: "round_boost",
