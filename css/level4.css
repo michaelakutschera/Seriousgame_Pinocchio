@@ -168,14 +168,49 @@ Start Overlay - Name and Image selection
 }
 
 /* ---------------------------------------------------------
-   Feed list — scrolling column of post/round cards
+   User bar — the player's chosen avatar + name, always
+   visible above the feed once the level has started
+   --------------------------------------------------------- */
+.feed-user-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--paper-dark);
+  border-bottom: 1px solid var(--paper-dark);
+}
+
+.feed-user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--paper);
+}
+
+.feed-user-label {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.feed-user-name {
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   Feed list — scrolling column of post/round cards.
+   Fixed height (not max-height) so the feed app has a stable
+   size from the start instead of growing and then suddenly
+   becoming scrollable once content overflows.
    --------------------------------------------------------- */
 .feed-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  max-height: 70vh;
+  height: 60vh;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -227,6 +262,15 @@ Start Overlay - Name and Image selection
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  overflow: hidden;
+}
+
+.feed-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .feed-post-names {
@@ -336,11 +380,13 @@ Start Overlay - Name and Image selection
   background: rgba(79,121,66,.16);
 }
 
-.sockpuppet-account.dismissed {
-  border-color: #ccc3a8;
-  background: transparent;
-  opacity: 0.55;
+.sockpuppet-account.wrong {
+  border-color: #c0392b;
+  background: rgba(192,57,43,.10);
 }
+
+.sockpuppet-account.unmasked .sockpuppet-reveal { color: #2f4a28; }
+.sockpuppet-account.wrong .sockpuppet-reveal    { color: #c0392b; }
 
 .sockpuppet-reveal {
   margin-top: 2px;
@@ -367,17 +413,48 @@ Start Overlay - Name and Image selection
    --------------------------------------------------------- */
 .troll-post {
   opacity: 0.92;
+  position: relative;
 }
 
-.troll-post.reported {
+.troll-report-btn {
+  margin-top: 8px;
+  height: auto;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+}
+
+.troll-post.reported-correct {
   opacity: 0.5;
 }
 
-.troll-post.reported .feed-post-text::after {
-  content: " (reported)";
-  font-style: italic;
+.troll-post.reported-wrong {
+  border-color: #c0392b;
+  background: rgba(192,57,43,.08);
+}
+
+.troll-verdict {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--error);
+}
+
+.troll-post.reported-correct .troll-verdict { color: #2f4a28; }
+.troll-post.reported-wrong .troll-verdict   { color: #c0392b; }
+
+/* ---------------------------------------------------------
+   PLAYER MOMENT — player's own post, highlighted when their
+   chosen reaction was the sharp/correct one
+   --------------------------------------------------------- */
+.feed-post.player-post-correct {
+  border-color: #4f7942;
+  background: rgba(79,121,66,.10);
+}
+
+.player-post-verdict {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #2f4a28;
 }
 
 /* ---------------------------------------------------------
@@ -400,6 +477,7 @@ Start Overlay - Name and Image selection
    --------------------------------------------------------- */
 @media (max-width: 500px) {
   .feed-platform-bar { padding: 12px 14px; }
-  .feed-list { padding: 12px; max-height: 65vh; }
+  .feed-list { padding: 12px; height: 55vh; }
+  .feed-user-bar { padding: 8px 14px; }
   .feed-post, .feed-round-card { padding: 12px; }
 }

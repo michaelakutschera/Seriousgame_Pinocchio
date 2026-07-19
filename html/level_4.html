@@ -38,15 +38,21 @@
       <!-- Platform bar -->
       <div class="feed-platform-bar">
         <span class="feed-platform-name">Woodpecker</span>
-        <!-- Trending/engagement counter, JS updates the number as lies get posted -->
+        <!-- Trending/engagement counter, JS updates the number passively as posts appear -->
         <span class="trending-meter" id="trendingMeter">
           <span class="trending-label">Trending:</span>
           <span class="trending-value" id="trendingValue">0</span>
         </span>
       </div>
 
-      <!-- Js injects every post/note/checkpoint card into this empty list. The HTML
-           only provides the empty container. -->
+      <!-- Current player's chosen avatar + name, filled in by JS on level start -->
+      <div class="feed-user-bar" id="feedUserBar">
+        <img class="feed-user-avatar" id="feedUserAvatar" src="" alt="" />
+        <span class="feed-user-label">Posting as</span>
+        <span class="feed-user-name" id="feedUserName"></span>
+      </div>
+
+      <!-- Js injects every post/note/checkpoint card into this empty list.-->
       <div class="feed-list" id="feedList"></div>
 
     </div>
