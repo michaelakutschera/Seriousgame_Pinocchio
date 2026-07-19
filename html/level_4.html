@@ -38,15 +38,21 @@
       <!-- Platform bar -->
       <div class="feed-platform-bar">
         <span class="feed-platform-name">Woodpecker</span>
-        <!-- Trending/engagement counter, JS updates the number as lies get posted -->
+        <!-- Trending/engagement counter, JS updates the number passively as posts appear -->
         <span class="trending-meter" id="trendingMeter">
           <span class="trending-label">Trending:</span>
           <span class="trending-value" id="trendingValue">0</span>
         </span>
       </div>
 
-      <!-- Js injects every post/note/checkpoint card into this empty list. The HTML
-           only provides the empty container. -->
+      <!-- Current player's chosen avatar + name, filled in by JS on level start -->
+      <div class="feed-user-bar" id="feedUserBar">
+        <img class="feed-user-avatar" id="feedUserAvatar" src="" alt="" />
+        <span class="feed-user-label">Posting as</span>
+        <span class="feed-user-name" id="feedUserName"></span>
+      </div>
+
+      <!-- Js injects every post/note/checkpoint card into this empty list.-->
       <div class="feed-list" id="feedList"></div>
 
     </div>
@@ -60,6 +66,22 @@
       <h2>Level 4 – Soical Media</h2>
       <!--Levelbeschreibung + Auswahl Avatar und Name. -->
       <p>Comming Soon.</p>
+
+      <p>Choose your profil picture.</p>
+
+      <div class="imageSelection">
+        <button class="selectButton" type="button"><img src="../images/profilpic1.jpg" alt="Carlo Collodi"></button>
+        <button class="selectButton" type="button"><img src="../images/profilpic2.jpg" alt="Carol Della Chiesa"></button>
+        <button class="selectButton" type="button"><img src="../images/profilpic3.jpg" alt="Anton Grumann"></button>
+        <button class="selectButton" type="button"><img src="../images/profilpic4.jpg" alt="Ulrike Schimming"></button>
+      </div>
+
+      <div class="nameSelection">
+        <p>Generate your profil name.</p>
+        <button class="btn btn-light" id="nameButton" type="button">Generate Name</button>
+        <p class="name-display" id="showName">&nbsp;</p>
+      </div>
+
       <button class="btn btn-primary" id="overlayStartBtn" type="button">&#9654; Start</button>
     </div>
   </div>

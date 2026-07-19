@@ -28,7 +28,7 @@
     <p class="lead">
       Pinocchio's most famous moment, about lying and his growing nose: <br/>
       Is told four times in four different media: 
-      a book, a comic, an audiobook, and a video game.<br/>
+      a book, a comic, an audiobook, and social media.<br/>
       Play through all four levels, collect Humanity Points, and decide Pinocchio's fate.
     </p>
     <div class="hero-actions">
@@ -49,7 +49,7 @@
             The chapters 17 and 18 from <em>Le avventure di Pinocchio.<br/>
             Storia di un burattino</em> (1883) from Carlo Collodi are told<br/>
             in the English translation, in form 
-            of a book, a comic, an audiobook and a video game. 
+            of a book, a comic, an audiobook and social media. 
           </p>
         </div>
         <div class="card">
@@ -106,7 +106,7 @@
         <div class="level-card-slot">
           <a class="level-card" id="levelCard4" href="html/level_4.html">
             <span class="level-tag">Level 4</span>
-            <h3>The Video Game</h3>
+            <h3>The Social Media</h3>
             <p>Coming soon</p>
             <span class="level-status" id="levelStatus4">Locked</span>
           </a>
@@ -276,9 +276,8 @@
       const levels = [
         { id: 1, completed: localStorage.getItem("pinocchio_level1Completed") === "true", href: "html/level_1.html", label: "Level 1: The Book" },
         { id: 2, completed: localStorage.getItem("pinocchio_level2Completed") === "true", href: "html/level_2.html", label: "Level 2: The Comic" },        
-        { id: 3, completed: localStorage.getItem("pinocchio_level3.Completed") == "true", href: "html/level_3.html", label: "Level 3: The Audiobook" }
-        /* Einfügen, wenn vorhanden!!!
-        { id: 4, completed: localStorage.getItem("pinocchio_level4Completed") == "true", href:"html/level_4.html", label: "Level 4: The Video Game"}*/
+        { id: 3, completed: localStorage.getItem("pinocchio_level3.Completed") == "true", href: "html/level_3.html", label: "Level 3: The Audiobook" },
+        { id: 4, completed: localStorage.getItem("pinocchio_level4Completed") == "true", href:"html/level_4.html", label: "Level 4: Soical Media"}
       ];
 
       const next = levels.find(l => !l.completed);
