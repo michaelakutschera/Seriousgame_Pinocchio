@@ -61,23 +61,24 @@ selectButtons.forEach(function(button) {
    AUTHORS — every account that can post/reply.
    --------------------------------------------------------- */
 const authors = {
-  pinocchio:    { name: "Pinocchio",        handle: "@wooden_puppet",  avatar: "p", kind: "main character" },
-  fairy:        { name: "The Blue Fairy",   handle: "@bluehair_fairy", avatar: "f", kind: "main character" },
+  pinocchio:    {name: "Pinocchio",        handle: "@wooden_puppet",  avatarImgSrc: "../images/Pinocchio.jpg", kind: "main character"},
+  fairy:        {name: "The Blue Fairy",   handle: "@bluehair_fairy", avatarImgSrc: "../images/Fairy.jpg", kind: "main character"},
   
-  fox:          { name: "Fox",              handle: "@red_fox",         avatar: "fo", kind: "trickster" },
-  cat:          { name: "Cat",              handle: "@black_cat",       avatar: "ca", kind: "trickster" },
-  assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",          avatar: "a1", kind:"assassin"},
-  assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack", avatar: "a2", kind:"assassin"},
+  fox:          {name: "Fox",              handle: "@red_fox",         avatarImgSrc: "../images/Fox.jpg", kind: "trickster"},
+  /* Bild ändern bei Cat und Geppetto*/
+  cat:          {name: "Cat",              handle: "@black_cat",       avatarImgSrc: "../images/Cat.jpg", kind: "trickster"},
+  assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",         avatarImgSrc: "../images/Assassin_1.jpg", kind:"assassin"},
+  assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack",avatarImgSrc: "../images/Assassin_2", kind:"assassin"},
   
-  geppetto:     {name: "Geppetto",          handle: "@polendina",        avatar: "g",   kind: "ambient" },
-  medoro:       {name: "Medoro",            handle: "@best_coachman",    avatar: "m",   kind: "ambient" },
-  mangiafuoco:  {name: "Mangiafuoco",        handle: "Fire_eater_circus", avatar: "ma",  kind:" ambient"},
-  candlewick:   {name: "Candlewick",        handle:"@thin_candlewick",   avatar:"c",    kind:"ambient"},
+  geppetto:     {name: "Geppetto",          handle: "@polendina",        avatarImgSrc: "../images/Geppetto.jpg",   kind: "ambient" },
+  medoro:       {name: "Medoro",            handle: "@best_coachman",    avatarImgSrc: "../images/Medoro.jpg",   kind: "ambient" },
+  mangiafuoco:  {name: "Mangiafuoco",        handle: "Fire_eater_circus",avatarImgSrc: "../images/Mangiafuoco.jpg",  kind:" ambient"},
+  candlewick:   {name: "Candlewick",        handle:"@thin_candlewick",   avatarImgSrc: "../images/Candlewick.jpg",    kind:"ambient"},
   
-  troll_1:      { name: "Little Black Rabbit",   handle: "@rabbit4321",               vatar: "R", kind: "troll" },
-  troll_2:      { name: "Middle Black Rabbit",  handle: "@dead_rabbit",               avatar: "R", kind: "troll"},
-  troll_3:      { name: "Big Black Rabbit",     handle: "@eldest_rabbit1234",         avatar: "R", kind: "troll"},
-  troll_4:      { name: "Grande Black Rabbit",  handle: "@black_rabbit_immortal",     avatar: "R", kind: "troll"}
+  troll_1:      {name: "Little Black Rabbit",   handle: "@rabbit4321",            avatarImgSrc: "../images/Rabbit_1.jpg", kind: "troll" },
+  troll_2:      {name: "Middle Black Rabbit",  handle: "@dead_rabbit",            avatarImgSrc: "../images/Rabbit_2.jpg", kind: "troll"},
+  troll_3:      {name: "Big Black Rabbit",     handle: "@eldest_rabbit1234",      avatarImgSrc: "../images/Rabbit_3.jpg", kind: "troll"},
+  troll_4:      {name: "Grande Black Rabbit",  handle: "@black_rabbit_immortal",  avatarImgSrc: "../images/Rabbit_4.jpg", kind: "troll"}
 };
 
 /* ---------------------------------------------------------
