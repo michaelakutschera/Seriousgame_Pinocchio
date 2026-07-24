@@ -5,6 +5,8 @@
    has to carry out various actions at different points, such
    as selecting Community Notes, responding correctly themselves, 
    and identifying trolls.
+
+  Scoring: 10 Humanity per correct answer (max 60).
   ========================================================= */
 
 

@@ -23,8 +23,8 @@ const HUMANITY_KEY = "pinocchio_totalHumanity";
  /* Approximate maximum humanity obtainable per level (puzzle + evaluation).*/
 const HUMANITY_MAX_PER_LEVEL = 70;
 const TOTAL_LEVELS = 4;
-const HUMANITY_MAX = HUMANITY_MAX_PER_LEVEL * TOTAL_LEVELS; // 280
-const HUMANITY_THRESHOLD = Math.round(HUMANITY_MAX * 0.6); // 60% -> becomes a real boy
+const HUMANITY_MAX = HUMANITY_MAX_PER_LEVEL * TOTAL_LEVELS; // 320
+const HUMANITY_THRESHOLD = Math.round(HUMANITY_MAX * 0.6);
 
 /** Read the player's total humanity collected so far. */
 function getTotalHumanity() {

@@ -12,7 +12,7 @@
    Page-turn ("Next") is enabled only once every blank on
    the current spread has been answered.
 
-   Scoring: 10 Humanity per correct blank (max 50).
+   Scoring: 10 Humanity per correct blank (max 60).
    ========================================================= */
 
 const DECISION_SECONDS = 30;
