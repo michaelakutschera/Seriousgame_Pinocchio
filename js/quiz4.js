@@ -6,7 +6,7 @@
      (5 Humanity Points each if correct)
    ========================================================= */
 
-const evalAnswerKey = { q1: "c", q2: "b", q3: "b", q4: "a" };
+const evalAnswerKey = { q1: "c", q2: "a", q3: "a", q4: "b" };
 const POINTS_PER_MC = 5;
 
 renderHumanityBadge("humanityBadge");
