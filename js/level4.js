@@ -65,7 +65,6 @@ const authors = {
   fairy:        {name: "The Blue Fairy",   handle: "@bluehair_fairy", avatarImgSrc: "../images/Fairy.jpg", kind: "main character"},
   
   fox:          {name: "Fox",              handle: "@red_fox",         avatarImgSrc: "../images/Fox.jpg", kind: "trickster"},
-  /* Bild ändern bei Cat und Geppetto*/
   cat:          {name: "Cat",              handle: "@black_cat",       avatarImgSrc: "../images/Cat.jpg", kind: "trickster"},
   assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",         avatarImgSrc: "../images/Assassin_1.jpg", kind:"assassin"},
   assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack",avatarImgSrc: "../images/Assassin_2", kind:"assassin"},
@@ -117,7 +116,7 @@ const feedScript = [
     id: "post_reply_fox",
     author: "Fox",
     replyTo: "post_thread_2",
-    text: "Wow, sounds rough buddy glad you're ok!",
+    text: "Wow, sounds rough buddy, glad you're ok!",
     reach: "medium"
   },
 
@@ -131,7 +130,7 @@ const feedScript = [
     prompt: "Choose the right reaction to Pinocchio's story?",
     options: [
       { id: "pr1_a", text: "Wow, five gold pieces turning into two thousand? Sounds like a great deal! #GetRich", correct: false},
-      { id: "pr1_b", text: "That is to scary, let us not talk about it anymore. #Scary", correct: false},
+      { id: "pr1_b", text: "That is too scary, let us not talk about it anymore. #Scary", correct: false},
       { id: "pr1_c", text: "How could you possibly leave out the Red Lobster Inn? #RedLobsterInn", correct: true }
     ]
   },
@@ -149,7 +148,7 @@ const feedScript = [
     id: "post_reply_cat",
     author: "Cat",
     replyTo: "post_thread_2",
-    text: "Terrible what some people do these days. Trust no one. #staysave",
+    text: "Terrible what some people do these days. Trust no one. #staysafe",
     reach: "medium"
   },
 
@@ -211,7 +210,7 @@ const feedScript = [
     id: "post_geppetto",
     author: "Geppetto",
     replyTo: "post_mangiafuoco",
-    text: "@Fire_eater_circus That are your only concerns?",
+    text: "@Fire_eater_circus Those are your only concerns?",
     reach: "low"
   },
 
@@ -370,7 +369,7 @@ const feedScript = [
     id: "post_reply_candlewick",
     author: "Candlewick",
     replyTo: "post_lie_3",
-    text: "Are you okay my friend @wooden_puppet? Are you free to meet and play?",
+    text: "Are you okay, my friend @wooden_puppet? Are you free to meet and play?",
     reach: "medium"
   },
 
@@ -418,7 +417,7 @@ const feedScript = [
     id: "post_pinocchio_nose_story_2",
     author: "Pinocchio",
     replyTo: "post_pinocchio_nose_story_1",
-    text: "Short version: I was getting STUCK in my own bedroom because my nose is baiscially a tree now! Cried for literraly HOURS!!! #Embarrassed",
+    text: "Short version: I was getting STUCK in my own bedroom because my nose is basically a tree now! Cried for literally HOURS!!! #Embarrassed",
     reach: "medium"
     },
 
@@ -442,7 +441,7 @@ const feedScript = [
     id: "post_reaction_troll_2",
     author: "Medoro",
     replyTo: "round_trolls_2",
-    text: "Some of you need definitely better hobbies...",
+    text: "Some of you definitely need better hobbies...",
     reach: "low"
   },
   {
@@ -450,7 +449,7 @@ const feedScript = [
     id: "post_reaction_troll_2b",
     author: "Candlewick",
     replyTo: "round_trolls_2",
-    text: "@wooden_puppet ignore them. Come lets hang out with the donkeys.",
+    text: "@wooden_puppet ignore them. Come, let's hang out with the donkeys.",
     reach: "low"
   },
   
@@ -459,7 +458,7 @@ const feedScript = [
     id: "post_fairy_reaction",
     author: "fairy",
     replyTo: "post_pinocchio_nose_story_2",
-    text: "I mean he looked very pale and terrified I couldn't even be mad anymore.",
+    text: "I mean, he looked very pale and terrified, I couldn't even be mad anymore.",
     reach: "low"
   },
 
@@ -484,9 +483,9 @@ const feedScript = [
     onPostId: "post_ending_1",
     prompt: "How do you want to react to how things ended?",
     options: [
-      { id: "pr2_a", text: "Imagine gettind side-eyed by a fairy, who is teaching you a lesson. Hahaha", correct: false},
+      { id: "pr2_a", text: "Imagine getting side-eyed by a fairy, who is teaching you a lesson. Hahaha", correct: false},
       { id: "pr2_b", text: "Awwwww, that's so sweet, the fairy does care about him!", correct: false},
-      { id: "pr2_c", text: "Why are you @bluehair_fairy just not say that you wanted to teach him a lesson? After all, lying is the WORST.", correct: true}
+      { id: "pr2_c", text: "Why don't you @bluehair_fairy just say that you wanted to teach him a lesson? After all, lying is the WORST.", correct: true}
     ]
   },
 
@@ -495,7 +494,7 @@ const feedScript = [
     id: "post_ending_2",
     author: "Geppetto",
     replyTo: "post_ending_1",
-    text: "Are you done something bad to my son?",
+    text: "Have you done something bad to my son?",
     reach: "low"
   },
 
