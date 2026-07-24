@@ -5,9 +5,7 @@
    has to carry out various actions at different points, such
    as selecting Community Notes, responding correctly themselves, 
    and identifying trolls.
-
-    Scoring: 10 Humanity per correct checkpoint (max. 60).
-   ========================================================= */
+  ========================================================= */
 
 
 /* =========================================================
@@ -66,15 +64,15 @@ const authors = {
   
   fox:          {name: "Fox",              handle: "@red_fox",         avatarImgSrc: "../images/Fox.jpg", kind: "trickster"},
   cat:          {name: "Cat",              handle: "@black_cat",       avatarImgSrc: "../images/Cat.jpg", kind: "trickster"},
-  assassin_1:   {name: "Assassin_Fox",      handle: "@assa_f",         avatarImgSrc: "../images/Assassin_1.jpg", kind:"assassin"},
-  assassin_2:   {name: "Assassin_Cat",      handle: "@black_coal_sack",avatarImgSrc: "../images/Assassin_2", kind:"assassin"},
+  assassin_1:   {name: "Assassin_Fox",     handle: "@assa_f",         avatarImgSrc: "../images/Assassin_1.jpg", kind:"assassin"},
+  assassin_2:   {name: "Assassin_Cat",     handle: "@black_coal_sack",avatarImgSrc: "../images/Assassin_2", kind:"assassin"},
   
   geppetto:     {name: "Geppetto",          handle: "@polendina",        avatarImgSrc: "../images/Geppetto.jpg",   kind: "ambient" },
   medoro:       {name: "Medoro",            handle: "@best_coachman",    avatarImgSrc: "../images/Medoro.jpg",   kind: "ambient" },
-  mangiafuoco:  {name: "Mangiafuoco",        handle: "Fire_eater_circus",avatarImgSrc: "../images/Mangiafuoco.jpg",  kind:" ambient"},
+  mangiafuoco:  {name: "Mangiafuoco",       handle: "Fire_eater_circus",avatarImgSrc: "../images/Mangiafuoco.jpg",  kind:" ambient"},
   candlewick:   {name: "Candlewick",        handle:"@thin_candlewick",   avatarImgSrc: "../images/Candlewick.jpg",    kind:"ambient"},
   
-  troll_1:      {name: "Little Black Rabbit",   handle: "@rabbit4321",            avatarImgSrc: "../images/Rabbit_1.jpg", kind: "troll" },
+  troll_1:      {name: "Little Black Rabbit",  handle: "@rabbit4321",            avatarImgSrc: "../images/Rabbit_1.jpg", kind: "troll" },
   troll_2:      {name: "Middle Black Rabbit",  handle: "@dead_rabbit",            avatarImgSrc: "../images/Rabbit_2.jpg", kind: "troll"},
   troll_3:      {name: "Big Black Rabbit",     handle: "@eldest_rabbit1234",      avatarImgSrc: "../images/Rabbit_3.jpg", kind: "troll"},
   troll_4:      {name: "Grande Black Rabbit",  handle: "@black_rabbit_immortal",  avatarImgSrc: "../images/Rabbit_4.jpg", kind: "troll"}
@@ -108,7 +106,7 @@ const feedScript = [
     type: "post",
     id: "post_thread_2",
     author: "Pinocchio",
-    text: "Short version: Fox & Cat convinced me my 5 gold coins could become 2000 at the Field of Wonders. We never got there. Two guys in coal sacks robbed me instead. Nearly hanged me from a tree. #wonder",
+    text: "Short version: Fox & Cat convinced me my 5 gold coins could become 2000 at the Field of Wonders. We never got there. Two guys in coal sacks robbed me instead. Nearly hanged me from a tree. #wonder #🦞",
     reach: "viral"
   },
   {
@@ -131,7 +129,7 @@ const feedScript = [
     options: [
       { id: "pr1_a", text: "Wow, five gold pieces turning into two thousand? Sounds like a great deal! #GetRich", correct: false},
       { id: "pr1_b", text: "That is too scary, let us not talk about it anymore. #Scary", correct: false},
-      { id: "pr1_c", text: "How could you possibly leave out the Red Lobster Inn? #RedLobsterInn", correct: true }
+      { id: "pr1_c", text: "Wait, what's with the 🦞 hashtag? Feels like you're leaving something out...", correct: true }
     ]
   },
 
@@ -172,7 +170,7 @@ const feedScript = [
     id: "round_sockpuppets",
     prompt: "A few anonymous accounts jump into the thread. Two of them are not who they pretend to be. Tap the ones you suspect are Fox & Cat in disguise.",
     accounts: [
-      { id: "sock_1", handle: "@assa_f", text: "Your money or your life!", isDisguise: true,  revealAs: "Fox"   },
+      { id: "sock_1", handle: "@assa_f", text: "Your money or your life, buddy!", isDisguise: true,  revealAs: "Fox"   },
       { id: "sock_2", handle: "@assa_cf", text: "Did anyone else hear screaming near the oak tree?!", isDisguise: false },
       { id: "sock_3", handle: "@black_coal_sack", text: "Hehe, tongue tricks won't save your paw— i mean, your gold", isDisguise: true,  revealAs: "Cat"},
       { id: "sock_4", handle: "@black_coal_sack_forever", text: "reporting this to the constable in the morning", isDisguise: false }
@@ -290,8 +288,8 @@ const feedScript = [
     accounts: [
       { id: "troll_1", author: "troll_1", replyTo: "post_lie_1", text: "typical puppet, can't even hold onto a job, no wonder nobody trusts wood-people", reach: "high", isTrollAttack: true },
       { id: "troll_2", author: "troll_2", replyTo: "post_lie_1", text: "Some people just love main character energy.", reach: "low", isTrollAttack: false},
-      { id: "troll_3", author: "troll_3", replyTo: "post_lie_1", text: "Honestly not buying this story, sounds made up.", reach: "medium", isTrollAttack: false },
-      { id: "troll_4", author: "troll_4", replyTo: "post_lie_1", text: "LOL classic pinocchio behavior", reach: "high", isTrollAttack: true}
+      { id: "troll_3", author: "troll_3", replyTo: "post_lie_1", text: "Not sure I buy this one, but wild things do happen out there.", reach: "medium", isTrollAttack: false },
+      { id: "troll_4", author: "troll_4", replyTo: "post_lie_1", text: "LOL Of course HE would say that — wood never tells the truth, does it?", reach: "high", isTrollAttack: true}
     ]
   },
 
