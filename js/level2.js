@@ -15,6 +15,7 @@
    is based on how close the player's total swap count is to
    the theoretical minimum for the whole 12-slot shuffle.
 
+  Scoring: 10 Humanity per correct blank (max 60).
   ========================================================= */
 
 const PANELS_PER_PAGE = 6;
