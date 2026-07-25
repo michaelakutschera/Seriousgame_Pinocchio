@@ -154,8 +154,8 @@ function buildResultsHTML({ puzzleScore, mcCorrect, evalScore, levelTotal, newTo
     <p class="breakdown">${breakdown}</p>
     <p>Total Humanity so far: <strong>${newTotal}</strong></p>
     <p style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-    <a class="btn btn-light" href="../index.html">Back to Start</a>  
-    <a class="btn btn-primary" href="final.html">Continue to the Finale &rarr;</a>
+      <a class="btn btn-light" href="../index.html">Back to Start</a>  
+      <a class="btn btn-primary" href="final.html">See Pinocchio's Fate</a> 
     </p>
   `;
 }
