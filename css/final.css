@@ -1,0 +1,65 @@
+/* =========================================================
+   final.css  —  Animation
+   ========================================================= */
+
+.final-screen {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 32px 60px;
+  text-align: center;
+}
+
+.final-summary {
+  max-width: 640px;
+  margin: 40px auto 0;
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  font-size: 1.08rem;
+  text-align: left;
+}
+
+.final-summary h2 {
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.final-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+}
+
+.final-summary td {
+  padding: 8px 4px;
+}
+
+.final-summary td:last-child {
+  text-align: right;
+  font-weight: 600;
+}
+
+.final-summary tr {
+  border-bottom: 1px solid var(--paper-dark);
+}
+
+.level-row td:first-child {
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.total-row {
+  background-color: rgba(201, 162, 39, 0.12);
+  font-weight: 700;
+  color: var(--forest);
+  border-top: 2px solid var(--gold);
+  border-bottom: none;
+}
+
+.total-row td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
