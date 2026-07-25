@@ -17,14 +17,39 @@
       <small>A Serious Game about one Story told in different Media</small>
     </p>
     <div class="top-bar-controls">
-      <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
+    <a class="btn btn-secondary" href="../index.html" id="backBtn">&larr; Back</a>
+    <span class="badge badge-gold"><span class="badge-icon">❤</span> <span id="humanityBadge">Humanity: 0</span></span>
     </div>
   </header>
 
   <main>
-    <div>
+    <section class="final-screen">
+      <h1>Pinocchio's Fate</h1>
+      <p id="final-text">Comming soon...</p>
+      
+      <!--Images for the transformation-->
+      <div class="final-images" id="final-figures">
+        <img src="../images/woodenpuppet.jpg" class="stage-img stage-puppet" alt="...">
+        <img src="../images/hybrid.jpg" class="stage-img stage-hybrid" alt="...">
+        <img src="../images/human.jpg" class="stage-img stage-human" alt="...">
+      </div>
+    
 
-    </div>
+      <div class="final-summary">
+        <h2>Your Jounrey</h2>
+        <table>
+          <tr><td>Level 1</td><td id="l1-puzzle">–</td></tr>
+          <tr><td>Level 1 - Quiz</td><td id="l1-quiz">–</td></tr>
+          <tr><td>Level 2</td><td id="l2-puzzle"></td></tr>
+          <tr><td>Level 2 - Quiz</td><td id="l2-quiz">–</td></tr>
+          <tr><td>Level 3</td><td id="l3-puzzle">–</td></tr>
+          <tr><td>Level 3 - Quiz</td><td id="l3-quiz">–</td></tr>
+          <tr><td>Level 4</td><td id="l4-puzzle">–</td></tr>
+          <tr><td>Level 4 - Quiz</td><td id="l4-quiz">–</td></tr>
+          <tr><td>Total</td><td id="total-score">–</td></tr>
+        </table>
+      </div>
+    </section>
   </main>
 
 
@@ -58,6 +83,8 @@
   <script src="../js/script.js"></script>
   <script>
     renderHumanityBadge("humanityBadge");
+    renderSummaryTable();
+    renderFinalStage();
   </script>
 </body>
 </html>

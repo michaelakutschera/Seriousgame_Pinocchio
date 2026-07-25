@@ -20,11 +20,24 @@ const DEV_MODE = true; /*Dev-Mode beenden --> FALSE setzen*/
 const HUMANITY_KEY = "pinocchio_totalHumanity";
 
 
- /* Approximate maximum humanity obtainable per level (puzzle + evaluation).*/
+ /* Approximate maximum humanity obtainable per level (puzzle + quiz).*/
 const HUMANITY_MAX_PER_LEVEL = 70;
 const TOTAL_LEVELS = 4;
 const HUMANITY_MAX = HUMANITY_MAX_PER_LEVEL * TOTAL_LEVELS; // 320
-const HUMANITY_THRESHOLD = Math.round(HUMANITY_MAX * 0.6);
+const STAGE_1_THRESHOLD = Math.round(HUMANITY_MAX * 0.33); //from here: hybrid
+const STAGE_2_THRESHOLD = Math.round(HUMANITY_MAX * 0.66); //from here: human
+
+function getFinalStage() {
+  const total = getTotalHumanity();
+
+  if(total < STAGE_1_THRESHOLD) {
+    return "puppet";
+  } else if (total < STAGE_2_THRESHOLD) {
+    return "hybrid";
+  } else {
+    return "human";
+  }
+}
 
 /** Read the player's total humanity collected so far. */
 function getTotalHumanity() {
@@ -52,4 +65,25 @@ function resetAllProgress() {
 function renderHumanityBadge(elementId) {
   const el = document.getElementById(elementId);
   if (el) el.textContent = "Humanity: " + getTotalHumanity();
+}
+
+/* Collect the level scores for the final page.*/
+function renderSummaryTable() {
+  [1, 2, 3, 4].forEach(n => {
+  const puzzleScore = parseInt(localStorage.getItem("pinocchio_level" + n + "PuzzleScore") || "0", 10);
+  const quizScore = parseInt(localStorage.getItem("pinocchio_level" + n + "Score") || "0", 10);
+  document.getElementById("l" + n + "-puzzle").textContent = puzzleScore;
+  document.getElementById("l" + n + "-quiz").textContent = quizScore;
+  });
+  document.getElementById("total-score").textContent = getTotalHumanity();
+}
+
+/* Image selection for the final page */
+function renderFinalStage() {
+  const stage = getFinalStage(); //"puppet"|"hybrid"|"human"
+
+  document.querySelectorAll(".stage-img").forEach(img => {
+    img.classList.remove("active");
+  });
+  document.querySelector(".stage-" + stage).classList.add("active");
 }
