@@ -81,9 +81,9 @@ function renderSummaryTable() {
 
 /* Choose the right image for the final animation*/
 function renderFinalStage() {
-  const stage = getFinalStage(); //"pupper"|"hybrid"|"human"
-  document.querySelectorAll(".stage-img").forEach(img => {
-    img.classList.remove("active");
+  const stage = getFinalStage(); //"puppet"|"hybrid"|"human"
+  document.querySelectorAll(".stage-block").forEach(block => {
+    block.classList.remove("active");
   });
   document.querySelector(".stage-" + stage).classList.add("active");
 }
