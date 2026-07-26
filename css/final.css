@@ -1,0 +1,137 @@
+/* =========================================================
+   final.css  —  Animation
+   ========================================================= */
+
+.final-screen {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 32px 60px;
+  text-align: center;
+}
+
+.final-text {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    font-size: 1.18rem;
+    color: var(--ink-soft);
+}
+
+.final-images {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 20px;
+}
+
+.stage-block {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+.stage-block.active {
+  display: flex;
+}
+
+.stage-caption {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  color: var(--forest);
+}
+
+.stage-img-wrap {
+  position: relative;
+  display: block;
+  max-width: 320px;
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: stage-img-in 0.6s ease-out 0.1s both;
+}
+
+.stage-img {
+  display: block;
+  width: 100%;
+}
+
+.stage-img-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,241,199,0.9) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: stage-shine 1.2s ease-in-out 0.5s 1;
+}
+
+@keyframes stage-img-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes stage-shine {
+  0%   { left: -60%; }
+  100% { left: 140%; }
+}
+
+.final-summary {
+  max-width: 640px;
+  margin: 40px auto 0;
+  background: #fffdf8;
+  border: 1px solid var(--paper-dark);
+  border-radius: var(--radius);
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  font-size: 1.08rem;
+  text-align: left;
+}
+
+.final-summary h2 {
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.final-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+}
+
+.final-summary td {
+  padding: 8px 4px;
+}
+
+.final-summary td:last-child {
+  text-align: right;
+  font-weight: 600;
+}
+
+.final-summary tr {
+  border-bottom: 1px solid var(--paper-dark);
+}
+
+.level-row td:first-child {
+  font-weight: 600;
+  color: var(--forest);
+}
+
+.total-row {
+  background-color: rgba(201, 162, 39, 0.12);
+  font-weight: 700;
+  color: var(--forest);
+  border-top: 2px solid var(--gold);
+  border-bottom: none;
+}
+
+.total-row td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

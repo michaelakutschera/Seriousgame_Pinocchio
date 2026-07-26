@@ -61,7 +61,7 @@ function resetAllProgress() {
   });
 }
 
-/** Write the current humanity total into a badge element. */
+/* Write the current humanity total into a badge element. */
 function renderHumanityBadge(elementId) {
   const el = document.getElementById(elementId);
   if (el) el.textContent = "Humanity: " + getTotalHumanity();
