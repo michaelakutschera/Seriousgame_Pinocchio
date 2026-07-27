@@ -82,8 +82,10 @@ function renderSummaryTable() {
 function renderFinalStage() {
   const stage = getFinalStage(); //"puppet"|"hybrid"|"human"
 
-  document.querySelectorAll(".stage-img").forEach(img => {
-    img.classList.remove("active");
+  document.querySelectorAll(".stage-caption, .stage-img-wrap").forEach(el => {
+    el.classList.remove("active");
   });
-  document.querySelector(".stage-" + stage).classList.add("active");
+  document.querySelectorAll(".stage-" + stage).forEach(el => {
+    el.classList.add("active");
+  });
 }
