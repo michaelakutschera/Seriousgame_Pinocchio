@@ -27,11 +27,11 @@ Each level ends with a **4-question evaluation quiz** about the medium itself (n
 
 •	After Level 4, the player's total Humanity decides Pinocchio's fate:
 
-    1. Enough Humanity → become a real boy.
+1. Enough Humanity → become a real boy.
     
-    2. Medium Humanity → become a hybrid.
-    
-    3. Not enough Humanity → he remains a wooden puppet.
+2. Medium Humanity → become a hybrid.
+
+3. Not enough Humanity → he remains a wooden puppet.
     
 •	A Hybrid ending illustration (part puppet, part boy) is planned for in-between results.
 
