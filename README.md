@@ -95,4 +95,13 @@ While DEV_MODE = true:
 
 •	2026
 
+**7. AI USAGE**
+
+This project was developed with the assistance of Claude.ai (Anthropic), mainly for writing and debugging code. Within the JavaScript and CSS files, the comment:
+
+/* Claude.ai provided assistance in the creation of the following code section. */ 
+
+marks the point from which a code section was created with AI assistance.
+
+The narrative text is taken from Carol Della Chiesa's public-domain translation of Carlo Collodi's _The Adventures of Pinocchio_. All other content, including the quiz questions, answer options, and the overall game design and concept, was developed and written independently by Michaela Kutschera.
 
