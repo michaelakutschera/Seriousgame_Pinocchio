@@ -48,8 +48,8 @@ Chapter heading
    checkpoints and transcript toggle
    --------------------------------------------------------- */
 .audio-stage {
-  max-width: 640px;
-  height: 720px;
+  width: 640px;
+  max-width: 100%;
   margin: 0 auto;
   background: #fffdf8;
   border: 1px solid var(--paper-dark);
@@ -57,7 +57,6 @@ Chapter heading
   box-shadow: var(--shadow-soft);
   padding: 36px 32px;
   text-align: center;
-  overflow: hidden;
 }
 
 .audio-visual {
@@ -149,7 +148,8 @@ Chapter heading
    styled in style.css) while a checkpoint is active
    --------------------------------------------------------- */
 .checkpoint-zone {
-  min-height: 250px;
+  height: 250px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
