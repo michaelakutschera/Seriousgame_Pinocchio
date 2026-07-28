@@ -62,6 +62,7 @@ const resumeBtn       = document.getElementById("resumeBtn");
 const startBtn        = document.getElementById("startBtn");
 const stopBtn         = document.getElementById("stopBtn");
 const backBtn         = document.getElementById("backBtn");
+const continueBtn     = document.getElementById("continueBtn");
 
 renderHumanityBadge("humanityBadge");
 
@@ -75,6 +76,10 @@ renderHumanityBadge("humanityBadge");
 let paused      = true;
 let gameStarted = false;
 let finished    = false;
+
+/* true once every panel is in its correct slot, before the
+   player clicks "Continue"*/
+let solved = false;
 
 let currentOrder = null;
 
@@ -237,7 +242,9 @@ function handlePanelClick(slot) {
    --------------------------------------------------------- */
 function checkCompletion() {
   if (currentOrder.every((p, i) => p.correctSlot === i)) {
-    finishPuzzle();
+    solved = true;
+    continueBtn.disabled = false;
+    continueBtn.classList.add("ready");
   }
 }
 
@@ -283,6 +290,8 @@ function finishPuzzle() {
 
   startBtn.disabled = true;
   stopBtn.disabled  = true;
+  continueBtn.disabled = true;
+  continueBtn.classList.remove("ready");
 }
 
 /* ---------------------------------------------------------
@@ -292,6 +301,10 @@ function startGame() {
   startOverlay.classList.add("hidden");
   paused = false; gameStarted = true;
   startBtn.disabled = true; stopBtn.disabled = false;
+
+  solved = false;
+  continueBtn.disabled = true;
+  continueBtn.classList.remove("ready");
 
   currentOrder = shuffledLayout();
   minSwapsTotal = computeMinSwaps(currentOrder);
@@ -319,6 +332,11 @@ startBtn.addEventListener("click", () => {
   else if (paused && gameStarted) resumeGame();
 });
 stopBtn.addEventListener("click", pauseGame);
+
+continueBtn.addEventListener("click", () => {
+  if (!solved || finished) return;
+  finishPuzzle();
+});
 
 backBtn.addEventListener("click", e => {
   const done = localStorage.getItem("pinocchio_level2Completed") === "true";

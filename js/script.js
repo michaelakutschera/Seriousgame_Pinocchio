@@ -15,7 +15,7 @@
    ========================================================= */
    
 /* ============= DEV-MODE =============*/
-const DEV_MODE = true; /*Dev-Mode beenden --> FALSE setzen*/
+const DEV_MODE = false; /*Dev-Mode beenden --> FALSE setzen*/
 
 const HUMANITY_KEY = "pinocchio_totalHumanity";
 
