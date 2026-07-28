@@ -5,19 +5,7 @@ Overlays (start/pause/finish/done) and the shared decision-box
 UI (word checkpoints) are styled globally in style.css, so every
 level & quiz page looks the same.
 ========================================================= */
-
-/* ---------------------------------------------------------
-Sticky footer
---------------------------------------------------------- */
-body.level3-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-body.level3-body main.level-stage {
-  flex: 1 0 auto;
-}
+/* Claude.ai provided assistance in the creation of the following code section.*/
 
 /* ---------------------------------------------------------
 Chapter heading

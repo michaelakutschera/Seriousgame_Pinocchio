@@ -159,6 +159,7 @@ const pages = [
 
 ];
 
+/* Claude.ai provided assistance in the creation of the following code section.*/
 /* ---------------------------------------------------------
    State
    --------------------------------------------------------- */
@@ -170,9 +171,7 @@ let gameStarted = false;
 let puzzleScore = 0;
 let correctCount = 0;
 
-/* true once the LAST spread has fully finished typing (including any
-   illustration/text after the final blank) -- gates the Finish button,
-   so the chapter-complete overlay never covers content still being read */
+/* true once the LAST spread has fully finished typing */
 let finishReady = false;
 
 /* answers[blankId] = { isCorrect, correctChoice } */
@@ -238,13 +237,9 @@ function shuffle(arr) {
   return a;
 }
 
-/* Shuffle a question's 3 options, then -- if the correct
-   answer would land in the SAME slot as the previous
-   question's correct answer -- reshuffle (a few tries max).
-   This avoids the "correct answer is always A" / "always B"
-   pattern across a playthrough without sacrificing fairness
-   (each individual shuffle is still a uniform permutation;
-   we're just rejecting a streak). */
+/* Shuffle a question's 3 options, then, if the correct
+   answer would land in the same slot as the previous
+   question's correct answer --> reshuffle. */
 function shuffleOptionsAvoidingRepeat(options) {
   let attempt = shuffle(options);
   let tries = 0;
@@ -320,9 +315,7 @@ function buildBlankResolved(block) {
 
 /* ---------------------------------------------------------
    Typewriter rendering of a page, block by block.
-   Calls onDone() once the whole page has finished (including
-   any blanks being answered).
-   --------------------------------------------------------- */
+  --------------------------------------------------------- */
 function typePage(pageIndex, container, myToken, onDone) {
   const blocks = pages[pageIndex];
   let blockIndex = 0;
@@ -337,14 +330,14 @@ function typePage(pageIndex, container, myToken, onDone) {
       typeTextBlock(container, block.text, myToken, nextBlock);
     } else if (block.type === "illus") {
       container.appendChild(buildIllustration(block));
-      setTimeout(nextBlock, fastForward ? 0 : 150);   /* CHANGED: respektiert Skip */
+      setTimeout(nextBlock, fastForward ? 0 : 150);
     } else if (block.type === "blank") {
       if (answers[block.id]) {
         /* already answered (e.g. revisiting) -> show resolved text */
         container.appendChild(buildBlankResolved(block));
         nextBlock();
       } else {
-        fastForward = false;   /* CHANGED: Frage erreicht -> Skip endet hier */
+        fastForward = false;
         updateSkipButton();
         showDecisionInline(container, block, myToken, nextBlock);
       }
@@ -519,8 +512,7 @@ function showDecisionInline(container, block, myToken, onDone) {
 
 /* ---------------------------------------------------------
    Render the current spread: left page types first, then
-   right page. If a page's blanks are already answered (e.g.
-   navigating back to a finished spread), it renders instantly.
+   right page.
    --------------------------------------------------------- */
 function renderSpread() {
   runToken++;

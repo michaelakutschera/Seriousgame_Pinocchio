@@ -44,6 +44,7 @@ const allPanels = [
   { id: "p12", correctSlot: 11, file: "../images/Panel_12.jpg", alt: "Panel 12" }
 ];
 
+/* Claude.ai provided assistance in the creation of the following code section. */
 /* ---------------------------------------------------------
    DOM
    --------------------------------------------------------- */
@@ -125,9 +126,7 @@ function shuffle(arr) {
   return a;
 }
 
-/* keep shuffling until the order is not already fully solved,
-   and until at least a few panels start on the "wrong" page
-   (so the puzzle isn't trivially page-local) */
+/* keep shuffling until the order is not already fully solved.*/
 function shuffledLayout() {
   let attempt;
   let tries = 0;
@@ -251,7 +250,7 @@ function checkCompletion() {
 /* ---------------------------------------------------------
    Scoring
    ---------------------------------------------------------
-   Correctness alone isn't a good measure here: with click-to-
+   Correctness alone isn't a good measure here. With click-to-
    swap, the player will EVENTUALLY reach the correct order no
    matter what. What matters is HOW DIRECTLY they got there --
    i.e. whether they recognised the right reading order quickly,
@@ -345,7 +344,7 @@ backBtn.addEventListener("click", e => {
 });
 
 /* ---------------------------------------------------------
-   Already completed?
+  Level already completed - not possible to play it agian, without reset.
    (skipped in DEV_MODE, so a level can be replayed freely)
    --------------------------------------------------------- */
 if (!DEV_MODE && localStorage.getItem("pinocchio_level2Completed") === "true") {

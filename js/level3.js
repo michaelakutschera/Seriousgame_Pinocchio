@@ -118,6 +118,7 @@ const transcriptLines = [
   { time: T("3:34.2"),  text: "“I love you, too,” answered the Fairy, “and if you wish to stay with me, you may be my little brother and I’ll be your good little sister.”" }
 ];
 
+/* Claude.ai provided assistance in the creation of the following code section. */
 /* ---------------------------------------------------------
    DOM
    --------------------------------------------------------- */
@@ -373,7 +374,6 @@ function resumeGame() {
   pauseOverlay.classList.add("hidden");
   paused = false;
   startBtn.disabled = true; stopBtn.disabled = false;
-  /* don't resume playback if a checkpoint is still waiting for an answer */
   if (!activeCheckpoint) audio.play();
 }
 
@@ -398,8 +398,7 @@ transcriptToggle.addEventListener("click", () => {
 });
 
 /* ---------------------------------------------------------
-   Dev-only scrubbing — drag the progress bar like a music-app
-   seek bar, to jump around and test transcript timing and
+   Dev-only scrubbing — drag the progress bar to jump around and test transcript timing and
    checkpoints without waiting through the whole track.
    --------------------------------------------------------- */
 if (DEV_MODE) {

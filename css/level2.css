@@ -9,6 +9,7 @@
    Overlays (start/pause/finish/done) are styled globally in
    style.css, so every level & quiz page looks the same.
    ========================================================= */
+/* Claude.ai provided assistance in the creation of the following code section.*/
 
 .comic-stage {
   max-width: 1400px;

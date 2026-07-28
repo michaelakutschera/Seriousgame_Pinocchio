@@ -10,6 +10,7 @@
    Overlays (start/pause/finish/done) are styled globally in
    style.css, so every level & quiz page looks the same.
    ========================================================= */
+/* Claude.ai provided assistance in the creation of the following code section.*/
 
 .book-stage {
   max-width: 1400px;
@@ -165,7 +166,7 @@
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* Wörter starten unsichtbar und blenden zeilenweise ein (ersetzt die alte Zeichen-für-Zeichen-Animation) */
+/*Words start out invisible and fade in word by word*/
 .story-text .word {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -174,7 +175,7 @@
   opacity: 1;
 }
 
-/* Steuerleiste für Geschwindigkeit in der Top-Bar */
+/* Speed control bar in the head. */
 .speed-group {
   display: flex;
   align-items: center;

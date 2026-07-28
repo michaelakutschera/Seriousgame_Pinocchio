@@ -6,6 +6,7 @@
      (5 Humanity each if correct)
    - combined with the puzzle score from level_2.html
    ========================================================= */
+/* Claude.ai provided assistance in the creation of the following code section. */
 
 const evalAnswerKey = { q1: "c", q2: "a", q3: "b", q4: "a" };
 const POINTS_PER_MC = 5;

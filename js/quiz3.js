@@ -6,6 +6,7 @@
      (5 Humanity Points each if correct)
    - combined with the  score from level_3.html
    ========================================================= */
+/* Claude.ai provided assistance in the creation of the following code section. */
 
 const evalAnswerKey = { q1: "c", q2: "b", q3: "b", q4: "a" };
 const POINTS_PER_MC = 5;

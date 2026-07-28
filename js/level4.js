@@ -541,8 +541,7 @@ const feedScript = [
    ENGINE — walks feedScript top to bottom, appending one card
    at a time to #feedList. Plain posts auto-advance after a
    short delay; rounds pause the feed until the player acts,
-   then resume it (same start/pause/resume shape as the other
-   levels).
+   then resume it.
 
    Scoring: puzzleScore is Humanity for this chapter (max 60 --
    2 sockpuppet rounds + 3 notes + 2 troll rounds + 1 boost +
@@ -567,6 +566,7 @@ const REVEAL_DELAY_MS        = 1600; // gap between plain posts
 const ROUND_RESOLVE_DELAY_MS = 1000;  // pause after a round is answered
 const START_DELAY_MS         = 400;  // gap before the very first / resumed post
 
+/* Claude.ai provided assistance in the creation of the following code section. */
 /* ---------------------------------------------------------
    DOM
    --------------------------------------------------------- */
@@ -973,9 +973,9 @@ card.className = "feed-round-card troll-round feed-item-in";
     const postCard = buildPostCard(acc, "troll-post");
     card.appendChild(postCard);
 
-    // These replies are visible in the feed the moment the round
-    // renders, so their reach counts passively right away, same
-    // as any other post -- reporting one later removes it again.
+    /* These replies are visible in the feed the moment the round
+    renders, so their reach counts passively right away, same
+    as any other post -- reporting one later removes it again.*/
     const reach = postReach(acc);
     if (reach > 0) bumpTrending(reach);
 
@@ -995,7 +995,7 @@ card.className = "feed-round-card troll-round feed-item-in";
       if (acc.isTrollAttack) {
         postCard.classList.add("reported", "reported-correct");
         puzzleScore += TROLL_POINTS;
-        bumpTrending(TREND_TROLL - reach); // takedown: its own reach is removed again, small bonus on top
+        bumpTrending(TREND_TROLL - reach);
       } else {
         postCard.classList.add("reported", "reported-wrong");
       }

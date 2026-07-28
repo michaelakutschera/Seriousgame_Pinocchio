@@ -1,3 +1,4 @@
+/* Claude.ai provided assistance in the creation of the following code section. */
 /* =========================================================
    script.js
    Shared logic for the Pinocchio Serious Game:

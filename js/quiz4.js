@@ -5,6 +5,7 @@
    - 4 multiple-choice questions about SOICAL MEDIA as a medium
      (5 Humanity Points each if correct)
    ========================================================= */
+/* Claude.ai provided assistance in the creation of the following code section. */
 
 const evalAnswerKey = { q1: "c", q2: "a", q3: "a", q4: "b" };
 const POINTS_PER_MC = 5;
