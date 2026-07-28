@@ -153,7 +153,6 @@ function buildResultsHTML({ puzzleScore, mcCorrect, evalScore, levelTotal, newTo
     <p class="quiz-eyebrow">Level 3 complete</p>
     <p class="humanity-earned">+${levelTotal} Humanity</p>
     <p class="breakdown">${breakdown}</p>
-    <p>Total Humanity so far: <strong>${newTotal}</strong></p>
     <p style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
     <a class="btn btn-light" href="../index.html">Back to Start</a>  
     <a class="btn btn-primary" href="../html/level_4.html">Continue to Level 4: The Video Game</a>

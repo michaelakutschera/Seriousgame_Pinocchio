@@ -62,7 +62,7 @@ const resumeBtn       = document.getElementById("resumeBtn");
 const startBtn        = document.getElementById("startBtn");
 const stopBtn         = document.getElementById("stopBtn");
 const backBtn         = document.getElementById("backBtn");
-const continueBtn     = document.getElementById("continueBtn");
+const continuePuzzleBtn = document.getElementById("continuePuzzleBtn");
 
 renderHumanityBadge("humanityBadge");
 
@@ -243,8 +243,8 @@ function handlePanelClick(slot) {
 function checkCompletion() {
   if (currentOrder.every((p, i) => p.correctSlot === i)) {
     solved = true;
-    continueBtn.disabled = false;
-    continueBtn.classList.add("ready");
+    continuePuzzleBtn.disabled = false;
+    continuePuzzleBtn.classList.add("ready");
   }
 }
 
@@ -290,8 +290,8 @@ function finishPuzzle() {
 
   startBtn.disabled = true;
   stopBtn.disabled  = true;
-  continueBtn.disabled = true;
-  continueBtn.classList.remove("ready");
+  continuePuzzleBtn.disabled = true;
+  continuePuzzleBtn.classList.remove("ready");
 }
 
 /* ---------------------------------------------------------
@@ -303,8 +303,8 @@ function startGame() {
   startBtn.disabled = true; stopBtn.disabled = false;
 
   solved = false;
-  continueBtn.disabled = true;
-  continueBtn.classList.remove("ready");
+  continuePuzzleBtn.disabled = true;
+  continuePuzzleBtn.classList.remove("ready");
 
   currentOrder = shuffledLayout();
   minSwapsTotal = computeMinSwaps(currentOrder);
@@ -333,7 +333,7 @@ startBtn.addEventListener("click", () => {
 });
 stopBtn.addEventListener("click", pauseGame);
 
-continueBtn.addEventListener("click", () => {
+continuePuzzleBtn.addEventListener("click", () => {
   if (!solved || finished) return;
   finishPuzzle();
 });

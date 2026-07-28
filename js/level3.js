@@ -36,7 +36,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp2", time: 116.2,
+    id: "cp2", time: 116.3,
     prompt: "Which word did you just hear?",
     options: [
       { text: "gold pieces", correct: true },
@@ -45,7 +45,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp3", time: 157.10,
+    id: "cp3", time: 157.95,
     prompt: "Which word did you just hear?",
     options: [
       { text: "noses", correct: true },

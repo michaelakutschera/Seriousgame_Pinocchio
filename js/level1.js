@@ -132,7 +132,7 @@ const pages = [
   [
     { type: "text", text:
         "The Fairy showed no pity toward him, as she was trying to teach him a good lesson, "
-      + "so that he would stop telling lies, the worst habit any boy may acquire."
+      + "so that he would stop telling lies, the worst habit any boy may acquire. "
       + "But when she saw him, pale with fright and with his eyes "
       + "half out of his head from terror, she began to feel sorry for him and clapped her hands together."
     },
@@ -597,7 +597,7 @@ function updateNextButton() {
   } else {
     /* Finish action once the whole page has been shown */
     nextBtn.disabled = !finishReady;
-    nextBtn.textContent = finishReady ? "Finish \u2713" : "\u203a";
+    nextBtn.textContent = finishReady ? "Continue" : "\u203a";
   }
 
   if (wasDisabled && !nextBtn.disabled) {

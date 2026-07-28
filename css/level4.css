@@ -426,7 +426,8 @@ Start Overlay - Name and Image selection
 }
 
 .troll-post.reported-correct {
-  opacity: 0.5;
+  border-color: #2f4a28;
+  background: rgba(47,74,40,.08);
 }
 
 .troll-post.reported-wrong {

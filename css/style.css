@@ -44,6 +44,9 @@ html, body {
 
 img { max-width: 100%; display: block; }
 
+/* Generic visibility utility (eg. Dev Pause Button level 3) */
+.hidden { display: none !important; }
+
 a { color: var(--forest); }
 
 h1, h2, h3, h4 {

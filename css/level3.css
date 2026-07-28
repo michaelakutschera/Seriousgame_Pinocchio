@@ -7,6 +7,19 @@ level & quiz page looks the same.
 ========================================================= */
 
 /* ---------------------------------------------------------
+Sticky footer
+--------------------------------------------------------- */
+body.level3-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.level3-body main.level-stage {
+  flex: 1 0 auto;
+}
+
+/* ---------------------------------------------------------
 Chapter heading
 --------------------------------------------------------- */
 .chapter-heading {
