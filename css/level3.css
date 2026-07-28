@@ -49,6 +49,7 @@ Chapter heading
    --------------------------------------------------------- */
 .audio-stage {
   max-width: 640px;
+  height: 720px;
   margin: 0 auto;
   background: #fffdf8;
   border: 1px solid var(--paper-dark);
@@ -56,6 +57,7 @@ Chapter heading
   box-shadow: var(--shadow-soft);
   padding: 36px 32px;
   text-align: center;
+  overflow: hidden;
 }
 
 .audio-visual {
@@ -93,8 +95,7 @@ Chapter heading
   position: relative;
   flex: 1;
   height: 6px;
-  /* Extra invisible padding around the visible track, so the drag
-     hit-area is bigger than the thin bar itself (dev scrub only). */
+  /* Extra invisible padding around the visible track (dev scrub only). */
   padding: 9px 0;
   margin: -9px 0;
 }
@@ -148,7 +149,7 @@ Chapter heading
    styled in style.css) while a checkpoint is active
    --------------------------------------------------------- */
 .checkpoint-zone {
-  min-height: 90px;
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,8 +170,11 @@ Chapter heading
 
 .transcript-panel {
   margin-top: 16px;
-  max-height: 320px;
-  overflow-y: auto;
+  height: 140px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: left;
   background: var(--paper);
   border: 1px solid var(--paper-dark);
@@ -181,7 +185,9 @@ Chapter heading
   line-height: 1.7;
   color: var(--ink);
 }
-.transcript-panel.hidden { display: none; }
+/* Collapsed transcript keeps its reserved space, so the white
+   audio-stage card never resizes when toggling or between lines. */
+.transcript-panel.collapsed { visibility: hidden; }
 
 .transcript-line {
   text-align: center;

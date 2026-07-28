@@ -45,7 +45,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp3", time: 157.95,
+    id: "cp3", time: 157.11,
     prompt: "Which word did you just hear?",
     options: [
       { text: "noses", correct: true },
@@ -63,7 +63,7 @@ const CHECKPOINT_POINTS  = 10;
     ]
   },
   {
-    id: "cp5", time: 198.9,
+    id: "cp5", time: 198.85,
     prompt: "Which word did you just hear?",
     options: [
       { text: "Woodpeckers", correct: true },
@@ -393,8 +393,8 @@ backBtn.addEventListener("click", e => {
 
 /* Transcript show/hide (accessibility) */
 transcriptToggle.addEventListener("click", () => {
-  const isHidden = transcriptPanel.classList.toggle("hidden");
-  transcriptToggle.textContent = isHidden ? "Show Transcript" : "Hide Transcript";
+  const isCollapsed = transcriptPanel.classList.toggle("collapsed");
+  transcriptToggle.textContent = isCollapsed ? "Show Transcript" : "Hide Transcript";
 });
 
 /* ---------------------------------------------------------
