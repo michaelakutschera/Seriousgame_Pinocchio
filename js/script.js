@@ -22,7 +22,7 @@ const HUMANITY_KEY = "pinocchio_totalHumanity";
 
 
  /* Approximate maximum humanity obtainable per level (puzzle + quiz).*/
-const HUMANITY_MAX_PER_LEVEL = 70;
+const HUMANITY_MAX_PER_LEVEL = 80;
 const TOTAL_LEVELS = 4;
 const HUMANITY_MAX = HUMANITY_MAX_PER_LEVEL * TOTAL_LEVELS; // 320
 const STAGE_1_THRESHOLD = Math.round(HUMANITY_MAX * 0.33); //from here: hybrid
