@@ -550,10 +550,9 @@ const feedScript = [
    at 60 instead of creeping up to 100.
   ========================================================= */
 
-const SOCKPUPPET_POINTS   = 1;   // x2 correct picks x2 rounds = 4
+const SOCKPUPPET_POINTS   = 2.5; // x2 correct picks x2 rounds = 10
 const NOTE_POINTS         = 10;  // x3 rounds                  = 30
-const TROLL_POINTS        = 1;   // x2 correct picks x2 rounds = 4
-const BOOST_POINTS        = 12;  // x1 (the finale)             = 12
+const TROLL_POINTS        = 2.5; // x2 correct picks x2 rounds = 10
 const PLAYER_REPLY_POINTS = 5;   // x2 rounds                   = 10
 
 const TREND_SOCKPUPPET   = 25;
