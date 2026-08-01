@@ -200,8 +200,8 @@ h1, h2, h3, h4 {
 }
 .overlay.hidden { display: none; }
 .overlay-box { max-width: 460px; color: var(--paper); }
-.overlay-box h2 { color: var(--paper); font-size: 1.8rem; margin-bottom: 10px; }
-.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: .97rem; }
+.overlay-box h2 { color: var(--paper); font-size: 1.7rem; margin-bottom: 10px; }
+.overlay-box p  { color: #dde8d8; margin-bottom: 22px; font-size: 1.2rem; }
 
 /* =========================================================
    Page wrapper / generic sections

@@ -47,9 +47,16 @@ function initQuiz() {
     if (qid === "results") return;
     step.querySelectorAll(".option-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
+        if (selected[qid] !== null) return;
         selected[qid] = btn.dataset.value;
-        step.querySelectorAll(".option-btn").forEach((b) => b.classList.remove("selected"));
-        btn.classList.add("selected");
+
+        const isCorrect = btn.dataset.value === evalAnswerKey[qid];
+        step.querySelectorAll(".option-btn").forEach((b) => (b.disabled = true));
+        btn.classList.add(isCorrect ? "correct" : "incorrect");
+        if (!isCorrect) {
+          step.querySelector(`.option-btn[data-value="${evalAnswerKey[qid]}"]`)?.classList.add("correct");
+        }
+
         updateNav();
       });
     });
