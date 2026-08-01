@@ -1042,7 +1042,6 @@ function renderBoostRound(item) {
     btn.classList.add("boosted");
 
     const amplified = targetPost ? postReach(targetPost) : 0;
-    puzzleScore += BOOST_POINTS;
     bumpTrending(amplified > 0 ? amplified : TREND_BOOST);
     resolveRoundAndAdvance();
   });
