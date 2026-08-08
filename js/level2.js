@@ -284,7 +284,7 @@ function finishPuzzle() {
       `You solved the whole comic in <strong>${swapCount}</strong> swap${swapCount === 1 ? "" : "s"} `
     + `(best possible: ${minSwapsTotal}).<br>`
     + `<strong>+${score} Humanity</strong> earned for this chapter. `
-    + `Continue to the evaluation to collect more.`;
+    + `Continue to the quiz to collect more.`;
   finishOverlay.classList.remove("hidden");
 
   startBtn.disabled = true;

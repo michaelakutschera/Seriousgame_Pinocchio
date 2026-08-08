@@ -1,6 +1,6 @@
 /* =========================================================
    quiz2.js
-   Step-based evaluation for Level 2 ("The Comic").
+   Step-based quiz for Level 2 ("The Comic").
 
    - 4 multiple-choice questions about the COMIC as a medium
      (5 Humanity each if correct)
@@ -71,7 +71,7 @@ function initQuiz() {
     if (currentStep < 3) {
       showStep(currentStep + 1);
     } else {
-      finishEvaluation();
+      finishQuiz();
     }
   });
 
@@ -111,7 +111,7 @@ function updateNav() {
 /* ---------------------------------------------------------
    Finish: score, save, show results
    --------------------------------------------------------- */
-function finishEvaluation() {
+function finishQuiz() {
   let mcCorrect = 0;
   ["q1", "q2", "q3", "q4"].forEach((qid) => {
     if (selected[qid] === evalAnswerKey[qid]) mcCorrect++;

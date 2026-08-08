@@ -1,6 +1,6 @@
 /* =========================================================
    quiz.js
-   Step-based evaluation for Level 4 ("Social Media").
+   Step-based quiz for Level 4 ("Social Media").
 
    - 4 multiple-choice questions about SOICAL MEDIA as a medium
      (5 Humanity Points each if correct)
@@ -70,7 +70,7 @@ function initQuiz() {
     if (currentStep < 3) {
       showStep(currentStep + 1);
     } else {
-      finishEvaluation();
+      finishQuiz();
     }
   });
 
@@ -110,7 +110,7 @@ function updateNav() {
 /* ---------------------------------------------------------
    Finish: score, save, show results
    --------------------------------------------------------- */
-function finishEvaluation() {
+function finishQuiz() {
   let mcCorrect = 0;
   ["q1", "q2", "q3", "q4"].forEach((qid) => {
     if (selected[qid] === evalAnswerKey[qid]) mcCorrect++;

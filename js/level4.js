@@ -5,7 +5,7 @@
    has to carry out various actions at different points, such
    as selecting Community Notes, responding correctly themselves, 
    and identifying trolls.
-
+   
   Scoring: 10 Humanity per correct answer (max 60).
   ========================================================= */
 
@@ -1172,7 +1172,7 @@ function finishFeed() {
   finishText.innerHTML =
       `You steered the feed and earned <strong>+${puzzleScore} Humanity</strong> for this chapter `
     + `(Trending reached <strong>${formatCount(trendingValue)}</strong>).<br>`
-    + `Continue to the evaluation to collect more.`;
+    + `Continue to the quiz to collect more.`;
   finishOverlay.classList.remove("hidden");
 
   startBtn.disabled = true;

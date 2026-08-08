@@ -627,7 +627,7 @@ function finishPuzzle() {
   finishText.innerHTML =
       `You answered <strong>${correctCount} of 6</strong> moments correctly in time \u2014 `
     + `<strong>+${puzzleScore} Humanity</strong> earned for this chapter.<br>`
-    + `Continue to the evaluation to collect more.`;
+    + `Continue to the quiz to collect more.`;
   finishOverlay.classList.remove("hidden");
 
   startBtn.disabled = true;

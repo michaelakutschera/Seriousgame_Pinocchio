@@ -345,7 +345,7 @@ audio.addEventListener("ended", () => {
   finishText.innerHTML =
       `You caught <strong>${correctCount} of ${checkpoints.length}</strong> words in time — `
     + `<strong>+${puzzleScore} Humanity</strong> earned for this chapter.<br>`
-    + `Continue to the evaluation to collect more.`;
+    + `Continue to the quiz to collect more.`;
   finishOverlay.classList.remove("hidden");
 
   startBtn.disabled = true;
